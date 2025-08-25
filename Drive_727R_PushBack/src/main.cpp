@@ -1,4 +1,28 @@
 #include "main.h"
+#include "lemlib/api.hpp" // IWYU pragma: keep
+
+pros::Controller master(pros::E_CONTROLLER_MASTER);
+
+pros::MotorGroup left_mg({1, -2, 3}, pros::MotorGearset::blue);    // Creates a motor group with forwards ports 1 & 3 and reversed port 2
+pros::MotorGroup right_mg({-4, 5, -6}, pros::MotorGearset::blue);  // Creates a motor group with forwards port 5 and reversed ports 4 & 6
+
+// drivetrain settings
+lemlib::Drivetrain drivetrain(&left_mg, // left motor group
+                              &right_mg, // right motor group
+                              10, // 10 inch track width
+                              lemlib::Omniwheel::NEW_325, // using new 4" omnis
+                              360, // drivetrain rpm is 360
+                              2 // horizontal drift is 2 (for now)
+);
+
+// Creates an imu on port 10
+pros::Imu imu(10);
+
+// Creates a V5 vertical rotation sensor on port 9
+pros::Rotation vertical_sensor(9);
+
+// Creates a V5 horizontal rotation sensor on port 8
+pros::Rotation horizontal_sensor(8);
 
 /**
  * A callback function for LLEMU's center button.
@@ -74,11 +98,6 @@ void autonomous() {}
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	pros::MotorGroup left_mg({1, -2, 3});    // Creates a motor group with forwards ports 1 & 3 and reversed port 2
-	pros::MotorGroup right_mg({-4, 5, -6});  // Creates a motor group with forwards port 5 and reversed ports 4 & 6
-
-
 	while (true) {
 		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
 		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
