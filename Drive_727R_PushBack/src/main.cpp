@@ -1,11 +1,20 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "lemlib/chassis/trackingWheel.hpp"
+#include "pros/abstract_motor.hpp"
+#include "pros/colors.hpp" // IWYU pragma: keep
+#include "pros/device.hpp" // IWYU pragma: keep
+#include "pros/misc.h"
+#include "pros/misc.hpp"
+#include "pros/optical.h" // IWYU pragma: keep
+#include "pros/optical.hpp"
 
-pros::Controller master(pros::E_CONTROLLER_MASTER);
+pros::Controller Controller(pros::E_CONTROLLER_MASTER);
 
 pros::MotorGroup left_mg({1, -2, 3}, pros::MotorGearset::blue);    // Creates a motor group with forwards ports 1 & 3 and reversed port 2
 pros::MotorGroup right_mg({-4, 5, -6}, pros::MotorGearset::blue);  // Creates a motor group with forwards port 5 and reversed ports 4 & 6
+pros::Motor intake(10, pros::MotorGearset::blue);
+pros::Motor highMedium(17);
 
 // drivetrain settings
 lemlib::Drivetrain drivetrain(&left_mg, // left motor group
@@ -24,6 +33,9 @@ pros::Rotation vertical_sensor(9);
 
 // Creates a V5 horizontal rotation sensor on port 8
 pros::Rotation horizontal_sensor(8);
+
+// Creates a V5 optical sensor on port 11
+pros::Optical colorSensor (11);
 
 // Horizontal Tracking Wheel
 lemlib::TrackingWheel horizontal_tracker(&horizontal_sensor, lemlib::Omniwheel::NEW_275, -2);
@@ -102,6 +114,33 @@ void initialize() {
     }
 }
 
+// Senses the color of the balls entering the intake and if a blue one tries to enter it spits it back out
+void colorSensing () {
+	colorSensor.set_led_pwm(100);
+}
+
+// Intakes and outtakes the balls
+void intaking () {
+	if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+		intake.move(100);
+	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+		intake.move(-100);
+	} else {
+		intake.brake();
+	}
+}
+
+// Spins the motor at the top of the robot to score in the high or medium height goal
+void scoring () {
+	if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+		highMedium.move(100);
+	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+		highMedium.move(-100);
+	} else {
+		highMedium.brake();
+	}
+}
+
 /**
  * Runs while the robot is in the disabled state of Field Management System or
  * the VEX Competition Switch, following either autonomous or opcontrol. When
@@ -153,10 +192,12 @@ void opcontrol() {
 		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);  // Prints status of the emulated screen LCDs
 
 		// Arcade control scheme
-		int dir = master.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
-		int turn = master.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
+		int dir = Controller.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
+		int turn = Controller.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
 		left_mg.move(dir - turn);                      // Sets left motor voltage
 		right_mg.move(dir + turn);                     // Sets right motor voltage
-		pros::delay(20);                               // Run for 20 ms then update
+		intaking();
+		colorSensing();
+		pros::delay(20);                          // Run for 20 ms then update
 	}
 }
