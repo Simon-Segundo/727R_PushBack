@@ -38,10 +38,10 @@ pros::Rotation horizontal_sensor(8);
 pros::Optical colorSensor (11);
 
 // Horizontal Tracking Wheel
-lemlib::TrackingWheel horizontal_tracker(&horizontal_sensor, lemlib::Omniwheel::NEW_275, -2);
+lemlib::TrackingWheel horizontal_tracker(&horizontal_sensor, lemlib::Omniwheel::NEW_2, -2);
 
 // Vertical Tracking Wheel
-lemlib::TrackingWheel vertical_tracker(&vertical_sensor, lemlib::Omniwheel::NEW_275, 0);
+lemlib::TrackingWheel vertical_tracker(&vertical_sensor, lemlib::Omniwheel::NEW_2, 0);
 
 lemlib::OdomSensors sensors(&vertical_tracker, // vertical tracking wheel 1, set to null
                             nullptr, // vertical tracking wheel 2, set to nullptr as we are using IMEs
@@ -190,7 +190,17 @@ void opcontrol() {
 		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
 		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
 		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);  // Prints status of the emulated screen LCDs
+						 // Get color data
+        pros::c::optical_rgb_s_t rgb = colorSensor.get_rgb();
+        double hue = colorSensor.get_hue();
+        double brightness = colorSensor.get_brightness();
+        int proximity = colorSensor.get_proximity();
 
+        // Print to VEX brain screen
+        pros::lcd::print(0, "RGB: %f %f %f", rgb.red, rgb.green, rgb.blue);
+        pros::lcd::print(1, "Hue: %f", hue);
+        pros::lcd::print(2, "Brightness: %f", brightness);
+        pros::lcd::print(3, "Proximity: %d", proximity);
 		// Arcade control scheme
 		int dir = Controller.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
 		int turn = Controller.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
