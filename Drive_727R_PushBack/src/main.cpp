@@ -105,18 +105,21 @@ void on_center_button() {
  */
 void initialize() {
 	pros::lcd::initialize();
+    pros::lcd::print(0, "Initialized");
 	while (true) { // infinite loop
-        // print measurements from the adi encoder
-        pros::lcd::print(0, "X: %i", vertical_sensor.get_position());
-        // print measurements from the rotation sensor
-        pros::lcd::print(1, "Y: %i", horizontal_sensor.get_position());
+        // // print measurements from the adi encoder
+        // pros::lcd::print(0, "X: %i", vertical_sensor.get_position());
+        // // print measurements from the rotation sensor
+        // pros::lcd::print(1, "Y: %i", horizontal_sensor.get_position());
         pros::delay(10); // delay to save resources. DO NOT REMOVE
     }
 }
 
 // Senses the color of the balls entering the intake and if a blue one tries to enter it spits it back out
 void colorSensing () {
-	colorSensor.set_led_pwm(100);
+    while (true) {
+	    colorSensor.set_led_pwm(100);
+    }
 }
 
 // Intakes and outtakes the balls
@@ -170,8 +173,9 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
-
+void autonomous() {
+    pros::lcd::print(1, "autonomous Running");
+}
 /**
  * Runs the operator control code. This function will be started in its own task
  * with the default priority and stack size whenever the robot is enabled via
@@ -187,16 +191,12 @@ void autonomous() {}
  */
 void opcontrol() {
 	while (true) {
-		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
-		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
-		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);  // Prints status of the emulated screen LCDs
-						 // Get color data
+        pros::lcd::print(2, "opcontrol Running");
+        colorSensor.set_led_pwm(100);
         pros::c::optical_rgb_s_t rgb = colorSensor.get_rgb();
         double hue = colorSensor.get_hue();
         double brightness = colorSensor.get_brightness();
         int proximity = colorSensor.get_proximity();
-
-        // Print to VEX brain screen
         pros::lcd::print(0, "RGB: %f %f %f", rgb.red, rgb.green, rgb.blue);
         pros::lcd::print(1, "Hue: %f", hue);
         pros::lcd::print(2, "Brightness: %f", brightness);
@@ -206,8 +206,6 @@ void opcontrol() {
 		int turn = Controller.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
 		left_mg.move(dir - turn);                      // Sets left motor voltage
 		right_mg.move(dir + turn);                     // Sets right motor voltage
-		intaking();
-		colorSensing();
 		pros::delay(20);                          // Run for 20 ms then update
 	}
 }
