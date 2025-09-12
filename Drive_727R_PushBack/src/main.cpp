@@ -9,6 +9,12 @@
 #include "pros/optical.h" // IWYU pragma: keep
 #include "pros/optical.hpp"
 
+// Used to toggle the color sensor on and off
+int color = 0;
+
+// Used to stop intake from being able to run from controller input
+bool sensed = false;
+
 pros::Controller Controller(pros::E_CONTROLLER_MASTER);
 
 pros::MotorGroup left_mg({1, -2, 3}, pros::MotorGearset::blue);    // Creates a motor group with forwards ports 1 & 3 and reversed port 2
@@ -106,27 +112,34 @@ void on_center_button() {
 void initialize() {
 	pros::lcd::initialize();
     pros::lcd::print(0, "Initialized");
-	while (true) { // infinite loop
-        // // print measurements from the adi encoder
-        // pros::lcd::print(0, "X: %i", vertical_sensor.get_position());
-        // // print measurements from the rotation sensor
-        // pros::lcd::print(1, "Y: %i", horizontal_sensor.get_position());
-        pros::delay(10); // delay to save resources. DO NOT REMOVE
-    }
+	colorSensor.set_led_pwm(100);
+    colorSensor.set_integration_time(10);
 }
 
-// Senses the color of the balls entering the intake and if a blue one tries to enter it spits it back out
+// Senses the color of the balls entering the intake and if an orb of the opposing color tries to enter the intake, the intake spits it back out
 void colorSensing () {
-    while (true) {
-	    colorSensor.set_led_pwm(100);
+    // Senses if a red orb is entering the intake and reverses the intake to spit it out
+    if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) && (color == 0)) {
+        sensed = true;
+        if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 25)) {
+            intake.brake();
+        }
+        color++;
+    // Senses if a blue orb is entering the intake and reverses the intake to spit it out
+    } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) && (color == 1)) {
+        sensed = true;
+        if ((colorSensor.get_hue() >= 50) && (colorSensor.get_hue() <= 75)) {
+            intake.brake();
+        }
+        color--;
     }
 }
 
 // Intakes and outtakes the balls
 void intaking () {
-	if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+	if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) && sensed == false) {
 		intake.move(100);
-	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2) && sensed == false) {
 		intake.move(-100);
 	} else {
 		intake.brake();
@@ -192,7 +205,6 @@ void autonomous() {
 void opcontrol() {
 	while (true) {
         pros::lcd::print(2, "opcontrol Running");
-        colorSensor.set_led_pwm(100);
         pros::c::optical_rgb_s_t rgb = colorSensor.get_rgb();
         double hue = colorSensor.get_hue();
         double brightness = colorSensor.get_brightness();
