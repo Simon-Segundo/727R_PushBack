@@ -8,8 +8,10 @@
 #include "pros/misc.hpp"
 #include "pros/optical.h" // IWYU pragma: keep
 #include "pros/optical.hpp"
+#include <thread> // IWYU pragma: keep
+#include "gif-pros/gifclass.hpp" // IWYU pragma: keep
 
-// Used to toggle the color sensor on and off
+// Used to toggle the color sensor from off, to sensing blue and red balls
 int color = 0;
 
 // Used to stop intake from being able to run from controller input
@@ -20,13 +22,15 @@ pros::Controller Controller(pros::E_CONTROLLER_MASTER);
 pros::MotorGroup left_mg({1, -2, 3}, pros::MotorGearset::blue);    // Creates a motor group with forwards ports 1 & 3 and reversed port 2
 pros::MotorGroup right_mg({-4, 5, -6}, pros::MotorGearset::blue);  // Creates a motor group with forwards port 5 and reversed ports 4 & 6
 pros::Motor intake(10, pros::MotorGearset::blue);
-pros::Motor highMedium(17);
+pros::Motor store(16, pros::MotorGearset::blue);
+pros::Motor unstore (15, pros::MotorGearset::blue);
+pros::Motor highMid(17, pros::MotorGearset::blue);
 
 // drivetrain settings
 lemlib::Drivetrain drivetrain(&left_mg, // left motor group
                               &right_mg, // right motor group
-                              10, // 10 inch track width
-                              lemlib::Omniwheel::NEW_325, // using new 4" omnis
+                              12.75, // 12.75 inch track width
+                              lemlib::Omniwheel::NEW_325, // using new 3.25" omnis
                               360, // drivetrain rpm is 360
                               2 // horizontal drift is 2 (for now)
 );
@@ -114,23 +118,36 @@ void initialize() {
     pros::lcd::print(0, "Initialized");
 	colorSensor.set_led_pwm(100);
     colorSensor.set_integration_time(10);
+    Gif gif("/usd/<name of your gif>.gif", lv_scr_act());
 }
 
 // Senses the color of the balls entering the intake and if an orb of the opposing color tries to enter the intake, the intake spits it back out
+// ************** Make it disable control of intake while purging opposing color balls from intake ****************
 void colorSensing () {
     // Senses if a red orb is entering the intake and reverses the intake to spit it out
     if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) && (color == 0)) {
         sensed = true;
         if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 25)) {
-            intake.brake();
+            intake.move(100);
+        }
+        color++;
+    // Senses if a red orb is entering the intake and reverses the intake to spit it out
+    } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) && (color == 1)) {
+        sensed = true;
+        if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 25)) {
+            intake.move(100);
+            // Find a way to make it wait for 5 seconds before stopping and allowing Controller input
+            // std::this_thread::sleep_for(5);
+
         }
         color++;
     // Senses if a blue orb is entering the intake and reverses the intake to spit it out
-    } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) && (color == 1)) {
+    } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) && (color == 2)) {
         sensed = true;
         if ((colorSensor.get_hue() >= 50) && (colorSensor.get_hue() <= 75)) {
-            intake.brake();
+            intake.move(100);
         }
+        color--;
         color--;
     }
 }
@@ -141,7 +158,7 @@ void intaking () {
 		intake.move(100);
 	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2) && sensed == false) {
 		intake.move(-100);
-	} else {
+    } else {
 		intake.brake();
 	}
 }
@@ -149,11 +166,11 @@ void intaking () {
 // Spins the motor at the top of the robot to score in the high or medium height goal
 void scoring () {
 	if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-		highMedium.move(100);
+		highMid.move(100);
 	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-		highMedium.move(-100);
+		highMid.move(-100);
 	} else {
-		highMedium.brake();
+		highMid.brake();
 	}
 }
 
@@ -187,7 +204,6 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-    pros::lcd::print(1, "autonomous Running");
 }
 /**
  * Runs the operator control code. This function will be started in its own task
