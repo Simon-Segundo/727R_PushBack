@@ -2,6 +2,8 @@
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "lemlib/chassis/trackingWheel.hpp"
 #include "pros/abstract_motor.hpp"
+#include "pros/adi.h" // IWYU pragma: keep
+#include "pros/adi.hpp"
 #include "pros/colors.hpp" // IWYU pragma: keep
 #include "pros/device.hpp" // IWYU pragma: keep
 #include "pros/misc.h"
@@ -11,7 +13,7 @@
 #include <thread> // IWYU pragma: keep
 #include "gif-pros/gifclass.hpp" // IWYU pragma: keep
 
-// Used to toggle the color sensor from off, to sensing blue and red balls
+// Used to toggle the color sensor between sensing blue or red balls
 int color = 0;
 
 // Used to stop intake from being able to run from controller input
@@ -21,12 +23,14 @@ pros::Controller Controller(pros::E_CONTROLLER_MASTER);
 
 pros::MotorGroup left_mg({1, -2, 3}, pros::MotorGearset::blue);    // Creates a motor group with forwards ports 1 & 3 and reversed port 2
 pros::MotorGroup right_mg({-4, 5, -6}, pros::MotorGearset::blue);  // Creates a motor group with forwards port 5 and reversed ports 4 & 6
-pros::Motor intake(10, pros::MotorGearset::blue);
+pros::Motor intake(-10, pros::MotorGearset::blue);
 pros::Motor store(16, pros::MotorGearset::blue);
-pros::Motor unstore (15, pros::MotorGearset::blue);
-pros::Motor highMid(17, pros::MotorGearset::blue);
+pros::Motor highScore(17, pros::MotorGearset::blue);
+pros::adi::DigitalOut matchLoad('A');
+pros::adi::DigitalOut midScore('B');
+pros::adi::DigitalOut storage('C');
 
-// drivetrain settings
+// Drivetrain settings
 lemlib::Drivetrain drivetrain(&left_mg, // left motor group
                               &right_mg, // right motor group
                               12.75, // 12.75 inch track width
@@ -35,32 +39,27 @@ lemlib::Drivetrain drivetrain(&left_mg, // left motor group
                               2 // horizontal drift is 2 (for now)
 );
 
-// Creates an imu on port 10
-pros::Imu imu(10);
+// Creates an imu on port 21
+pros::Imu imu(21);
 
 // Creates a V5 vertical rotation sensor on port 9
 pros::Rotation vertical_sensor(9);
 
-// Creates a V5 horizontal rotation sensor on port 8
-pros::Rotation horizontal_sensor(8);
-
 // Creates a V5 optical sensor on port 11
 pros::Optical colorSensor (11);
-
-// Horizontal Tracking Wheel
-lemlib::TrackingWheel horizontal_tracker(&horizontal_sensor, lemlib::Omniwheel::NEW_2, -2);
 
 // Vertical Tracking Wheel
 lemlib::TrackingWheel vertical_tracker(&vertical_sensor, lemlib::Omniwheel::NEW_2, 0);
 
+// Combines all sensors into one item
 lemlib::OdomSensors sensors(&vertical_tracker, // vertical tracking wheel 1, set to null
                             nullptr, // vertical tracking wheel 2, set to nullptr as we are using IMEs
-                            &horizontal_tracker, // horizontal tracking wheel 1
+                            nullptr, // horizontal tracking wheel 1
                             nullptr, // horizontal tracking wheel 2, set to nullptr as we don't have a second one
                             &imu // inertial sensor
 );
 
-// lateral PID controller
+// Lateral PID controller
 lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
                                               0, // integral gain (kI)
                                               3, // derivative gain (kD)
@@ -72,7 +71,7 @@ lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
                                               20 // maximum acceleration (slew)
 );
 
-// angular PID controller
+// Angular PID controller
 lemlib::ControllerSettings angular_controller(2, // proportional gain (kP)
                                               0, // integral gain (kI)
                                               10, // derivative gain (kD)
@@ -84,7 +83,7 @@ lemlib::ControllerSettings angular_controller(2, // proportional gain (kP)
                                               0 // maximum acceleration (slew)
 );
 
-// create the chassis
+// Creates the chassis
 lemlib::Chassis chassis(drivetrain, // Drivetrain Settings
                         lateral_controller, // Lateral PID Settings
                         angular_controller, // Angular PID Settings
@@ -92,62 +91,50 @@ lemlib::Chassis chassis(drivetrain, // Drivetrain Settings
 );
 
 /**
- * A callback function for LLEMU's center button.
- *
- * When this callback is fired, it will toggle line 2 of the LCD text between
- * "I was pressed!" and nothing.
- */
-void on_center_button() {
-	static bool pressed = false;
-	pressed = !pressed;
-	if (pressed) {
-		pros::lcd::set_text(2, "I was pressed!");
-	} else {
-		pros::lcd::clear_line(2);
-	}
-}
-
-/**
  * Runs initialization code. This occurs as soon as the program is started.
  *
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
+
 void initialize() {
 	pros::lcd::initialize();
-    pros::lcd::print(0, "Initialized");
+    // Sets the brightness of the color sensor's lights (This affects color detection)
 	colorSensor.set_led_pwm(100);
+    // Sets the speed at which the color sensor scans the color
     colorSensor.set_integration_time(10);
+    // Creates a startup animation for the code
     Gif gif("/usd/<name of your gif>.gif", lv_scr_act());
 }
 
-// Senses the color of the balls entering the intake and if an orb of the opposing color tries to enter the intake, the intake spits it back out
-// ************** Make it disable control of intake while purging opposing color balls from intake ****************
+/* Senses the color of the balls entering the intake and if an orb of the opposing color tries to enter the storage,
+   the code actuates a piston and runs a motor to put the opposing colored ball into a separate storage area */
 void colorSensing () {
-    // Senses if a red orb is entering the intake and reverses the intake to spit it out
+    // Senses if a red orb is trying to enter the storage and actuates the piston at the top of the robot to have it stored in a separate area
     if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) && (color == 0)) {
-        sensed = true;
         if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 25)) {
-            intake.move(100);
+            sensed = true;
+            storage.set_value(true);
+            store.move(100);
+            pros::delay(5000);
+        } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+            store.move(-100);
         }
+        storage.set_value(false);
+        sensed = false;
         color++;
-    // Senses if a red orb is entering the intake and reverses the intake to spit it out
+    // Senses if a blue orb is trying to enter the storage and actuates the piston at the top of the robot to have it stored in a separate area
     } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) && (color == 1)) {
-        sensed = true;
-        if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 25)) {
-            intake.move(100);
-            // Find a way to make it wait for 5 seconds before stopping and allowing Controller input
-            // std::this_thread::sleep_for(5);
-
-        }
-        color++;
-    // Senses if a blue orb is entering the intake and reverses the intake to spit it out
-    } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) && (color == 2)) {
-        sensed = true;
         if ((colorSensor.get_hue() >= 50) && (colorSensor.get_hue() <= 75)) {
-            intake.move(100);
+            sensed = true;
+            storage.set_value(true);
+            store.move(100);
+            pros::delay(5000);
+        } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+            store.move(-100);
         }
-        color--;
+        storage.set_value(false);
+        sensed = false;
         color--;
     }
 }
@@ -163,22 +150,12 @@ void intaking () {
 	}
 }
 
-// Spins the motor at the top of the robot to score in the high or medium height goal
-void scoring () {
-	if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-		highMid.move(100);
-	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-		highMid.move(-100);
-	} else {
-		highMid.brake();
-	}
-}
-
 /**
  * Runs while the robot is in the disabled state of Field Management System or
  * the VEX Competition Switch, following either autonomous or opcontrol. When
  * the robot is enabled, this task will exit.
  */
+
 void disabled() {}
 
 /**
@@ -190,6 +167,7 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
+
 void competition_initialize() {}
 
 /**
@@ -203,8 +181,11 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
+
 void autonomous() {
+
 }
+
 /**
  * Runs the operator control code. This function will be started in its own task
  * with the default priority and stack size whenever the robot is enabled via
@@ -218,9 +199,9 @@ void autonomous() {
  * operator control task will be stopped. Re-enabling the robot will restart the
  * task, not resume it from where it left off.
  */
+
 void opcontrol() {
 	while (true) {
-        pros::lcd::print(2, "opcontrol Running");
         pros::c::optical_rgb_s_t rgb = colorSensor.get_rgb();
         double hue = colorSensor.get_hue();
         double brightness = colorSensor.get_brightness();
@@ -234,6 +215,9 @@ void opcontrol() {
 		int turn = Controller.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
 		left_mg.move(dir - turn);                      // Sets left motor voltage
 		right_mg.move(dir + turn);                     // Sets right motor voltage
+        intaking();
+        colorSensing();
+
 		pros::delay(20);                          // Run for 20 ms then update
 	}
 }
