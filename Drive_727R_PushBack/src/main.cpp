@@ -8,6 +8,7 @@
 #include "pros/device.hpp" // IWYU pragma: keep
 #include "pros/misc.h"
 #include "pros/misc.hpp"
+#include "pros/motors.h"
 #include "pros/optical.h" // IWYU pragma: keep
 #include "pros/optical.hpp"
 #include <thread> // IWYU pragma: keep
@@ -21,11 +22,11 @@ bool sensed = false;
 
 pros::Controller Controller(pros::E_CONTROLLER_MASTER);
 
-pros::MotorGroup left_mg({1, -2, 3}, pros::MotorGearset::blue);    // Creates a motor group with forwards ports 1 & 3 and reversed port 2
-pros::MotorGroup right_mg({-4, 5, -6}, pros::MotorGearset::blue);  // Creates a motor group with forwards port 5 and reversed ports 4 & 6
-pros::Motor intake(-10, pros::MotorGearset::blue);
-pros::Motor store(16, pros::MotorGearset::blue);
-pros::Motor highScore(17, pros::MotorGearset::blue);
+pros::MotorGroup left_mg({-11, -12, -13}, pros::MotorGearset::blue);    // Creates a motor group with reversed ports 11 12 & 13
+pros::MotorGroup right_mg({20, 19, 18}, pros::MotorGearset::blue);  // Creates a motor group with forwards port 18 19 & 20
+// pros::Motor intake(2, pros::MotorGearset::blue);
+pros::Motor unstore(10);
+pros::Motor store(9);
 pros::adi::DigitalOut matchLoad('A');
 pros::adi::DigitalOut midScore('B');
 pros::adi::DigitalOut storage('C');
@@ -43,10 +44,10 @@ lemlib::Drivetrain drivetrain(&left_mg, // left motor group
 pros::Imu imu(21);
 
 // Creates a V5 vertical rotation sensor on port 9
-pros::Rotation vertical_sensor(9);
+pros::Rotation vertical_sensor(17);
 
 // Creates a V5 optical sensor on port 11
-pros::Optical colorSensor (11);
+pros::Optical colorSensor (3);
 
 // Vertical Tracking Wheel
 lemlib::TrackingWheel vertical_tracker(&vertical_sensor, lemlib::Omniwheel::NEW_2, 0);
@@ -109,16 +110,17 @@ void initialize() {
 
 /* Senses the color of the balls entering the intake and if an orb of the opposing color tries to enter the storage,
    the code actuates a piston and runs a motor to put the opposing colored ball into a separate storage area */
-void colorSensing () {
+void colorSensing() {
     // Senses if a red orb is trying to enter the storage and actuates the piston at the top of the robot to have it stored in a separate area
     if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) && (color == 0)) {
         if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 25)) {
             sensed = true;
             storage.set_value(true);
-            store.move(100);
+            store.move(127);
             pros::delay(5000);
+        // make this optional *********
         } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-            store.move(-100);
+            store.move(-127);
         }
         storage.set_value(false);
         sensed = false;
@@ -128,10 +130,11 @@ void colorSensing () {
         if ((colorSensor.get_hue() >= 50) && (colorSensor.get_hue() <= 75)) {
             sensed = true;
             storage.set_value(true);
-            store.move(100);
+            store.move(127);
             pros::delay(5000);
+        // make this optional *********
         } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-            store.move(-100);
+            store.move(-127);
         }
         storage.set_value(false);
         sensed = false;
@@ -140,14 +143,24 @@ void colorSensing () {
 }
 
 // Intakes and outtakes the balls
-void intaking () {
-	if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) && sensed == false) {
-		intake.move(100);
-	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2) && sensed == false) {
-		intake.move(-100);
+// void intaking() {
+// 	if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) && sensed == false) {
+// 		intake.move(127);
+// 	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2) && sensed == false) {
+// 		intake.move(-127);
+//     } else {
+// 		intake.brake();
+// 	}
+// }
+
+// Takes balls out of storage when holding R1 and holds the position of the sprocket when not holding it so extra balls wont come out of storage
+void unstoring() {
+    unstore.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+        unstore.move(127);
     } else {
-		intake.brake();
-	}
+        unstore.brake();
+    }
 }
 
 /**
@@ -183,7 +196,11 @@ void competition_initialize() {}
  */
 
 void autonomous() {
-
+    left_mg.move(127);
+    right_mg.move(127);
+    pros::delay(5000);
+    left_mg.move(127);
+    right_mg.move(127);
 }
 
 /**
@@ -213,11 +230,17 @@ void opcontrol() {
 		// Arcade control scheme
 		int dir = Controller.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
 		int turn = Controller.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
-		left_mg.move(dir - turn);                      // Sets left motor voltage
-		right_mg.move(dir + turn);                     // Sets right motor voltage
-        intaking();
-        colorSensing();
+		chassis.arcade(dir, turn);
 
-		pros::delay(20);                          // Run for 20 ms then update
+        // Curvature Drive control scheme
+        // chassis.curvature(dir, turn);            // Similar to arcade but turns better
+
+        // Calling functions
+        // intaking();                                            // Calls the intaking function
+        // colorSensing();                                        // Calls the colorSensing function
+        // unstoring();                                           // Calls the unstoring function
+
+        // How long it takes for each update of inputs
+		pros::delay(20);
 	}
 }
