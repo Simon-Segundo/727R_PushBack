@@ -12,24 +12,23 @@
 #include "pros/optical.h" // IWYU pragma: keep
 #include "pros/optical.hpp"
 #include <thread> // IWYU pragma: keep
-#include "gif-pros/gifclass.hpp" // IWYU pragma: keep
 
 // Used to toggle the color sensor between sensing blue or red balls
 int color = 0;
 
-// Used to stop intake from being able to run from controller input
-bool sensed = false;
+// Used to disable the color sensor while trying to score in the top or middle goals
+int scoring = false;
 
 pros::Controller Controller(pros::E_CONTROLLER_MASTER);
 
 pros::MotorGroup left_mg({-11, -12, -13}, pros::MotorGearset::blue);    // Creates a motor group with reversed ports 11 12 & 13
 pros::MotorGroup right_mg({20, 19, 18}, pros::MotorGearset::blue);  // Creates a motor group with forwards port 18 19 & 20
-// pros::Motor intake(2, pros::MotorGearset::blue);
-pros::Motor unstore(10);
-pros::Motor store(9);
-pros::adi::DigitalOut matchLoad('A');
+pros::Motor intake(-2, pros::MotorGearset::blue);
+pros::Motor unstore(-9);
+pros::Motor store(10);
+pros::adi::DigitalOut matchLoad('C');
 pros::adi::DigitalOut midScore('B');
-pros::adi::DigitalOut storage('C');
+pros::adi::DigitalOut storage('A');
 
 // Drivetrain settings
 lemlib::Drivetrain drivetrain(&left_mg, // left motor group
@@ -69,7 +68,7 @@ lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
                                               100, // small error range timeout, in milliseconds
                                               3, // large error range, in inches
                                               500, // large error range timeout, in milliseconds
-                                              20 // maximum acceleration (slew)
+                                              10 // maximum acceleration (slew)
 );
 
 // Angular PID controller
@@ -81,7 +80,7 @@ lemlib::ControllerSettings angular_controller(2, // proportional gain (kP)
                                               100, // small error range timeout, in milliseconds
                                               3, // large error range, in degrees
                                               500, // large error range timeout, in milliseconds
-                                              0 // maximum acceleration (slew)
+                                              10 // maximum acceleration (slew)
 );
 
 // Creates the chassis
@@ -104,56 +103,49 @@ void initialize() {
 	colorSensor.set_led_pwm(100);
     // Sets the speed at which the color sensor scans the color
     colorSensor.set_integration_time(10);
-    // Creates a startup animation for the code
-    Gif gif("/usd/<name of your gif>.gif", lv_scr_act());
 }
 
-/* Senses the color of the balls entering the intake and if an orb of the opposing color tries to enter the storage,
-   the code actuates a piston and runs a motor to put the opposing colored ball into a separate storage area */
+// Senses the color of the balls entering the intake and if an orb of the opposing color tries to enter the storage, the code actuates a piston and runs a motor to put the opposing colored ball into a separate storage area
 void colorSensing() {
     // Senses if a red orb is trying to enter the storage and actuates the piston at the top of the robot to have it stored in a separate area
-    if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) && (color == 0)) {
+    if (color == 0) {
         if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 25)) {
-            sensed = true;
             storage.set_value(true);
             store.move(127);
-            pros::delay(5000);
-        // make this optional *********
-        } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+        } else if ((colorSensor.get_hue() >= 58) && (colorSensor.get_hue() <= 75)) {
+            storage.set_value(false);
             store.move(-127);
+        } else {
+            store.brake();
         }
-        storage.set_value(false);
-        sensed = false;
         color++;
     // Senses if a blue orb is trying to enter the storage and actuates the piston at the top of the robot to have it stored in a separate area
-    } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) && (color == 1)) {
-        if ((colorSensor.get_hue() >= 50) && (colorSensor.get_hue() <= 75)) {
-            sensed = true;
+    } else if (color == 1) {
+        if ((colorSensor.get_hue() >= 58) && (colorSensor.get_hue() <= 75)) {
             storage.set_value(true);
             store.move(127);
-            pros::delay(5000);
-        // make this optional *********
-        } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+        } else if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 25)) {
+            storage.set_value(false);
             store.move(-127);
+        } else {
+            store.brake();
         }
-        storage.set_value(false);
-        sensed = false;
         color--;
     }
 }
 
 // Intakes and outtakes the balls
-// void intaking() {
-// 	if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) && sensed == false) {
-// 		intake.move(127);
-// 	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2) && sensed == false) {
-// 		intake.move(-127);
-//     } else {
-// 		intake.brake();
-// 	}
-// }
+void intaking() {
+	if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+		intake.move(127);
+	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+		intake.move(-127);
+    } else {
+		intake.brake();
+	}
+}
 
-// Takes balls out of storage when holding R1 and holds the position of the sprocket when not holding it so extra balls wont come out of storage
+// Takes balls out of storage when holding R1 and holds the position of the rubber band roller when not holding it so extra balls wont come out of storage
 void unstoring() {
     unstore.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
@@ -196,11 +188,7 @@ void competition_initialize() {}
  */
 
 void autonomous() {
-    left_mg.move(127);
-    right_mg.move(127);
-    pros::delay(5000);
-    left_mg.move(127);
-    right_mg.move(127);
+
 }
 
 /**
@@ -233,12 +221,12 @@ void opcontrol() {
 		chassis.arcade(dir, turn);
 
         // Curvature Drive control scheme
-        // chassis.curvature(dir, turn);            // Similar to arcade but turns better
+        // chassis.curvature(-dir, turn);            // Similar to arcade but turns better
 
         // Calling functions
-        // intaking();                                            // Calls the intaking function
-        // colorSensing();                                        // Calls the colorSensing function
-        // unstoring();                                           // Calls the unstoring function
+        intaking();                                            // Calls the intaking function
+        colorSensing();                                        // Calls the colorSensing function
+        unstoring();                                           // Calls the unstoring function
 
         // How long it takes for each update of inputs
 		pros::delay(20);
