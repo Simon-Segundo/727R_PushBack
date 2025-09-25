@@ -13,11 +13,17 @@
 #include "pros/optical.hpp"
 #include <thread> // IWYU pragma: keep
 
-// Used to toggle the color sensor between sensing blue or red balls
-int color = 0;
+// Used to toggle the top piston to allow for shooting blocks into the top storage
+bool oppStore = false;
+
+// Used to toggle the top piston to allow for scoring blocks in the middle goal
+bool middleScore = false;
+
+// Used to toggle the top piston to access the blocks at the bottom of the match loading tubes
+bool matchLoadDown = false;
 
 // Used to disable the color sensor while trying to score in the top or middle goals
-int scoring = false;
+bool scoring = false;
 
 pros::Controller Controller(pros::E_CONTROLLER_MASTER);
 
@@ -105,36 +111,35 @@ void initialize() {
     colorSensor.set_integration_time(10);
 }
 
-// Senses the color of the balls entering the intake and if an orb of the opposing color tries to enter the storage, the code actuates a piston and runs a motor to put the opposing colored ball into a separate storage area
+// Senses the color of the blocks entering the intake and if a block of the opposing color tries to enter the storage, the code actuates a piston and runs a motor to put the opposing colored block into a separate storage area
 void colorSensing() {
-    // Senses if a red orb is trying to enter the storage and actuates the piston at the top of the robot to have it stored in a separate area
-    if (color == 0) {
-        if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 25)) {
-            storage.set_value(true);
-            store.move(127);
-        } else if ((colorSensor.get_hue() >= 58) && (colorSensor.get_hue() <= 75)) {
-            storage.set_value(false);
-            store.move(-127);
-        } else {
-            store.brake();
-        }
-        color++;
-    // Senses if a blue orb is trying to enter the storage and actuates the piston at the top of the robot to have it stored in a separate area
-    } else if (color == 1) {
-        if ((colorSensor.get_hue() >= 58) && (colorSensor.get_hue() <= 75)) {
-            storage.set_value(true);
-            store.move(127);
-        } else if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 25)) {
-            storage.set_value(false);
-            store.move(-127);
-        } else {
-            store.brake();
-        }
-        color--;
+// Red Team
+    // if ((colorSensor.get_hue() >= 25) && (colorSensor.get_hue() <= 45)) {
+    //     storage.set_value(true);
+    //     store.move(127);
+    //     pros::delay(500);
+    // } else if ((colorSensor.get_hue() >= 58) && (colorSensor.get_hue() <= 75)) {
+    //     storage.set_value(false);
+    //     store.move(-127);
+    //     pros::delay(1500);
+    // } else {
+    //     store.brake();
+    // }
+// Blue Team
+    if ((colorSensor.get_hue() >= 58) && (colorSensor.get_hue() <= 75)) {
+        storage.set_value(true);
+        store.move(127);
+        pros::delay(500);
+    } else if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 25)) {
+        storage.set_value(false);
+        store.move(-127);
+        pros::delay(1500);
+    } else {
+        store.brake();
     }
 }
 
-// Intakes and outtakes the balls
+// Intakes and outtakes the blocks
 void intaking() {
 	if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 		intake.move(127);
@@ -145,13 +150,48 @@ void intaking() {
 	}
 }
 
-// Takes balls out of storage when holding R1 and holds the position of the rubber band roller when not holding it so extra balls wont come out of storage
+// Takes blocks out of storage when holding R1 and holds the position of the rubber band roller when not holding it so extra blocks wont come out of storage
 void unstoring() {
     unstore.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
         unstore.move(127);
+    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
+        unstore.move(-127);
     } else {
         unstore.brake();
+    }
+}
+
+// Actuates the piston at the top of the robot to allow for storage of the opposite color of block
+void opposingStorage() {
+    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y) && (oppStore == false)) {
+        storage.set_value(true);
+        oppStore = true;
+    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y) && (oppStore == true)) {
+        storage.set_value(false);
+        oppStore = false;
+    }
+}
+
+// Actuates the middle piston to block the intake at the middle to redirect the blocks into the middle tube
+void midScoring() {
+    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == false)) {
+        midScore.set_value(false);
+        middleScore = true;
+    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == true)) {
+        midScore.set_value(true);
+        middleScore = false;
+    }
+}
+
+// Actuates the bottom piston to drop a bar that gives us access to the blocks inside of the match loading tubes
+void matchLoading() {
+    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) && (matchLoadDown == false)) {
+        matchLoad.set_value(true);
+        matchLoadDown = true;
+    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) && (matchLoadDown == true)) {
+        matchLoad.set_value(false);
+        matchLoadDown = false;
     }
 }
 
@@ -160,7 +200,6 @@ void unstoring() {
  * the VEX Competition Switch, following either autonomous or opcontrol. When
  * the robot is enabled, this task will exit.
  */
-
 void disabled() {}
 
 /**
@@ -172,7 +211,6 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
-
 void competition_initialize() {}
 
 /**
@@ -186,7 +224,6 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-
 void autonomous() {
 
 }
@@ -204,8 +241,13 @@ void autonomous() {
  * operator control task will be stopped. Re-enabling the robot will restart the
  * task, not resume it from where it left off.
  */
-
 void opcontrol() {
+    pros::Task colorTask ([&] () {
+        while(true) {
+            colorSensing();                                        // Calls the colorSensing function
+            pros::delay(10);
+        }
+    });
 	while (true) {
         pros::c::optical_rgb_s_t rgb = colorSensor.get_rgb();
         double hue = colorSensor.get_hue();
@@ -221,12 +263,14 @@ void opcontrol() {
 		chassis.arcade(dir, turn);
 
         // Curvature Drive control scheme
-        // chassis.curvature(-dir, turn);            // Similar to arcade but turns better
+        // chassis.curvature(dir, turn);            // Similar to arcade but turns better
 
         // Calling functions
         intaking();                                            // Calls the intaking function
-        colorSensing();                                        // Calls the colorSensing function
         unstoring();                                           // Calls the unstoring function
+        opposingStorage();                                     // Calls the opposingStorage function
+        midScoring();                                          // Calls the midScoring function
+        matchLoading();                                        // Calls the matchLoading function
 
         // How long it takes for each update of inputs
 		pros::delay(20);
