@@ -13,18 +13,6 @@
 #include "pros/optical.hpp"
 #include <thread> // IWYU pragma: keep
 
-// Used to toggle the top piston to allow for shooting blocks into the top storage
-bool oppStore = false;
-
-// Used to toggle the top piston to allow for scoring blocks in the middle goal
-bool middleScore = false;
-
-// Used to toggle the top piston to access the blocks at the bottom of the match loading tubes
-bool matchLoadDown = false;
-
-// Used to disable the color sensor while trying to score in the top or middle goals
-bool scoring = false;
-
 pros::Controller Controller(pros::E_CONTROLLER_MASTER);
 
 pros::MotorGroup left_mg({-11, -12, -13}, pros::MotorGearset::blue);    // Creates a motor group with reversed ports 11 12 & 13
@@ -96,6 +84,18 @@ lemlib::Chassis chassis(drivetrain, // Drivetrain Settings
                         sensors // Odometry Sensors
 );
 
+// Used to toggle the top piston to allow for shooting blocks into the top storage
+bool oppStore = false;
+
+// Used to toggle the top piston to allow for scoring blocks in the middle goal
+bool middleScore = false;
+
+// Used to toggle the top piston to access the blocks at the bottom of the match loading tubes
+bool matchLoadDown = false;
+
+// Used to disable the color sensor while trying to score in the top or middle goals
+bool scoring = false;
+
 /**
  * Runs initialization code. This occurs as soon as the program is started.
  *
@@ -114,26 +114,26 @@ void initialize() {
 // Senses the color of the blocks entering the intake and if a block of the opposing color tries to enter the storage, the code actuates a piston and runs a motor to put the opposing colored block into a separate storage area
 void colorSensing() {
 // Red Team
-    // if ((colorSensor.get_hue() >= 25) && (colorSensor.get_hue() <= 45)) {
+    // if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 50) && (colorSensor.get_proximity() >= 150)) {
     //     storage.set_value(true);
     //     store.move(127);
-    //     pros::delay(500);
-    // } else if ((colorSensor.get_hue() >= 58) && (colorSensor.get_hue() <= 75)) {
+    //     pros::delay(250);
+    // } else if ((colorSensor.get_hue() >= 59) && (colorSensor.get_hue() <= 75) && (colorSensor.get_proximity() >= 150)) {
     //     storage.set_value(false);
     //     store.move(-127);
-    //     pros::delay(1500);
+    //     pros::delay(250);
     // } else {
     //     store.brake();
     // }
 // Blue Team
-    if ((colorSensor.get_hue() >= 58) && (colorSensor.get_hue() <= 75)) {
+    if ((colorSensor.get_hue() >= 59) && (colorSensor.get_hue() <= 75) && (colorSensor.get_proximity() >= 150)) {
         storage.set_value(true);
         store.move(127);
-        pros::delay(500);
-    } else if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 25)) {
+        pros::delay(250);
+    } else if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 50) && (colorSensor.get_proximity() >= 150)) {
         storage.set_value(false);
         store.move(-127);
-        pros::delay(1500);
+        pros::delay(250);
     } else {
         store.brake();
     }
