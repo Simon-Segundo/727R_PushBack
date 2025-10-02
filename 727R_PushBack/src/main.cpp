@@ -10,7 +10,7 @@
 #include "pros/misc.hpp"
 #include "pros/motors.h"
 #include "pros/optical.h" // IWYU pragma: keep
-#include "pros/optical.hpp"
+#include "pros/optical.hpp" // IWYU pragma: keep
 #include <thread> // IWYU pragma: keep
 
 pros::Controller Controller(pros::E_CONTROLLER_MASTER);
@@ -160,10 +160,10 @@ void unstoring() {
 
 // Actuates the piston at the top of the robot to allow for storage of the opposite color of block
 void opposingStorage() {
-    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y) && (oppStore == false)) {
+    if (Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y) && (oppStore == false)) {
         storage.set_value(true);
         oppStore = true;
-    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y) && (oppStore == true)) {
+    } else if (Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y) && (oppStore == true)) {
         storage.set_value(false);
         oppStore = false;
     }
@@ -171,10 +171,10 @@ void opposingStorage() {
 
 // Actuates the middle piston to block the intake at the middle to redirect the blocks into the middle tube
 void midScoring() {
-    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == false)) {
+    if (Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == false)) {
         midScore.set_value(false);
         middleScore = true;
-    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == true)) {
+    } else if (Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == true)) {
         midScore.set_value(true);
         middleScore = false;
     }
@@ -182,10 +182,10 @@ void midScoring() {
 
 // Actuates the bottom piston to drop a bar that gives us access to the blocks inside of the match loading tubes
 void matchLoading() {
-    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) && (matchLoadDown == false)) {
+    if (Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN) && (matchLoadDown == false)) {
         matchLoad.set_value(true);
         matchLoadDown = true;
-    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) && (matchLoadDown == true)) {
+    } else if (Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN) && (matchLoadDown == true)) {
         matchLoad.set_value(false);
         matchLoadDown = false;
     }
