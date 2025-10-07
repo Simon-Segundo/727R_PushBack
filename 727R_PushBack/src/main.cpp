@@ -1,6 +1,7 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "lemlib/chassis/trackingWheel.hpp"
+#include "liblvgl/widgets/lv_label.h" // IWYU pragma: keep
 #include "pros/abstract_motor.hpp"
 #include "pros/adi.h" // IWYU pragma: keep
 #include "pros/adi.hpp"
@@ -114,20 +115,20 @@ void initialize() {
 // Senses the color of the blocks entering the intake and if a block of the opposing color tries to enter the storage, the runs a motor to put the opposing colored block into a separate storage area
 void colorSensing() {
 // Red Team
-    // if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 52) && (colorSensor.get_proximity() >= 150)) {
+    // if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 53) && (colorSensor.get_proximity() >= 50)) {
     //     store.move(127);
     //     pros::delay(100);
-    // } else if ((colorSensor.get_hue() >= 59) && (colorSensor.get_hue() <= 75) && (colorSensor.get_proximity() >= 150)) {
+    // } else if ((colorSensor.get_hue() >= 57) && (colorSensor.get_hue() <= 75) && (colorSensor.get_proximity() >= 50)) {
     //     store.move(-127);
     //     pros::delay(100);
     // } else {
     //     store.brake();
     // }
 // Blue Team
-    if ((colorSensor.get_hue() >= 59) && (colorSensor.get_hue() <= 75) && (colorSensor.get_proximity() >= 150)) {
+    if ((colorSensor.get_hue() >= 60) && (colorSensor.get_hue() <= 75) && (colorSensor.get_proximity() >= 50)) {
         store.move(127);
         pros::delay(100);
-    } else if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 52) && (colorSensor.get_proximity() >= 150)) {
+    } else if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 53) && (colorSensor.get_proximity() >= 50)) {
         store.move(-127);
         pros::delay(100);
     } else {
@@ -160,33 +161,47 @@ void unstoring() {
 
 // Actuates the piston at the top of the robot to allow for storage of the opposite color of block
 void opposingStorage() {
-    if (Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y) && (oppStore == false)) {
-        storage.set_value(true);
-        oppStore = true;
-    } else if (Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y) && (oppStore == true)) {
+    if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) && (oppStore == false)) {
         storage.set_value(false);
+        pros::delay(500);
+        // Shoots any color of block out the front of the robot for high goal scoring
+        if (((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 53)) || ((colorSensor.get_hue() >= 57) && (colorSensor.get_hue() <= 75)) && (colorSensor.get_proximity() >= 50)) {
+            store.move(-127);
+            pros::delay(100);
+        } else {
+            store.brake();
+        }
+        oppStore = true;
+    } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) && (oppStore == true)) {
+        storage.set_value(true);
+        pros::delay(500);
+        colorSensing(); // Calls the colorSensing function
         oppStore = false;
     }
 }
 
 // Actuates the middle piston to block the intake at the middle to redirect the blocks into the middle tube
 void midScoring() {
-    if (Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == false)) {
+    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == false)) {
         midScore.set_value(false);
+        pros::delay(500);
         middleScore = true;
-    } else if (Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == true)) {
+    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == true)) {
         midScore.set_value(true);
+        pros::delay(500);
         middleScore = false;
     }
 }
 
 // Actuates the bottom piston to drop a bar that gives us access to the blocks inside of the match loading tubes
 void matchLoading() {
-    if (Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN) && (matchLoadDown == false)) {
+    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) && (matchLoadDown == false)) {
         matchLoad.set_value(true);
+        pros::delay(500);
         matchLoadDown = true;
-    } else if (Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN) && (matchLoadDown == true)) {
+    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) && (matchLoadDown == true)) {
         matchLoad.set_value(false);
+        pros::delay(500);
         matchLoadDown = false;
     }
 }
@@ -238,13 +253,75 @@ void autonomous() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-    pros::Task colorTask ([&] () {
+    // Tasks for drivercontrol
+    pros::Task sortingTask ([&] () {
         while(true) {
-            colorSensing();                                        // Calls the colorSensing function
+            lv_task_handler();
+            if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) && (oppStore == false)) {
+                storage.set_value(false);
+                pros::delay(500);
+                // Shoots any color of block out the front of the robot for high goal scoring
+                if (((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 53)) || ((colorSensor.get_hue() >= 57) && (colorSensor.get_hue() <= 75)) && (colorSensor.get_proximity() >= 50)) {
+                    store.move(-127);
+                    pros::delay(100);
+                } else {
+                    store.brake();
+                }
+                oppStore = true;
+            } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) && (oppStore == true)) {
+                storage.set_value(true);
+                pros::delay(500);
+                // Red Team
+                    // if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 53) && (colorSensor.get_proximity() >= 50)) {
+                    //     store.move(127);
+                    //     pros::delay(100);
+                    // } else if ((colorSensor.get_hue() >= 57) && (colorSensor.get_hue() <= 75) && (colorSensor.get_proximity() >= 50)) {
+                    //     store.move(-127);
+                    //     pros::delay(100);
+                    // } else {
+                    //     store.brake();
+                    // }
+                // Blue Team
+                    if ((colorSensor.get_hue() >= 60) && (colorSensor.get_hue() <= 75) && (colorSensor.get_proximity() >= 50)) {
+                        store.move(127);
+                        pros::delay(100);
+                    } else if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 53) && (colorSensor.get_proximity() >= 50)) {
+                        store.move(-127);
+                        pros::delay(100);
+                    } else {
+                        store.brake();
+                    }
+                oppStore = false;
+            }
             pros::delay(10);
         }
     });
+    pros::Task midScoreTask ([&] () {
+        while(true) {
+            lv_task_handler();
+            midScoring(); // Calls the midScoring function
+            pros::delay(10);
+        }
+    });
+    pros::Task matchLoadTask ([&] () {
+        while(true) {
+            lv_task_handler();
+            matchLoading(); // Calls the matchLoading function
+            pros::delay(10);
+        }
+    });
+        
 	while (true) {
+        // Defines the color sensor values and prints the values on the screen
+        pros::c::optical_rgb_s_t rgb = colorSensor.get_rgb();
+        double hue = colorSensor.get_hue();
+        double brightness = colorSensor.get_brightness();
+        double proximity = colorSensor.get_proximity();
+        pros::lcd::print(0, "RGB: %f, %f, %f", rgb.red, rgb.green, rgb.blue);
+        pros::lcd::print(1, "Hue: %f", hue);
+        pros::lcd::print(2, "Brightness: %f", brightness);
+        pros::lcd::print(3, "Proximity: %f", proximity);
+
 		// Arcade control scheme
 		int dir = Controller.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
 		int turn = Controller.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
@@ -256,9 +333,6 @@ void opcontrol() {
         // Calling functions
         intaking();                                            // Calls the intaking function
         unstoring();                                           // Calls the unstoring function
-        opposingStorage();                                     // Calls the opposingStorage function
-        midScoring();                                          // Calls the midScoring function
-        matchLoading();                                        // Calls the matchLoading function
 
         // How long it takes for each update of inputs
 		pros::delay(20);
