@@ -13,10 +13,17 @@ extern "C" {
 /*********************
  *      INCLUDES
  *********************/
+<<<<<<< Updated upstream
 #include "lv_draw.h"
 #include "../misc/lv_color.h"
 #include "../misc/lv_area.h"
 #include "../misc/lv_style.h"
+=======
+#include "liblvgl/lv_conf_internal.h"
+#include "liblvgl/misc/lv_color.h"
+#include "liblvgl/misc/lv_area.h"
+#include "liblvgl/misc/lv_style.h"
+>>>>>>> Stashed changes
 #include "sw/lv_draw_sw_gradient.h"
 
 /*********************
@@ -30,9 +37,14 @@ LV_EXPORT_CONST_INT(LV_RADIUS_CIRCLE);
  **********************/
 
 typedef struct {
+<<<<<<< Updated upstream
     lv_draw_dsc_base_t base;
 
     int32_t radius;
+=======
+    lv_coord_t radius;
+    lv_blend_mode_t blend_mode;
+>>>>>>> Stashed changes
 
     /*Background*/
     lv_opa_t bg_opa;
@@ -40,6 +52,7 @@ typedef struct {
     lv_grad_dsc_t bg_grad;
 
     /*Background img*/
+<<<<<<< Updated upstream
     const void * bg_image_src;
     const void * bg_image_symbol_font;
     lv_color_t bg_image_recolor;
@@ -58,10 +71,31 @@ typedef struct {
     lv_color_t outline_color;
     int32_t outline_width;
     int32_t outline_pad;
+=======
+    const void * bg_img_src;
+    const void * bg_img_symbol_font;
+    lv_color_t bg_img_recolor;
+    lv_opa_t bg_img_opa;
+    lv_opa_t bg_img_recolor_opa;
+    uint8_t bg_img_tiled;
+
+    /*Border*/
+    lv_color_t border_color;
+    lv_coord_t border_width;
+    lv_opa_t border_opa;
+    uint8_t border_post : 1;        /*There is a border it will be drawn later.*/
+    lv_border_side_t border_side : 5;
+
+    /*Outline*/
+    lv_color_t outline_color;
+    lv_coord_t outline_width;
+    lv_coord_t outline_pad;
+>>>>>>> Stashed changes
     lv_opa_t outline_opa;
 
     /*Shadow*/
     lv_color_t shadow_color;
+<<<<<<< Updated upstream
     int32_t shadow_width;
     int32_t shadow_offset_x;
     int32_t shadow_offset_y;
@@ -104,11 +138,22 @@ typedef struct {
     lv_opa_t opa;
     uint8_t bg_cover    : 1;
 } lv_draw_box_shadow_dsc_t;
+=======
+    lv_coord_t shadow_width;
+    lv_coord_t shadow_ofs_x;
+    lv_coord_t shadow_ofs_y;
+    lv_coord_t shadow_spread;
+    lv_opa_t shadow_opa;
+} lv_draw_rect_dsc_t;
+
+struct _lv_draw_ctx_t;
+>>>>>>> Stashed changes
 
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
 
+<<<<<<< Updated upstream
 /**
  * Initialize a rectangle draw descriptor.
  * @param dsc       pointer to a draw descriptor
@@ -162,6 +207,18 @@ lv_draw_box_shadow_dsc_t * lv_draw_task_get_box_shadow_dsc(lv_draw_task_t * task
  * @param coords        the coordinates of the rectangle
  */
 void lv_draw_rect(lv_layer_t * layer, const lv_draw_rect_dsc_t * dsc, const lv_area_t * coords);
+=======
+LV_ATTRIBUTE_FAST_MEM void lv_draw_rect_dsc_init(lv_draw_rect_dsc_t * dsc);
+
+
+/**
+ * Draw a rectangle
+ * @param coords the coordinates of the rectangle
+ * @param clip the rectangle will be drawn only in this area
+ * @param dsc pointer to an initialized `lv_draw_rect_dsc_t` variable
+ */
+void lv_draw_rect(struct _lv_draw_ctx_t * draw_ctx, const lv_draw_rect_dsc_t * dsc, const lv_area_t * coords);
+>>>>>>> Stashed changes
 
 /**********************
  *      MACROS

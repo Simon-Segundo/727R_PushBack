@@ -370,4 +370,8 @@ std::uint8_t read_buttons(void);
 }  // namespace pros
 
 
+<<<<<<< Updated upstream
 #endif  // _LIBLVGL_LLEMU_HPP_
+=======
+#endif  // _LIBLVGL_LLEMU_HPP_
+>>>>>>> Stashed changes

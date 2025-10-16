@@ -13,21 +13,32 @@ extern "C" {
 /***************************
  * CURRENT VERSION OF LVGL
  ***************************/
+<<<<<<< Updated upstream
 #include "lv_version.h"
+=======
+#define LVGL_VERSION_MAJOR 8
+#define LVGL_VERSION_MINOR 3
+#define LVGL_VERSION_PATCH 4
+#define LVGL_VERSION_INFO "dev"
+>>>>>>> Stashed changes
 
 /*********************
  *      INCLUDES
  *********************/
+<<<<<<< Updated upstream
 #include "lvgl_private.h"
 #include "liblvgl/lv_init.h"
 
 #include "liblvgl/stdlib/lv_mem.h"
 #include "liblvgl/stdlib/lv_string.h"
 #include "liblvgl/stdlib/lv_sprintf.h"
+=======
+>>>>>>> Stashed changes
 
 #include "liblvgl/misc/lv_log.h"
 #include "liblvgl/misc/lv_timer.h"
 #include "liblvgl/misc/lv_math.h"
+<<<<<<< Updated upstream
 #include "liblvgl/misc/lv_array.h"
 #include "liblvgl/misc/lv_async.h"
 #include "liblvgl/misc/lv_anim_timeline.h"
@@ -124,6 +135,50 @@ extern "C" {
 #if LV_USE_PRIVATE_API
 #include "liblvgl/lvgl_private.h"
 #endif
+=======
+#include "liblvgl/misc/lv_mem.h"
+#include "liblvgl/misc/lv_async.h"
+#include "liblvgl/misc/lv_anim_timeline.h"
+#include "liblvgl/misc/lv_printf.h"
+
+#include "liblvgl/hal/lv_hal.h"
+
+#include "liblvgl/core/lv_obj.h"
+#include "liblvgl/core/lv_group.h"
+#include "liblvgl/core/lv_indev.h"
+#include "liblvgl/core/lv_refr.h"
+#include "liblvgl/core/lv_disp.h"
+#include "liblvgl/core/lv_theme.h"
+
+#include "liblvgl/font/lv_font.h"
+#include "liblvgl/font/lv_font_loader.h"
+#include "liblvgl/font/lv_font_fmt_txt.h"
+
+#include "liblvgl/widgets/lv_arc.h"
+#include "liblvgl/widgets/lv_btn.h"
+#include "liblvgl/widgets/lv_img.h"
+#include "liblvgl/widgets/lv_label.h"
+#include "liblvgl/widgets/lv_line.h"
+#include "liblvgl/widgets/lv_table.h"
+#include "liblvgl/widgets/lv_checkbox.h"
+#include "liblvgl/widgets/lv_bar.h"
+#include "liblvgl/widgets/lv_slider.h"
+#include "liblvgl/widgets/lv_btnmatrix.h"
+#include "liblvgl/widgets/lv_dropdown.h"
+#include "liblvgl/widgets/lv_roller.h"
+#include "liblvgl/widgets/lv_textarea.h"
+#include "liblvgl/widgets/lv_canvas.h"
+#include "liblvgl/widgets/lv_switch.h"
+
+#include "liblvgl/draw/lv_draw.h"
+
+#include "liblvgl/lv_api_map.h"
+
+/*-----------------
+ * EXTRAS
+ *----------------*/
+#include "liblvgl/extra/lv_extra.h"
+>>>>>>> Stashed changes
 
 /*********************
  *      DEFINES
@@ -183,7 +238,11 @@ static inline int lv_version_patch(void)
     return LVGL_VERSION_PATCH;
 }
 
+<<<<<<< Updated upstream
 static inline const char * lv_version_info(void)
+=======
+static inline const char *lv_version_info(void)
+>>>>>>> Stashed changes
 {
     return LVGL_VERSION_INFO;
 }
@@ -192,4 +251,8 @@ static inline const char * lv_version_info(void)
 } /*extern "C"*/
 #endif
 
+<<<<<<< Updated upstream
 #endif /*LVGL_H*/
+=======
+#endif /*LVGL_H*/
+>>>>>>> Stashed changes

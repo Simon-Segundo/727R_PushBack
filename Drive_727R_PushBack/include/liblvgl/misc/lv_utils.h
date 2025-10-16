@@ -13,9 +13,13 @@ extern "C" {
 /*********************
  *      INCLUDES
  *********************/
+<<<<<<< Updated upstream
 
 #include "lv_types.h"
 #include "../draw/lv_draw_buf.h"
+=======
+#include <stdint.h>
+>>>>>>> Stashed changes
 
 /*********************
  *      DEFINES
@@ -35,12 +39,17 @@ extern "C" {
  *  argument (the search key) is less that it's second (a table entry),
  *  zero if equal, and positive if greater.
  *
+<<<<<<< Updated upstream
  * @note Items in the array must be in ascending order.
+=======
+ *  @note Items in the array must be in ascending order.
+>>>>>>> Stashed changes
  *
  * @param key    Pointer to item being searched for
  * @param base   Pointer to first element to search
  * @param n      Number of elements
  * @param size   Size of each element
+<<<<<<< Updated upstream
  * @param cmp    Pointer to comparison function (see unicode_list_compare()
  *                 as a comparison function example)
  *
@@ -56,6 +65,15 @@ void * lv_utils_bsearch(const void * key, const void * base, size_t n, size_t si
  * @return          LV_RESULT_OK: success; LV_RESULT_INVALID: error
  */
 lv_result_t lv_draw_buf_save_to_file(const lv_draw_buf_t * draw_buf, const char * path);
+=======
+ * @param cmp    Pointer to comparison function (see #unicode_list_compare as a comparison function
+ * example)
+ *
+ * @return a pointer to a matching item, or NULL if none exists.
+ */
+void * _lv_utils_bsearch(const void * key, const void * base, uint32_t n, uint32_t size,
+                         int32_t (*cmp)(const void * pRef, const void * pElement));
+>>>>>>> Stashed changes
 
 /**********************
  *      MACROS

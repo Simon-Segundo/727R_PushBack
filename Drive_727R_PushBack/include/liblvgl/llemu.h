@@ -435,4 +435,8 @@ void lcd_set_text_align(text_align_e_t alignment);
 }  // namespace pros
 }  // extern "C"
 #endif
+<<<<<<< Updated upstream
 #endif  // _LIBLVGL_LLEMU_H_
+=======
+#endif  // _LIBLVGL_LLEMU_H_
+>>>>>>> Stashed changes

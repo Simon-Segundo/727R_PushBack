@@ -22,6 +22,7 @@ extern "C" {
 /**********************
  *      TYPEDEFS
  **********************/
+<<<<<<< Updated upstream
 typedef struct {
     lv_draw_dsc_base_t base;
 
@@ -31,11 +32,14 @@ typedef struct {
 
     lv_point_precise_t p[3];
 } lv_draw_triangle_dsc_t;
+=======
+>>>>>>> Stashed changes
 
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
 
+<<<<<<< Updated upstream
 /**
  * Initialize a triangle draw descriptor
  * @param draw_dsc  pointer to a draw descriptor
@@ -56,6 +60,12 @@ lv_draw_triangle_dsc_t * lv_draw_task_get_triangle_dsc(lv_draw_task_t * task);
  */
 void lv_draw_triangle(lv_layer_t * layer, const lv_draw_triangle_dsc_t * draw_dsc);
 
+=======
+void lv_draw_polygon(struct _lv_draw_ctx_t * draw_ctx, const lv_draw_rect_dsc_t * draw_dsc, const lv_point_t points[],
+                     uint16_t point_cnt);
+
+void lv_draw_triangle(struct _lv_draw_ctx_t * draw_ctx, const lv_draw_rect_dsc_t * draw_dsc, const lv_point_t points[]);
+>>>>>>> Stashed changes
 /**********************
  *      MACROS
  **********************/

@@ -18,6 +18,7 @@ extern "C" {
 
 #  ifdef __NuttX__
 #    include <nuttx/config.h>
+<<<<<<< Updated upstream
 /*
  * Make sure version number in Kconfig file is correctly set.
  * Mismatch can happen when user manually copy lvgl/Kconfig file to their project, like what NuttX does.
@@ -28,6 +29,8 @@ extern "C" {
         || CONFIG_LVGL_VERSION_PATCH != LVGL_VERSION_PATCH
 #        warning "Version mismatch between Kconfig and lvgl/lv_version.h"
 #    endif
+=======
+>>>>>>> Stashed changes
 #  elif defined(__RTTHREAD__)
 #    define LV_CONF_INCLUDE_SIMPLE
 #    include <lv_rt_thread_conf.h>
@@ -36,6 +39,7 @@ extern "C" {
 #endif /*LV_CONF_KCONFIG_EXTERNAL_INCLUDE*/
 
 /*******************
+<<<<<<< Updated upstream
  * LV_USE_STDLIB_MALLOC
  *******************/
 
@@ -81,6 +85,13 @@ extern "C" {
 #  define CONFIG_LV_USE_STDLIB_SPRINTF LV_STDLIB_RTTHREAD
 #elif defined (CONFIG_LV_USE_CUSTOM_SPRINTF)
 #  define CONFIG_LV_USE_STDLIB_SPRINTF LV_STDLIB_CUSTOM
+=======
+ * LV COLOR CHROMA KEY
+ *******************/
+
+#ifdef CONFIG_LV_COLOR_CHROMA_KEY_HEX
+#  define CONFIG_LV_COLOR_CHROMA_KEY lv_color_hex(CONFIG_LV_COLOR_CHROMA_KEY_HEX)
+>>>>>>> Stashed changes
 #endif
 
 /*******************
@@ -88,6 +99,7 @@ extern "C" {
  *******************/
 
 #ifdef CONFIG_LV_MEM_SIZE_KILOBYTES
+<<<<<<< Updated upstream
 #  if(CONFIG_LV_MEM_SIZE_KILOBYTES < 2)
 #    error "LV_MEM_SIZE >= 2kB is required"
 #  endif
@@ -99,6 +111,11 @@ extern "C" {
 #  define CONFIG_LV_MEM_POOL_EXPAND_SIZE (CONFIG_LV_MEM_POOL_EXPAND_SIZE_KILOBYTES * 1024U)
 #endif
 
+=======
+#  define CONFIG_LV_MEM_SIZE (CONFIG_LV_MEM_SIZE_KILOBYTES * 1024U)
+#endif
+
+>>>>>>> Stashed changes
 /*------------------
  * MONITOR POSITION
  *-----------------*/
@@ -204,8 +221,11 @@ extern "C" {
 #  define CONFIG_LV_FONT_DEFAULT &lv_font_montserrat_28_compressed
 #elif defined(CONFIG_LV_FONT_DEFAULT_DEJAVU_16_PERSIAN_HEBREW)
 #  define CONFIG_LV_FONT_DEFAULT &lv_font_dejavu_16_persian_hebrew
+<<<<<<< Updated upstream
 #elif defined(CONFIG_LV_FONT_DEFAULT_SIMSUN_14_CJK)
 #  define CONFIG_LV_FONT_DEFAULT &lv_font_simsun_14_cjk
+=======
+>>>>>>> Stashed changes
 #elif defined(CONFIG_LV_FONT_DEFAULT_SIMSUN_16_CJK)
 #  define CONFIG_LV_FONT_DEFAULT &lv_font_simsun_16_cjk
 #elif defined(CONFIG_LV_FONT_DEFAULT_UNSCII_8)
@@ -235,6 +255,7 @@ extern "C" {
 #  define CONFIG_LV_BIDI_BASE_DIR_DEF LV_BASE_DIR_AUTO
 #endif
 
+<<<<<<< Updated upstream
 /*------------------
  * SDL
  *-----------------*/
@@ -259,8 +280,14 @@ extern "C" {
 #  define CONFIG_LV_LINUX_FBDEV_RENDER_MODE LV_DISPLAY_RENDER_MODE_FULL
 #endif
 
+=======
+>>>>>>> Stashed changes
 #ifdef __cplusplus
 } /*extern "C"*/
 #endif
 
+<<<<<<< Updated upstream
 #endif /*LV_CONF_KCONFIG_H*/
+=======
+#endif /*LV_CONF_KCONFIG_H*/
+>>>>>>> Stashed changes

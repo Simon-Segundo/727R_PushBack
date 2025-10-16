@@ -13,6 +13,7 @@ extern "C" {
 /*********************
  *      INCLUDES
  *********************/
+<<<<<<< Updated upstream
 #include "../lv_conf_internal.h"
 
 #ifndef __ASSEMBLY__
@@ -23,19 +24,30 @@ extern "C" {
 #include LV_LIMITS_INCLUDE
 #include LV_STDARG_INCLUDE
 #endif
+=======
+#include <stdint.h>
+>>>>>>> Stashed changes
 
 /*********************
  *      DEFINES
  *********************/
 
+<<<<<<< Updated upstream
 /*If __UINTPTR_MAX__ or UINTPTR_MAX are available, use them to determine arch size*/
+=======
+// If __UINTPTR_MAX__ or UINTPTR_MAX are available, use them to determine arch size
+>>>>>>> Stashed changes
 #if defined(__UINTPTR_MAX__) && __UINTPTR_MAX__ > 0xFFFFFFFF
 #define LV_ARCH_64
 
 #elif defined(UINTPTR_MAX) && UINTPTR_MAX > 0xFFFFFFFF
 #define LV_ARCH_64
 
+<<<<<<< Updated upstream
 /*Otherwise use compiler-dependent means to determine arch size*/
+=======
+// Otherwise use compiler-dependent means to determine arch size
+>>>>>>> Stashed changes
 #elif defined(_WIN64) || defined(__x86_64__) || defined(__ppc64__) || defined (__aarch64__)
 #define LV_ARCH_64
 
@@ -45,6 +57,7 @@ extern "C" {
  *      TYPEDEFS
  **********************/
 
+<<<<<<< Updated upstream
 /* Exclude C enum and struct definitions when included by assembly code */
 #ifndef __ASSEMBLY__
 
@@ -71,10 +84,34 @@ typedef int64_t lv_intptr_t;
 #else
 typedef uint32_t lv_uintptr_t;
 typedef int32_t lv_intptr_t;
+=======
+/**
+ * LVGL error codes.
+ */
+enum {
+    LV_RES_INV = 0, /*Typically indicates that the object is deleted (become invalid) in the action
+                      function or an operation was failed*/
+    LV_RES_OK,      /*The object is valid (no deleted) after the action*/
+};
+typedef uint8_t lv_res_t;
+
+#if defined(__cplusplus) || __STDC_VERSION__ >= 199901L
+// If c99 or newer,  use the definition of uintptr_t directly from <stdint.h>
+typedef uintptr_t lv_uintptr_t;
+
+#else
+
+// Otherwise, use the arch size determination
+#ifdef LV_ARCH_64
+typedef uint64_t lv_uintptr_t;
+#else
+typedef uint32_t lv_uintptr_t;
+>>>>>>> Stashed changes
 #endif
 
 #endif
 
+<<<<<<< Updated upstream
 #if LV_USE_FLOAT
 typedef float lv_value_precise_t;
 #else
@@ -346,6 +383,8 @@ typedef struct _lv_sysmon_perf_info_t lv_sysmon_perf_info_t;
 
 #endif /*__ASSEMBLY__*/
 
+=======
+>>>>>>> Stashed changes
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
@@ -358,17 +397,27 @@ typedef struct _lv_sysmon_perf_info_t lv_sysmon_perf_info_t;
 
 #define _LV_CONCAT(x, y) x ## y
 #define LV_CONCAT(x, y) _LV_CONCAT(x, y)
+<<<<<<< Updated upstream
 #undef _LV_CONCAT
 
 #define _LV_CONCAT3(x, y, z) x ## y ## z
 #define LV_CONCAT3(x, y, z) _LV_CONCAT3(x, y, z)
 #undef _LV_CONCAT3
+=======
+
+#define _LV_CONCAT3(x, y, z) x ## y ## z
+#define LV_CONCAT3(x, y, z) _LV_CONCAT3(x, y, z)
+>>>>>>> Stashed changes
 
 #if defined(PYCPARSER) || defined(__CC_ARM)
 #define LV_FORMAT_ATTRIBUTE(fmtstr, vararg)
 #elif defined(__GNUC__) && ((__GNUC__ == 4 && __GNUC_MINOR__ >= 4) || __GNUC__ > 4)
 #define LV_FORMAT_ATTRIBUTE(fmtstr, vararg) __attribute__((format(gnu_printf, fmtstr, vararg)))
+<<<<<<< Updated upstream
 #elif (defined(__clang__) || defined(__GNUC__) || defined(__GNUG__) || defined(__IAR_SYSTEMS_ICC__))
+=======
+#elif (defined(__clang__) || defined(__GNUC__) || defined(__GNUG__))
+>>>>>>> Stashed changes
 #define LV_FORMAT_ATTRIBUTE(fmtstr, vararg) __attribute__((format(printf, fmtstr, vararg)))
 #else
 #define LV_FORMAT_ATTRIBUTE(fmtstr, vararg)
