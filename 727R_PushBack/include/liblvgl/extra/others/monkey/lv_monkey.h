@@ -13,7 +13,12 @@ extern "C" {
  *      INCLUDES
  *********************/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
 #include "liblvgl/lvgl.h"
+=======
+#include "../../lv_conf_internal.h"
+#include "../../indev/lv_indev.h"
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
 =======
 #include "../../lv_conf_internal.h"
 #include "../../indev/lv_indev.h"
@@ -29,15 +34,21 @@ extern "C" {
  *      TYPEDEFS
  **********************/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
 struct _lv_monkey;
 typedef struct _lv_monkey lv_monkey_t;
 
 typedef struct {
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
 
 typedef struct _lv_monkey_t lv_monkey_t;
 
 struct _lv_monkey_config_t {
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
     /**< Input device type*/
     lv_indev_type_t type;
@@ -45,13 +56,19 @@ struct _lv_monkey_config_t {
     /**< Monkey execution period*/
     struct {
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
         uint32_t min;
         uint32_t max;
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
         //! @cond Doxygen_Suppress
         uint32_t min;
         uint32_t max;
         //! @endcond
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
     } period_range;
 
@@ -61,7 +78,11 @@ struct _lv_monkey_config_t {
         int32_t max;
     } input_range;
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
 } lv_monkey_config_t;
+=======
+};
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
 =======
 };
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
@@ -105,8 +126,11 @@ void lv_monkey_set_enable(lv_monkey_t * monkey, bool en);
 bool lv_monkey_get_enable(lv_monkey_t * monkey);
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
 #if LV_USE_USER_DATA
 
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
 =======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
 /**
@@ -124,8 +148,11 @@ void lv_monkey_set_user_data(lv_monkey_t * monkey, void * user_data);
 void * lv_monkey_get_user_data(lv_monkey_t * monkey);
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
 #endif/*LV_USE_USER_DATA*/
 
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
 =======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
 /**
@@ -133,7 +160,11 @@ void * lv_monkey_get_user_data(lv_monkey_t * monkey);
  * @param monkey pointer to monkey
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
 void lv_monkey_del(lv_monkey_t * monkey);
+=======
+void lv_monkey_delete(lv_monkey_t * monkey);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h
 =======
 void lv_monkey_delete(lv_monkey_t * monkey);
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/monkey/lv_monkey.h

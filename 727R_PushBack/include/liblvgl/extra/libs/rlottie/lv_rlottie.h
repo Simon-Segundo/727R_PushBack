@@ -14,7 +14,11 @@ extern "C" {
  *      INCLUDES
  *********************/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/rlottie/lv_rlottie.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/rlottie/lv_rlottie.h
 #include "liblvgl/lvgl.h"
+=======
+#include "../../lv_conf_internal.h"
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/rlottie/lv_rlottie.h
 =======
 #include "../../lv_conf_internal.h"
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/rlottie/lv_rlottie.h
@@ -35,6 +39,7 @@ typedef enum {
     LV_RLOTTIE_CTRL_LOOP     = 8,
 } lv_rlottie_ctrl_t;
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/rlottie/lv_rlottie.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/rlottie/lv_rlottie.h
 /** definition in lottieanimation_capi.c */
 struct Lottie_Animation_S;
@@ -57,15 +62,24 @@ extern const lv_obj_class_t lv_rlottie_class;
 =======
 LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_rlottie_class;
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/rlottie/lv_rlottie.h
+=======
+LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_rlottie_class;
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/rlottie/lv_rlottie.h
 
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/rlottie/lv_rlottie.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/rlottie/lv_rlottie.h
 lv_obj_t * lv_rlottie_create_from_file(lv_obj_t * parent, lv_coord_t width, lv_coord_t height, const char * path);
 
 lv_obj_t * lv_rlottie_create_from_raw(lv_obj_t * parent, lv_coord_t width, lv_coord_t height,
+=======
+lv_obj_t * lv_rlottie_create_from_file(lv_obj_t * parent, int32_t width, int32_t height, const char * path);
+
+lv_obj_t * lv_rlottie_create_from_raw(lv_obj_t * parent, int32_t width, int32_t height,
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/rlottie/lv_rlottie.h
 =======
 lv_obj_t * lv_rlottie_create_from_file(lv_obj_t * parent, int32_t width, int32_t height, const char * path);
 

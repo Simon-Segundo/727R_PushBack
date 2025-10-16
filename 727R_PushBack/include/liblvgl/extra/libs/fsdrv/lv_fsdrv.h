@@ -14,7 +14,11 @@ extern "C" {
  *      INCLUDES
  *********************/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/fsdrv/lv_fsdrv.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/fsdrv/lv_fsdrv.h
 #include "liblvgl/lv_conf_internal.h"
+=======
+#include "../../lv_conf_internal.h"
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/fsdrv/lv_fsdrv.h
 =======
 #include "../../lv_conf_internal.h"
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/fsdrv/lv_fsdrv.h
@@ -31,6 +35,7 @@ extern "C" {
  * GLOBAL PROTOTYPES
  **********************/
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/fsdrv/lv_fsdrv.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/fsdrv/lv_fsdrv.h
 #if LV_USE_FS_FATFS != '\0'
 void lv_fs_fatfs_init(void);
@@ -49,6 +54,8 @@ void lv_fs_win32_init(void);
 #endif
 
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/fsdrv/lv_fsdrv.h
 #if LV_USE_FS_FATFS
 void lv_fs_fatfs_init(void);
 #endif
@@ -83,6 +90,9 @@ void lv_fs_arduino_esp_littlefs_init(void);
 void lv_fs_arduino_sd_init(void);
 #endif
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/fsdrv/lv_fsdrv.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/fsdrv/lv_fsdrv.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/fsdrv/lv_fsdrv.h
 /**********************
  *      MACROS
@@ -94,6 +104,9 @@ void lv_fs_arduino_sd_init(void);
 
 #endif /*LV_FSDRV_H*/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/fsdrv/lv_fsdrv.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/fsdrv/lv_fsdrv.h
 
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/fsdrv/lv_fsdrv.h
 =======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/fsdrv/lv_fsdrv.h

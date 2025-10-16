@@ -14,7 +14,11 @@ extern "C" {
  *      INCLUDES
  *********************/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
 #include "liblvgl/lvgl.h"
+=======
+#include "../textarea/lv_textarea.h"
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
 =======
 #include "../textarea/lv_textarea.h"
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
@@ -36,6 +40,7 @@ extern "C" {
  **********************/
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
 /*Data of spinbox*/
 typedef struct {
     lv_textarea_t ta;   /*Ext. of ancestor*/
@@ -54,6 +59,9 @@ extern const lv_obj_class_t lv_spinbox_class;
 =======
 LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_spinbox_class;
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+=======
+LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_spinbox_class;
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
 
 /**********************
  * GLOBAL PROTOTYPES
@@ -61,9 +69,15 @@ LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_spinbox_class;
 
 /**
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
  * Create a Spinbox object
  * @param parent pointer to an object, it will be the parent of the new spinbox
  * @return pointer to the created spinbox
+=======
+ * Create a spinbox object
+ * @param parent    pointer to an object, it will be the parent of the new spinbox
+ * @return          pointer to the created spinbox
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
 =======
  * Create a spinbox object
  * @param parent    pointer to an object, it will be the parent of the new spinbox
@@ -78,6 +92,7 @@ lv_obj_t * lv_spinbox_create(lv_obj_t * parent);
 
 /**
  * Set spinbox value
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
  * @param obj pointer to spinbox
  * @param i value to be set
@@ -105,6 +120,8 @@ void lv_spinbox_set_digit_format(lv_obj_t * obj, uint8_t digit_count, uint8_t se
  * @param obj pointer to spinbox
  * @param step steps on increment/decrement. Can be 1, 10, 100, 1000, etc the digit that will change.
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
  * @param obj   pointer to spinbox
  * @param v     value to be set
  */
@@ -130,6 +147,9 @@ void lv_spinbox_set_digit_format(lv_obj_t * obj, uint32_t digit_count, uint32_t 
  * Set spinbox step
  * @param obj   pointer to spinbox
  * @param step  steps on increment/decrement. Can be 1, 10, 100, 1000, etc the digit that will change.
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
  */
 void lv_spinbox_set_step(lv_obj_t * obj, uint32_t step);
@@ -137,7 +157,11 @@ void lv_spinbox_set_step(lv_obj_t * obj, uint32_t step);
 /**
  * Set spinbox value range
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
  * @param obj pointer to spinbox
+=======
+ * @param obj       pointer to spinbox
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
 =======
  * @param obj       pointer to spinbox
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
@@ -149,6 +173,7 @@ void lv_spinbox_set_range(lv_obj_t * obj, int32_t range_min, int32_t range_max);
 /**
  * Set cursor position to a specific digit for edition
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
  * @param obj pointer to spinbox
  * @param pos selected position in spinbox
  */
@@ -159,6 +184,8 @@ void lv_spinbox_set_cursor_pos(lv_obj_t * obj, uint8_t pos);
  * @param obj pointer to spinbox
  * @param direction the direction (LV_DIR_RIGHT or LV_DIR_LEFT)
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
  * @param obj   pointer to spinbox
  * @param pos   selected position in spinbox
  */
@@ -168,6 +195,9 @@ void lv_spinbox_set_cursor_pos(lv_obj_t * obj, uint32_t pos);
  * Set direction of digit step when clicking an encoder button while in editing mode
  * @param obj           pointer to spinbox
  * @param direction     the direction (LV_DIR_RIGHT or LV_DIR_LEFT)
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
  */
 void lv_spinbox_set_digit_step_direction(lv_obj_t * obj, lv_dir_t direction);
@@ -179,7 +209,11 @@ void lv_spinbox_set_digit_step_direction(lv_obj_t * obj, lv_dir_t direction);
 /**
  * Get spinbox rollover function status
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
  * @param obj pointer to spinbox
+=======
+ * @param obj   pointer to spinbox
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
 =======
  * @param obj   pointer to spinbox
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
@@ -189,8 +223,13 @@ bool lv_spinbox_get_rollover(lv_obj_t * obj);
 /**
  * Get the spinbox numeral value (user has to convert to float according to its digit format)
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
  * @param obj pointer to spinbox
  * @return value integer value of the spinbox
+=======
+ * @param obj   pointer to spinbox
+ * @return      value integer value of the spinbox
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
 =======
  * @param obj   pointer to spinbox
  * @return      value integer value of the spinbox
@@ -201,8 +240,13 @@ int32_t lv_spinbox_get_value(lv_obj_t * obj);
 /**
  * Get the spinbox step value (user has to convert to float according to its digit format)
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
  * @param obj pointer to spinbox
  * @return value integer step value of the spinbox
+=======
+ * @param obj   pointer to spinbox
+ * @return      value integer step value of the spinbox
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
 =======
  * @param obj   pointer to spinbox
  * @return      value integer step value of the spinbox
@@ -217,7 +261,11 @@ int32_t lv_spinbox_get_step(lv_obj_t * obj);
 /**
  * Select next lower digit for edition by dividing the step by 10
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
  * @param obj pointer to spinbox
+=======
+ * @param obj   pointer to spinbox
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
 =======
  * @param obj   pointer to spinbox
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
@@ -227,7 +275,11 @@ void lv_spinbox_step_next(lv_obj_t * obj);
 /**
  * Select next higher digit for edition by multiplying the step by 10
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
  * @param obj pointer to spinbox
+=======
+ * @param obj   pointer to spinbox
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
 =======
  * @param obj   pointer to spinbox
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
@@ -237,7 +289,11 @@ void lv_spinbox_step_prev(lv_obj_t * obj);
 /**
  * Increment spinbox value by one step
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
  * @param obj pointer to spinbox
+=======
+ * @param obj   pointer to spinbox
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
 =======
  * @param obj   pointer to spinbox
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
@@ -247,7 +303,11 @@ void lv_spinbox_increment(lv_obj_t * obj);
 /**
  * Decrement spinbox value by one step
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
  * @param obj pointer to spinbox
+=======
+ * @param obj   pointer to spinbox
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
 =======
  * @param obj   pointer to spinbox
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
@@ -259,10 +319,13 @@ void lv_spinbox_decrement(lv_obj_t * obj);
  **********************/
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
 /* It was ambiguous in MicroPython. See https://github.com/lvgl/lvgl/issues/3301
  * TODO remove in v9*/
 #define lv_spinbox_set_pos lv_spinbox_set_cursor_pos
 
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
 =======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinbox/lv_spinbox.h
 #endif /*LV_USE_SPINBOX*/

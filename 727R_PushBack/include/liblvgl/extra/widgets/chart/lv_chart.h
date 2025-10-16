@@ -14,7 +14,12 @@ extern "C" {
  *      INCLUDES
  *********************/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 #include "liblvgl/lvgl.h"
+=======
+#include "../../lv_conf_internal.h"
+#include "../../core/lv_obj.h"
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
 #include "../../lv_conf_internal.h"
 #include "../../core/lv_obj.h"
@@ -28,11 +33,15 @@ extern "C" {
 
 /**Default value of points. Can be used to not draw a point*/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 #if LV_USE_LARGE_COORD
 #define LV_CHART_POINT_NONE (INT32_MAX)
 #else
 #define LV_CHART_POINT_NONE (INT16_MAX)
 #endif
+=======
+#define LV_CHART_POINT_NONE     (INT32_MAX)
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
 #define LV_CHART_POINT_NONE     (INT32_MAX)
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -46,7 +55,11 @@ LV_EXPORT_CONST_INT(LV_CHART_POINT_NONE);
  * Chart types
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 enum {
+=======
+typedef enum {
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
 typedef enum {
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -55,8 +68,12 @@ typedef enum {
     LV_CHART_TYPE_BAR,      /**< Draw columns*/
     LV_CHART_TYPE_SCATTER,  /**< Draw points and lines in 2D (x,y coordinates)*/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 };
 typedef uint8_t lv_chart_type_t;
+=======
+} lv_chart_type_t;
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
 } lv_chart_type_t;
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -65,23 +82,33 @@ typedef uint8_t lv_chart_type_t;
  * Chart update mode for `lv_chart_set_next`
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 enum {
     LV_CHART_UPDATE_MODE_SHIFT,     /**< Shift old data to the left and add the new one the right*/
     LV_CHART_UPDATE_MODE_CIRCULAR,  /**< Add the new data in a circular way*/
 };
 typedef uint8_t lv_chart_update_mode_t;
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 typedef enum {
     LV_CHART_UPDATE_MODE_SHIFT,     /**< Shift old data to the left and add the new one the right*/
     LV_CHART_UPDATE_MODE_CIRCULAR,  /**< Add the new data in a circular way*/
 } lv_chart_update_mode_t;
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 
 /**
  * Enumeration of the axis'
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 enum {
+=======
+typedef enum {
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
 typedef enum {
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -89,6 +116,7 @@ typedef enum {
     LV_CHART_AXIS_SECONDARY_Y   = 0x01,
     LV_CHART_AXIS_PRIMARY_X     = 0x02,
     LV_CHART_AXIS_SECONDARY_X   = 0x04,
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
     _LV_CHART_AXIS_LAST
 };
@@ -163,10 +191,15 @@ typedef enum {
     LV_CHART_DRAW_PART_TICK_LABEL,       /**< Used on tick lines and labels*/
 } lv_chart_draw_part_type_t;
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
     LV_CHART_AXIS_LAST
 } lv_chart_axis_t;
 
 LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_chart_class;
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 
 /**********************
@@ -192,7 +225,11 @@ void lv_chart_set_type(lv_obj_t * obj, lv_chart_type_t type);
  * @param cnt       new number of points on the data lines
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 void lv_chart_set_point_count(lv_obj_t * obj, uint16_t cnt);
+=======
+void lv_chart_set_point_count(lv_obj_t * obj, uint32_t cnt);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
 void lv_chart_set_point_count(lv_obj_t * obj, uint32_t cnt);
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -205,6 +242,7 @@ void lv_chart_set_point_count(lv_obj_t * obj, uint32_t cnt);
  * @param max       maximum value of the y axis
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 void lv_chart_set_range(lv_obj_t * obj, lv_chart_axis_t axis, lv_coord_t min, lv_coord_t max);
 
 /**
@@ -212,12 +250,17 @@ void lv_chart_set_range(lv_obj_t * obj, lv_chart_axis_t axis, lv_coord_t min, lv
  * @param obj       pointer to a chart object
  * @param mode      the update mode
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 void lv_chart_set_range(lv_obj_t * obj, lv_chart_axis_t axis, int32_t min, int32_t max);
 
 /**
  * Set update mode of the chart object. Affects
  * @param obj              pointer to a chart object
  * @param update_mode      the update mode
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
  */
 void lv_chart_set_update_mode(lv_obj_t * obj, lv_chart_update_mode_t update_mode);
@@ -231,6 +274,7 @@ void lv_chart_set_update_mode(lv_obj_t * obj, lv_chart_update_mode_t update_mode
 void lv_chart_set_div_line_count(lv_obj_t * obj, uint8_t hdiv, uint8_t vdiv);
 
 /**
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
  * Zoom into the chart in X direction
  * @param obj       pointer to a chart object
@@ -277,6 +321,8 @@ void lv_chart_set_axis_tick(lv_obj_t * obj, lv_chart_axis_t axis, lv_coord_t maj
 /**
 =======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
  * Get the type of a chart
  * @param obj       pointer to chart object
  * @return          type of the chart (from 'lv_chart_t' enum)
@@ -285,6 +331,7 @@ lv_chart_type_t lv_chart_get_type(const lv_obj_t * obj);
 
 /**
  * Get the data point number per data line on chart
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
  * @param chart     pointer to chart object
  * @return          point number on each data line
@@ -303,6 +350,8 @@ uint16_t lv_chart_get_x_start_point(const lv_obj_t * obj, lv_chart_series_t * se
  * Get the position of a point to the chart.
  * @param chart     pointer to a chart object
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
  * @param obj       pointer to chart object
  * @return          point number on each data line
  */
@@ -319,11 +368,15 @@ uint32_t lv_chart_get_x_start_point(const lv_obj_t * obj, lv_chart_series_t * se
 /**
  * Get the position of a point to the chart.
  * @param obj       pointer to a chart object
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
  * @param ser       pointer to series
  * @param id        the index.
  * @param p_out     store the result position here
  */
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 void lv_chart_get_point_pos_by_id(lv_obj_t * obj, lv_chart_series_t * ser, uint16_t id, lv_point_t * p_out);
 
@@ -331,11 +384,16 @@ void lv_chart_get_point_pos_by_id(lv_obj_t * obj, lv_chart_series_t * ser, uint1
  * Refresh a chart if its data line has changed
  * @param   chart pointer to chart object
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 void lv_chart_get_point_pos_by_id(lv_obj_t * obj, lv_chart_series_t * ser, uint32_t id, lv_point_t * p_out);
 
 /**
  * Refresh a chart if its data line has changed
  * @param   obj   pointer to chart object
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
  */
 void lv_chart_refresh(lv_obj_t * obj);
@@ -350,7 +408,11 @@ void lv_chart_refresh(lv_obj_t * obj);
  * @param color     color of the data series
  * @param axis      the y axis to which the series should be attached (::LV_CHART_AXIS_PRIMARY_Y or ::LV_CHART_AXIS_SECONDARY_Y)
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
  * @return          pointer to the allocated data series
+=======
+ * @return          pointer to the allocated data series or NULL on failure
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
  * @return          pointer to the allocated data series or NULL on failure
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -360,7 +422,11 @@ lv_chart_series_t * lv_chart_add_series(lv_obj_t * obj, lv_color_t color, lv_cha
 /**
  * Deallocate and remove a data series from a chart
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
  * @param chart     pointer to a chart object
+=======
+ * @param obj       pointer to a chart object
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
  * @param obj       pointer to a chart object
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -371,7 +437,11 @@ void lv_chart_remove_series(lv_obj_t * obj, lv_chart_series_t * series);
 /**
  * Hide/Unhide a single series of a chart.
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
  * @param obj       pointer to a chart object.
+=======
+ * @param chart     pointer to a chart object.
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
  * @param chart     pointer to a chart object.
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -383,7 +453,11 @@ void lv_chart_hide_series(lv_obj_t * chart, lv_chart_series_t * series, bool hid
 /**
  * Change the color of a series
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
  * @param obj       pointer to a chart object.
+=======
+ * @param chart     pointer to a chart object.
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
  * @param chart     pointer to a chart object.
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -394,7 +468,10 @@ void lv_chart_set_series_color(lv_obj_t * chart, lv_chart_series_t * series, lv_
 
 /**
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
  * Get the color of a series
  * @param chart     pointer to a chart object.
  * @param series    pointer to a series object
@@ -403,6 +480,9 @@ void lv_chart_set_series_color(lv_obj_t * chart, lv_chart_series_t * series, lv_
 lv_color_t lv_chart_get_series_color(lv_obj_t * chart, const lv_chart_series_t * series);
 
 /**
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
  * Set the index of the x-axis start point in the data array.
  * This point will be considers the first (left) point and the other points will be drawn after it.
@@ -411,7 +491,11 @@ lv_color_t lv_chart_get_series_color(lv_obj_t * chart, const lv_chart_series_t *
  * @param id        the index of the x point in the data array
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 void lv_chart_set_x_start_point(lv_obj_t * obj, lv_chart_series_t * ser, uint16_t id);
+=======
+void lv_chart_set_x_start_point(lv_obj_t * obj, lv_chart_series_t * ser, uint32_t id);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
 void lv_chart_set_x_start_point(lv_obj_t * obj, lv_chart_series_t * ser, uint32_t id);
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -425,8 +509,11 @@ void lv_chart_set_x_start_point(lv_obj_t * obj, lv_chart_series_t * ser, uint32_
 lv_chart_series_t * lv_chart_get_series_next(const lv_obj_t * chart, const lv_chart_series_t * ser);
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 
 
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 /*=====================
@@ -445,7 +532,11 @@ lv_chart_cursor_t  * lv_chart_add_cursor(lv_obj_t * obj, lv_color_t color, lv_di
 /**
  * Set the coordinate of the cursor with respect to the paddings
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
  * @param obj       pointer to a chart object
+=======
+ * @param chart     pointer to a chart object
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
  * @param chart     pointer to a chart object
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -457,7 +548,11 @@ void lv_chart_set_cursor_pos(lv_obj_t * chart, lv_chart_cursor_t * cursor, lv_po
 /**
  * Stick the cursor to a point
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
  * @param obj       pointer to a chart object
+=======
+ * @param chart     pointer to a chart object
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
  * @param chart     pointer to a chart object
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -467,17 +562,23 @@ void lv_chart_set_cursor_pos(lv_obj_t * chart, lv_chart_cursor_t * cursor, lv_po
  */
 void lv_chart_set_cursor_point(lv_obj_t * chart, lv_chart_cursor_t * cursor, lv_chart_series_t * ser,
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
                                uint16_t point_id);
 
 /**
  * Get the coordinate of the cursor with respect to the paddings
  * @param obj       pointer to a chart object
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
                                uint32_t point_id);
 
 /**
  * Get the coordinate of the cursor with respect to the paddings
  * @param chart     pointer to a chart object
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
  * @param cursor    pointer to cursor
  * @return          coordinate of the cursor as lv_point_t
@@ -495,7 +596,11 @@ lv_point_t lv_chart_get_cursor_point(lv_obj_t * chart, lv_chart_cursor_t * curso
  * @param value     the new value for all points. `LV_CHART_POINT_NONE` can be used to hide the points.
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 void lv_chart_set_all_value(lv_obj_t * obj, lv_chart_series_t * ser, lv_coord_t value);
+=======
+void lv_chart_set_all_value(lv_obj_t * obj, lv_chart_series_t * ser, int32_t value);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
 void lv_chart_set_all_value(lv_obj_t * obj, lv_chart_series_t * ser, int32_t value);
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -507,7 +612,11 @@ void lv_chart_set_all_value(lv_obj_t * obj, lv_chart_series_t * ser, int32_t val
  * @param value     the new value of the next data
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 void lv_chart_set_next_value(lv_obj_t * obj, lv_chart_series_t * ser, lv_coord_t value);
+=======
+void lv_chart_set_next_value(lv_obj_t * obj, lv_chart_series_t * ser, int32_t value);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
 void lv_chart_set_next_value(lv_obj_t * obj, lv_chart_series_t * ser, int32_t value);
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -520,7 +629,11 @@ void lv_chart_set_next_value(lv_obj_t * obj, lv_chart_series_t * ser, int32_t va
  * @param y_value   the new Y value of the next data
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 void lv_chart_set_next_value2(lv_obj_t * obj, lv_chart_series_t * ser, lv_coord_t x_value, lv_coord_t y_value);
+=======
+void lv_chart_set_next_value2(lv_obj_t * obj, lv_chart_series_t * ser, int32_t x_value, int32_t y_value);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
 void lv_chart_set_next_value2(lv_obj_t * obj, lv_chart_series_t * ser, int32_t x_value, int32_t y_value);
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -533,7 +646,11 @@ void lv_chart_set_next_value2(lv_obj_t * obj, lv_chart_series_t * ser, int32_t x
  * @param value   value to assign to array point
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 void lv_chart_set_value_by_id(lv_obj_t * obj, lv_chart_series_t * ser, uint16_t id, lv_coord_t value);
+=======
+void lv_chart_set_value_by_id(lv_obj_t * obj, lv_chart_series_t * ser, uint32_t id, int32_t value);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
 void lv_chart_set_value_by_id(lv_obj_t * obj, lv_chart_series_t * ser, uint32_t id, int32_t value);
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -548,8 +665,13 @@ void lv_chart_set_value_by_id(lv_obj_t * obj, lv_chart_series_t * ser, uint32_t 
  * @param y_value   the new Y value of the next data
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 void lv_chart_set_value_by_id2(lv_obj_t * obj, lv_chart_series_t * ser, uint16_t id, lv_coord_t x_value,
                                lv_coord_t y_value);
+=======
+void lv_chart_set_value_by_id2(lv_obj_t * obj, lv_chart_series_t * ser, uint32_t id, int32_t x_value,
+                               int32_t y_value);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
 void lv_chart_set_value_by_id2(lv_obj_t * obj, lv_chart_series_t * ser, uint32_t id, int32_t x_value,
                                int32_t y_value);
@@ -563,7 +685,11 @@ void lv_chart_set_value_by_id2(lv_obj_t * obj, lv_chart_series_t * ser, uint32_t
  * @param array     external array of points for chart
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 void lv_chart_set_ext_y_array(lv_obj_t * obj, lv_chart_series_t * ser, lv_coord_t array[]);
+=======
+void lv_chart_set_ext_y_array(lv_obj_t * obj, lv_chart_series_t * ser, int32_t array[]);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
 void lv_chart_set_ext_y_array(lv_obj_t * obj, lv_chart_series_t * ser, int32_t array[]);
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -576,7 +702,11 @@ void lv_chart_set_ext_y_array(lv_obj_t * obj, lv_chart_series_t * ser, int32_t a
  * @param array     external array of points for chart
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 void lv_chart_set_ext_x_array(lv_obj_t * obj, lv_chart_series_t * ser, lv_coord_t array[]);
+=======
+void lv_chart_set_ext_x_array(lv_obj_t * obj, lv_chart_series_t * ser, int32_t array[]);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
 void lv_chart_set_ext_x_array(lv_obj_t * obj, lv_chart_series_t * ser, int32_t array[]);
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -588,7 +718,11 @@ void lv_chart_set_ext_x_array(lv_obj_t * obj, lv_chart_series_t * ser, int32_t a
  * @return      the array of values with 'point_count' elements
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 lv_coord_t * lv_chart_get_y_array(const lv_obj_t * obj, lv_chart_series_t * ser);
+=======
+int32_t * lv_chart_get_y_array(const lv_obj_t * obj, lv_chart_series_t * ser);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
 int32_t * lv_chart_get_y_array(const lv_obj_t * obj, lv_chart_series_t * ser);
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -600,7 +734,11 @@ int32_t * lv_chart_get_y_array(const lv_obj_t * obj, lv_chart_series_t * ser);
  * @return      the array of values with 'point_count' elements
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 lv_coord_t * lv_chart_get_x_array(const lv_obj_t * obj, lv_chart_series_t * ser);
+=======
+int32_t * lv_chart_get_x_array(const lv_obj_t * obj, lv_chart_series_t * ser);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
 int32_t * lv_chart_get_x_array(const lv_obj_t * obj, lv_chart_series_t * ser);
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
@@ -613,7 +751,10 @@ int32_t * lv_chart_get_x_array(const lv_obj_t * obj, lv_chart_series_t * ser);
 uint32_t lv_chart_get_pressed_point(const lv_obj_t * obj);
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 /**
  * Get the overall offset from the chart's side to the center of the first point.
  * In case of a bar chart it will be the center of the first column group
@@ -622,6 +763,9 @@ uint32_t lv_chart_get_pressed_point(const lv_obj_t * obj);
  */
 int32_t lv_chart_get_first_point_center_offset(lv_obj_t * obj);
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/chart/lv_chart.h
 /**********************
  *      MACROS

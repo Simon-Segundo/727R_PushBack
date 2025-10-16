@@ -14,7 +14,11 @@ extern "C" {
  *      INCLUDES
  *********************/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
 #include "liblvgl/lvgl.h"
+=======
+#include "../../lv_conf_internal.h"
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
 =======
 #include "../../lv_conf_internal.h"
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
@@ -34,7 +38,11 @@ extern "C" {
  *      TYPEDEFS
  **********************/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
 extern const lv_obj_class_t lv_spinner_class;
+=======
+LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_spinner_class;
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
 =======
 LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_spinner_class;
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
@@ -44,8 +52,11 @@ LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_spinner_class;
  **********************/
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
 lv_obj_t * lv_spinner_create(lv_obj_t * parent, uint32_t time, uint32_t arc_length);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
 /**
  * Create a spinner widget
  * @param parent    pointer to an object, it will be the parent of the new spinner.
@@ -60,6 +71,9 @@ lv_obj_t * lv_spinner_create(lv_obj_t * parent);
  * @param angle     the angle of the arc in degrees
  */
 void lv_spinner_set_anim_params(lv_obj_t * obj, uint32_t t, uint32_t angle);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
 
 /**********************

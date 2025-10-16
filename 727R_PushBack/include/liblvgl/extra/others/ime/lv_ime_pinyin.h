@@ -13,7 +13,12 @@ extern "C" {
  *      INCLUDES
  *********************/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 #include "liblvgl/lvgl.h"
+=======
+#include "../../lv_conf_internal.h"
+#include "../../core/lv_obj.h"
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 =======
 #include "../../lv_conf_internal.h"
 #include "../../core/lv_obj.h"
@@ -34,6 +39,10 @@ typedef enum {
     LV_IME_PINYIN_MODE_K26,
     LV_IME_PINYIN_MODE_K9,
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
+=======
+    LV_IME_PINYIN_MODE_K9_NUMBER,
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 =======
     LV_IME_PINYIN_MODE_K9_NUMBER,
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
@@ -50,6 +59,7 @@ typedef struct {
     char py_str[7];
 } ime_pinyin_k9_py_str_t;
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 /*Data of lv_ime_pinyin*/
 typedef struct {
@@ -76,11 +86,18 @@ typedef struct {
 
 =======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 /***********************
  * GLOBAL VARIABLES
  ***********************/
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
+=======
+extern const lv_obj_class_t lv_ime_pinyin_class;
+
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 =======
 extern const lv_obj_class_t lv_ime_pinyin_class;
 
@@ -98,7 +115,11 @@ lv_obj_t * lv_ime_pinyin_create(lv_obj_t * parent);
  * Set the keyboard of Pinyin input method.
  * @param obj  pointer to a Pinyin input method object
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
  * @param dict pointer to a Pinyin input method keyboard
+=======
+ * @param kb pointer to a Pinyin input method keyboard
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 =======
  * @param kb pointer to a Pinyin input method keyboard
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
@@ -120,7 +141,10 @@ void lv_ime_pinyin_set_dict(lv_obj_t * obj, lv_pinyin_dict_t * dict);
 void lv_ime_pinyin_set_mode(lv_obj_t * obj, lv_ime_pinyin_mode_t mode);
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 =======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 /*=====================
@@ -135,7 +159,10 @@ void lv_ime_pinyin_set_mode(lv_obj_t * obj, lv_ime_pinyin_mode_t mode);
 lv_obj_t * lv_ime_pinyin_get_kb(lv_obj_t * obj);
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 =======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 /**
@@ -146,7 +173,10 @@ lv_obj_t * lv_ime_pinyin_get_kb(lv_obj_t * obj);
 lv_obj_t * lv_ime_pinyin_get_cand_panel(lv_obj_t * obj);
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 =======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 /**
@@ -155,7 +185,11 @@ lv_obj_t * lv_ime_pinyin_get_cand_panel(lv_obj_t * obj);
  * @return     pointer to the Pinyin input method dictionary
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 lv_pinyin_dict_t * lv_ime_pinyin_get_dict(lv_obj_t * obj);
+=======
+const lv_pinyin_dict_t * lv_ime_pinyin_get_dict(lv_obj_t * obj);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 =======
 const lv_pinyin_dict_t * lv_ime_pinyin_get_dict(lv_obj_t * obj);
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
@@ -176,7 +210,10 @@ const lv_pinyin_dict_t * lv_ime_pinyin_get_dict(lv_obj_t * obj);
 
 #endif /*LV_USE_IME_PINYIN*/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 
 
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h
 =======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/ime/lv_ime_pinyin.h

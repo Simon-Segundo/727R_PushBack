@@ -3,15 +3,21 @@
 /*----------------------------------------------*/
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h
 #define	JD_SZBUF		512
 /* Specifies size of stream input buffer */
 
 #define JD_FORMAT		0
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h
 #define JD_SZBUF        512
 /* Specifies size of stream input buffer */
 
 #define JD_FORMAT       0
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h
 /* Specifies output pixel format.
 /  0: RGB888 (24-bit/pix)
@@ -20,7 +26,11 @@
 */
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h
 #define	JD_USE_SCALE	1
+=======
+#define JD_USE_SCALE    0
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h
 =======
 #define JD_USE_SCALE    0
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h
@@ -30,7 +40,11 @@
 */
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h
 #define JD_TBLCLIP		1
+=======
+#define JD_TBLCLIP      1
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h
 =======
 #define JD_TBLCLIP      1
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h
@@ -40,7 +54,11 @@
 */
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h
 #define JD_FASTDECODE	0
+=======
+#define JD_FASTDECODE   1
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h
 =======
 #define JD_FASTDECODE   1
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/sjpg/tjpgdcnf.h

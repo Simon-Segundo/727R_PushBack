@@ -14,6 +14,7 @@ extern "C" {
  *      INCLUDES
  *********************/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 #include "liblvgl/lv_conf_internal.h"
 
 #if LV_USE_FRAGMENT
@@ -21,10 +22,15 @@ extern "C" {
 #include "liblvgl/core/lv_obj.h"
 
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 #include "../../core/lv_obj.h"
 
 #if LV_USE_FRAGMENT
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 /*********************
  *      DEFINES
@@ -37,10 +43,13 @@ extern "C" {
 typedef struct _lv_fragment_manager_t lv_fragment_manager_t;
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 typedef struct _lv_fragment_t lv_fragment_t;
 typedef struct _lv_fragment_class_t lv_fragment_class_t;
 typedef struct _lv_fragment_managed_states_t lv_fragment_managed_states_t;
 
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 =======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 struct _lv_fragment_t {
@@ -137,6 +146,7 @@ struct _lv_fragment_class_t {
 };
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 /**
  * Fragment states
  */
@@ -173,6 +183,8 @@ typedef struct _lv_fragment_managed_states_t  {
 
 =======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
@@ -189,7 +201,11 @@ lv_fragment_manager_t * lv_fragment_manager_create(lv_fragment_t * parent);
  * @param manager Fragment manager instance
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 void lv_fragment_manager_del(lv_fragment_manager_t * manager);
+=======
+void lv_fragment_manager_delete(lv_fragment_manager_t * manager);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 =======
 void lv_fragment_manager_delete(lv_fragment_manager_t * manager);
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
@@ -205,7 +221,11 @@ void lv_fragment_manager_create_obj(lv_fragment_manager_t * manager);
  * @param manager Fragment manager instance
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 void lv_fragment_manager_del_obj(lv_fragment_manager_t * manager);
+=======
+void lv_fragment_manager_delete_obj(lv_fragment_manager_t * manager);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 =======
 void lv_fragment_manager_delete_obj(lv_fragment_manager_t * manager);
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
@@ -288,7 +308,10 @@ lv_fragment_t * lv_fragment_manager_find_by_container(lv_fragment_manager_t * ma
 lv_fragment_t * lv_fragment_manager_get_parent_fragment(lv_fragment_manager_t * manager);
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 =======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 /**
@@ -305,7 +328,11 @@ lv_fragment_t * lv_fragment_create(const lv_fragment_class_t * cls, void * args)
  * @param fragment Fragment instance.
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 void lv_fragment_del(lv_fragment_t * fragment);
+=======
+void lv_fragment_delete(lv_fragment_t * fragment);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 =======
 void lv_fragment_delete(lv_fragment_t * fragment);
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
@@ -346,7 +373,11 @@ lv_obj_t * lv_fragment_create_obj(lv_fragment_t * fragment, lv_obj_t * container
  * @param fragment Fragment instance.
  */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 void lv_fragment_del_obj(lv_fragment_t * fragment);
+=======
+void lv_fragment_delete_obj(lv_fragment_t * fragment);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 =======
 void lv_fragment_delete_obj(lv_fragment_t * fragment);
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
@@ -358,7 +389,10 @@ void lv_fragment_delete_obj(lv_fragment_t * fragment);
 void lv_fragment_recreate_obj(lv_fragment_t * fragment);
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 =======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/fragment/lv_fragment.h
 /**********************

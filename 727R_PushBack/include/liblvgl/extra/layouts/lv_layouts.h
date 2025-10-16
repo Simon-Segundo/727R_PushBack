@@ -1,5 +1,6 @@
 /**
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
  * @file lv_layouts.h
  *
  */
@@ -7,12 +8,17 @@
 #ifndef LV_LAYOUTS_H
 #define LV_LAYOUTS_H
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
  * @file lv_vg_lite_decoder.h
  *
  */
 
 #ifndef LV_VG_LITE_DECODER_H
 #define LV_VG_LITE_DECODER_H
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
 
 #ifdef __cplusplus
@@ -23,13 +29,19 @@ extern "C" {
  *      INCLUDES
  *********************/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
 #include "flex/lv_flex.h"
 #include "grid/lv_grid.h"
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
 
 #include "../lv_image_decoder.h"
 
 #if LV_USE_DRAW_VG_LITE
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
 
 /*********************
@@ -45,6 +57,7 @@ extern "C" {
  **********************/
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
 /**********************
  *      MACROS
  **********************/
@@ -54,6 +67,8 @@ extern "C" {
 #  define LV_TRACE_LAYOUT(...)
 #endif
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
 void lv_vg_lite_decoder_init(void);
 
 void lv_vg_lite_decoder_deinit(void);
@@ -63,6 +78,9 @@ void lv_vg_lite_decoder_deinit(void);
  **********************/
 
 #endif /*LV_USE_DRAW_VG_LITE*/
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
 
 #ifdef __cplusplus
@@ -70,7 +88,11 @@ void lv_vg_lite_decoder_deinit(void);
 #endif
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
 #endif /*LV_LAYOUTS_H*/
+=======
+#endif /*LV_VG_LITE_DECODER_H*/
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h
 =======
 #endif /*LV_VG_LITE_DECODER_H*/
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/layouts/lv_layouts.h

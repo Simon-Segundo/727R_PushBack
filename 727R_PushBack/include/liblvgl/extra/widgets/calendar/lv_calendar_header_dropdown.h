@@ -14,15 +14,21 @@ extern "C" {
  *      INCLUDES
  *********************/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_dropdown.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_dropdown.h
 #include "liblvgl/core/lv_obj.h"
 #if LV_USE_CALENDAR_HEADER_DROPDOWN
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_dropdown.h
 #include "../../core/lv_obj.h"
 #if LV_USE_CALENDAR && LV_USE_CALENDAR_HEADER_DROPDOWN
 
 #if LV_USE_DROPDOWN == 0
 #error "LV_USE_DROPDOWN needs to be enabled"
 #endif
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_dropdown.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_dropdown.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_dropdown.h
 
 /*********************
@@ -33,7 +39,11 @@ extern "C" {
  *      TYPEDEFS
  **********************/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_dropdown.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_dropdown.h
 extern const lv_obj_class_t lv_calendar_header_dropdown_class;
+=======
+LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_calendar_header_dropdown_class;
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_dropdown.h
 =======
 LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_calendar_header_dropdown_class;
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_dropdown.h
@@ -50,7 +60,10 @@ LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_calendar_header_dropdown
 lv_obj_t * lv_calendar_header_dropdown_create(lv_obj_t * parent);
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_dropdown.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_dropdown.h
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_dropdown.h
 /**
  * Sets a custom calendar year list
  * @param parent        pointer to a calendar object
@@ -60,6 +73,9 @@ lv_obj_t * lv_calendar_header_dropdown_create(lv_obj_t * parent);
  */
 void lv_calendar_header_dropdown_set_year_list(lv_obj_t * parent, const char * years_list);
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_dropdown.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_dropdown.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_dropdown.h
 /**********************
  *      MACROS

@@ -1,8 +1,14 @@
 /*
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 LodePNG version 20201017
 
 Copyright (c) 2005-2020 Lode Vandevenne
+=======
+LodePNG version 20230410
+
+Copyright (c) 2005-2023 Lode Vandevenne
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
 LodePNG version 20230410
 
@@ -33,12 +39,15 @@ freely, subject to the following restrictions:
 #define LODEPNG_H
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #include <string.h> /*for size_t*/
 
 #include "liblvgl/lvgl.h"
 #if LV_USE_PNG
 extern const char* LODEPNG_VERSION_STRING;
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -47,6 +56,9 @@ extern "C" {
 #if LV_USE_LODEPNG
 #include LV_STDDEF_INCLUDE /*for size_t*/
 LV_ATTRIBUTE_EXTERN_DATA extern const char * LODEPNG_VERSION_STRING;
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 
 /*
@@ -55,9 +67,13 @@ to disable code sections, which can give faster compile time and smaller binary.
 The "NO_COMPILE" defines are designed to be used to pass as defines to the
 compiler command to disable them without modifying this header, e.g.
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 -DLODEPNG_NO_COMPILE_ZLIB for gcc.
 In addition to those below, you can also define LODEPNG_NO_COMPILE_CRC to
 allow implementing a custom lodepng_crc32.
+=======
+-DLODEPNG_NO_COMPILE_ZLIB for gcc or clang.
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
 -DLODEPNG_NO_COMPILE_ZLIB for gcc or clang.
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
@@ -66,7 +82,12 @@ allow implementing a custom lodepng_crc32.
 the custom_zlib field of the compress and decompress settings*/
 #ifndef LODEPNG_NO_COMPILE_ZLIB
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #define LODEPNG_COMPILE_ZLIB
+=======
+    /*pass -DLODEPNG_NO_COMPILE_ZLIB to the compiler to disable this, or comment out LODEPNG_COMPILE_ZLIB below*/
+    #define LODEPNG_COMPILE_ZLIB
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
     /*pass -DLODEPNG_NO_COMPILE_ZLIB to the compiler to disable this, or comment out LODEPNG_COMPILE_ZLIB below*/
     #define LODEPNG_COMPILE_ZLIB
@@ -76,7 +97,12 @@ the custom_zlib field of the compress and decompress settings*/
 /*png encoder and png decoder*/
 #ifndef LODEPNG_NO_COMPILE_PNG
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #define LODEPNG_COMPILE_PNG
+=======
+    /*pass -DLODEPNG_NO_COMPILE_PNG to the compiler to disable this, or comment out LODEPNG_COMPILE_PNG below*/
+    #define LODEPNG_COMPILE_PNG
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
     /*pass -DLODEPNG_NO_COMPILE_PNG to the compiler to disable this, or comment out LODEPNG_COMPILE_PNG below*/
     #define LODEPNG_COMPILE_PNG
@@ -86,7 +112,12 @@ the custom_zlib field of the compress and decompress settings*/
 /*deflate&zlib decoder and png decoder*/
 #ifndef LODEPNG_NO_COMPILE_DECODER
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #define LODEPNG_COMPILE_DECODER
+=======
+    /*pass -DLODEPNG_NO_COMPILE_DECODER to the compiler to disable this, or comment out LODEPNG_COMPILE_DECODER below*/
+    #define LODEPNG_COMPILE_DECODER
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
     /*pass -DLODEPNG_NO_COMPILE_DECODER to the compiler to disable this, or comment out LODEPNG_COMPILE_DECODER below*/
     #define LODEPNG_COMPILE_DECODER
@@ -96,7 +127,12 @@ the custom_zlib field of the compress and decompress settings*/
 /*deflate&zlib encoder and png encoder*/
 #ifndef LODEPNG_NO_COMPILE_ENCODER
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #define LODEPNG_COMPILE_ENCODER
+=======
+    /*pass -DLODEPNG_NO_COMPILE_ENCODER to the compiler to disable this, or comment out LODEPNG_COMPILE_ENCODER below*/
+    #define LODEPNG_COMPILE_ENCODER
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
     /*pass -DLODEPNG_NO_COMPILE_ENCODER to the compiler to disable this, or comment out LODEPNG_COMPILE_ENCODER below*/
     #define LODEPNG_COMPILE_ENCODER
@@ -106,7 +142,12 @@ the custom_zlib field of the compress and decompress settings*/
 /*the optional built in harddisk file loading and saving functions*/
 #ifndef LODEPNG_NO_COMPILE_DISK
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #define LODEPNG_COMPILE_DISK
+=======
+    /*pass -DLODEPNG_NO_COMPILE_DISK to the compiler to disable this, or comment out LODEPNG_COMPILE_DISK below*/
+    #define LODEPNG_COMPILE_DISK
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
     /*pass -DLODEPNG_NO_COMPILE_DISK to the compiler to disable this, or comment out LODEPNG_COMPILE_DISK below*/
     #define LODEPNG_COMPILE_DISK
@@ -116,7 +157,13 @@ the custom_zlib field of the compress and decompress settings*/
 /*support for chunks other than IHDR, IDAT, PLTE, tRNS, IEND: ancillary and unknown chunks*/
 #ifndef LODEPNG_NO_COMPILE_ANCILLARY_CHUNKS
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #define LODEPNG_COMPILE_ANCILLARY_CHUNKS
+=======
+    /*pass -DLODEPNG_NO_COMPILE_ANCILLARY_CHUNKS to the compiler to disable this,
+    or comment out LODEPNG_COMPILE_ANCILLARY_CHUNKS below*/
+    #define LODEPNG_COMPILE_ANCILLARY_CHUNKS
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
     /*pass -DLODEPNG_NO_COMPILE_ANCILLARY_CHUNKS to the compiler to disable this,
     or comment out LODEPNG_COMPILE_ANCILLARY_CHUNKS below*/
@@ -127,7 +174,13 @@ the custom_zlib field of the compress and decompress settings*/
 /*ability to convert error numerical codes to English text string*/
 #ifndef LODEPNG_NO_COMPILE_ERROR_TEXT
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #define LODEPNG_COMPILE_ERROR_TEXT
+=======
+    /*pass -DLODEPNG_NO_COMPILE_ERROR_TEXT to the compiler to disable this,
+    or comment out LODEPNG_COMPILE_ERROR_TEXT below*/
+    #define LODEPNG_COMPILE_ERROR_TEXT
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
     /*pass -DLODEPNG_NO_COMPILE_ERROR_TEXT to the compiler to disable this,
     or comment out LODEPNG_COMPILE_ERROR_TEXT below*/
@@ -140,8 +193,11 @@ you can define the functions lodepng_free, lodepng_malloc and lodepng_realloc in
 source files with custom allocators.*/
 #ifndef LODEPNG_NO_COMPILE_ALLOCATORS
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #define LODEPNG_COMPILE_ALLOCATORS
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
     /*pass -DLODEPNG_NO_COMPILE_ALLOCATORS to the compiler to disable the built-in ones,
     or comment out LODEPNG_COMPILE_ALLOCATORS below*/
     #define LODEPNG_COMPILE_ALLOCATORS
@@ -156,11 +212,15 @@ in a comment in the lodepng.c(pp) file in the 'else' case of the searchable LODE
     /*pass -DLODEPNG_NO_COMPILE_CRC to the compiler to disable the built-in one,
     or comment out LODEPNG_COMPILE_CRC below*/
     #define LODEPNG_COMPILE_CRC
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif
 
 /*compile the C++ version (you can disable the C++ wrapper here even when compiling for C++)*/
 #ifdef __cplusplus
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #ifndef LODEPNG_NO_COMPILE_CPP
 #define LODEPNG_COMPILE_CPP
@@ -171,6 +231,8 @@ in a comment in the lodepng.c(pp) file in the 'else' case of the searchable LODE
 #include <vector>
 #include <string>
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
     #ifndef LODEPNG_NO_COMPILE_CPP
         /*pass -DLODEPNG_NO_COMPILE_CPP to the compiler to disable C++ (not needed if a C-only compiler),
         or comment out LODEPNG_COMPILE_CPP below*/
@@ -181,12 +243,16 @@ in a comment in the lodepng.c(pp) file in the 'else' case of the searchable LODE
 #ifdef LODEPNG_COMPILE_CPP
     #include <vector>
     #include <string>
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /*LODEPNG_COMPILE_CPP*/
 
 #ifdef LODEPNG_COMPILE_PNG
 /*The PNG color types (also used for raw image).*/
 typedef enum LodePNGColorType {
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
   LCT_GREY = 0, /*grayscale: 1,2,4,8,16 bit*/
   LCT_RGB = 2, /*RGB: 8,16 bit*/
@@ -200,6 +266,8 @@ typedef enum LodePNGColorType {
   particular disallowed color type byte values, or cast to integer to print it.*/
   LCT_MAX_OCTET_VALUE = 255
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
     LCT_GREY = 0, /*grayscale: 1,2,4,8,16 bit*/
     LCT_RGB = 2, /*RGB: 8,16 bit*/
     LCT_PALETTE = 3, /*palette: 1,2,4,8 bit*/
@@ -211,6 +279,9 @@ typedef enum LodePNGColorType {
     the valid color type names above, or numeric values like 1 or 7 when checking for
     particular disallowed color type byte values, or cast to integer to print it.*/
     LCT_MAX_OCTET_VALUE = 255
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 } LodePNGColorType;
 
@@ -231,6 +302,7 @@ bitdepth: the desired bit depth for the raw output image. See explanation on PNG
 Return value: LodePNG error code (0 means no error).
 */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_decode_memory(unsigned char** out, unsigned* w, unsigned* h,
                                const unsigned char* in, size_t insize,
                                LodePNGColorType colortype, unsigned bitdepth);
@@ -243,6 +315,8 @@ unsigned lodepng_decode32(unsigned char** out, unsigned* w, unsigned* h,
 unsigned lodepng_decode24(unsigned char** out, unsigned* w, unsigned* h,
                           const unsigned char* in, size_t insize);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_decode_memory(unsigned char ** out, unsigned * w, unsigned * h,
                                const unsigned char * in, size_t insize,
                                LodePNGColorType colortype, unsigned bitdepth);
@@ -254,12 +328,16 @@ unsigned lodepng_decode32(unsigned char ** out, unsigned * w, unsigned * h,
 /*Same as lodepng_decode_memory, but always decodes to 24-bit RGB raw image*/
 unsigned lodepng_decode24(unsigned char ** out, unsigned * w, unsigned * h,
                           const unsigned char * in, size_t insize);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 
 #ifdef LODEPNG_COMPILE_DISK
 /*
 Load PNG from disk, from file with given name.
 Same as the other decode functions, but instead takes a filename as input.
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 */
 unsigned lodepng_decode_file(unsigned char** out, unsigned* w, unsigned* h,
@@ -274,6 +352,8 @@ unsigned lodepng_decode32_file(unsigned char** out, unsigned* w, unsigned* h,
 unsigned lodepng_decode24_file(unsigned char** out, unsigned* w, unsigned* h,
                                const char* filename);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 
 NOTE: Wide-character filenames are not supported, you can use an external method
 to handle such files and decode in-memory.*/
@@ -294,6 +374,9 @@ NOTE: Wide-character filenames are not supported, you can use an external method
 to handle such files and decode in-memory.*/
 unsigned lodepng_decode24_file(unsigned char ** out, unsigned * w, unsigned * h,
                                const char * filename);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /*LODEPNG_COMPILE_DISK*/
 #endif /*LODEPNG_COMPILE_DECODER*/
@@ -317,6 +400,7 @@ bitdepth: the bit depth of the raw input image. See explanation on PNG color typ
 Return value: LodePNG error code (0 means no error).
 */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_encode_memory(unsigned char** out, size_t* outsize,
                                const unsigned char* image, unsigned w, unsigned h,
                                LodePNGColorType colortype, unsigned bitdepth);
@@ -329,6 +413,8 @@ unsigned lodepng_encode32(unsigned char** out, size_t* outsize,
 unsigned lodepng_encode24(unsigned char** out, size_t* outsize,
                           const unsigned char* image, unsigned w, unsigned h);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_encode_memory(unsigned char ** out, size_t * outsize,
                                const unsigned char * image, unsigned w, unsigned h,
                                LodePNGColorType colortype, unsigned bitdepth);
@@ -340,12 +426,16 @@ unsigned lodepng_encode32(unsigned char ** out, size_t * outsize,
 /*Same as lodepng_encode_memory, but always encodes from 24-bit RGB raw image.*/
 unsigned lodepng_encode24(unsigned char ** out, size_t * outsize,
                           const unsigned char * image, unsigned w, unsigned h);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 
 #ifdef LODEPNG_COMPILE_DISK
 /*
 Converts raw pixel data into a PNG file on disk.
 Same as the other encode functions, but instead takes a filename as output.
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 NOTE: This overwrites existing files without warning!
 */
@@ -361,6 +451,8 @@ unsigned lodepng_encode32_file(const char* filename,
 unsigned lodepng_encode24_file(const char* filename,
                                const unsigned char* image, unsigned w, unsigned h);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 
 NOTE: This overwrites existing files without warning!
 
@@ -383,12 +475,16 @@ NOTE: Wide-character filenames are not supported, you can use an external method
 to handle such files and encode in-memory.*/
 unsigned lodepng_encode24_file(const char * filename,
                                const unsigned char * image, unsigned w, unsigned h);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /*LODEPNG_COMPILE_DISK*/
 #endif /*LODEPNG_COMPILE_ENCODER*/
 
 
 #ifdef LODEPNG_COMPILE_CPP
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 namespace lodepng {
 #ifdef LODEPNG_COMPILE_DECODER
@@ -400,6 +496,8 @@ unsigned decode(std::vector<unsigned char>& out, unsigned& w, unsigned& h,
 unsigned decode(std::vector<unsigned char>& out, unsigned& w, unsigned& h,
                 const std::vector<unsigned char>& in,
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 namespace lodepng
 {
 #ifdef LODEPNG_COMPILE_DECODER
@@ -410,6 +508,9 @@ unsigned decode(std::vector<unsigned char> & out, unsigned & w, unsigned & h,
                 LodePNGColorType colortype = LCT_RGBA, unsigned bitdepth = 8);
 unsigned decode(std::vector<unsigned char> & out, unsigned & w, unsigned & h,
                 const std::vector<unsigned char> & in,
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
                 LodePNGColorType colortype = LCT_RGBA, unsigned bitdepth = 8);
 #ifdef LODEPNG_COMPILE_DISK
@@ -417,16 +518,22 @@ unsigned decode(std::vector<unsigned char> & out, unsigned & w, unsigned & h,
 Converts PNG file from disk to raw pixel data in memory.
 Same as the other decode functions, but instead takes a filename as input.
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 */
 unsigned decode(std::vector<unsigned char>& out, unsigned& w, unsigned& h,
                 const std::string& filename,
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 
 NOTE: Wide-character filenames are not supported, you can use an external method
 to handle such files and decode in-memory.
 */
 unsigned decode(std::vector<unsigned char> & out, unsigned & w, unsigned & h,
                 const std::string & filename,
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
                 LodePNGColorType colortype = LCT_RGBA, unsigned bitdepth = 8);
 #endif /* LODEPNG_COMPILE_DISK */
@@ -436,23 +543,30 @@ unsigned decode(std::vector<unsigned char> & out, unsigned & w, unsigned & h,
 /*Same as lodepng_encode_memory, but encodes to an std::vector. colortype
 is that of the raw input data. The output PNG color type will be auto chosen.*/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned encode(std::vector<unsigned char>& out,
                 const unsigned char* in, unsigned w, unsigned h,
                 LodePNGColorType colortype = LCT_RGBA, unsigned bitdepth = 8);
 unsigned encode(std::vector<unsigned char>& out,
                 const std::vector<unsigned char>& in, unsigned w, unsigned h,
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned encode(std::vector<unsigned char> & out,
                 const unsigned char * in, unsigned w, unsigned h,
                 LodePNGColorType colortype = LCT_RGBA, unsigned bitdepth = 8);
 unsigned encode(std::vector<unsigned char> & out,
                 const std::vector<unsigned char> & in, unsigned w, unsigned h,
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
                 LodePNGColorType colortype = LCT_RGBA, unsigned bitdepth = 8);
 #ifdef LODEPNG_COMPILE_DISK
 /*
 Converts 32-bit RGBA raw pixel data into a PNG file on disk.
 Same as the other encode functions, but instead takes a filename as output.
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 NOTE: This overwrites existing files without warning!
 */
@@ -462,6 +576,8 @@ unsigned encode(const std::string& filename,
 unsigned encode(const std::string& filename,
                 const std::vector<unsigned char>& in, unsigned w, unsigned h,
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 
 NOTE: This overwrites existing files without warning!
 
@@ -473,6 +589,9 @@ unsigned encode(const std::string & filename,
                 LodePNGColorType colortype = LCT_RGBA, unsigned bitdepth = 8);
 unsigned encode(const std::string & filename,
                 const std::vector<unsigned char> & in, unsigned w, unsigned h,
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
                 LodePNGColorType colortype = LCT_RGBA, unsigned bitdepth = 8);
 #endif /* LODEPNG_COMPILE_DISK */
@@ -483,8 +602,13 @@ unsigned encode(const std::string & filename,
 
 #ifdef LODEPNG_COMPILE_ERROR_TEXT
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 /*Returns an English description of the numerical error code.*/
 const char* lodepng_error_text(unsigned code);
+=======
+    /*Returns an English description of the numerical error code.*/
+    const char * lodepng_error_text(unsigned code);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
     /*Returns an English description of the numerical error code.*/
     const char * lodepng_error_text(unsigned code);
@@ -495,6 +619,7 @@ const char* lodepng_error_text(unsigned code);
 /*Settings for zlib decompression*/
 typedef struct LodePNGDecompressSettings LodePNGDecompressSettings;
 struct LodePNGDecompressSettings {
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
   /* Check LodePNGDecoderSettings for more ignorable errors such as ignore_crc */
   unsigned ignore_adler32; /*if 1, continue and don't give an error message if the Adler32 checksum is corrupted*/
@@ -525,6 +650,8 @@ struct LodePNGDecompressSettings {
 extern const LodePNGDecompressSettings lodepng_default_decompress_settings;
 void lodepng_decompress_settings_init(LodePNGDecompressSettings* settings);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
     /* Check LodePNGDecoderSettings for more ignorable errors such as ignore_crc */
     unsigned ignore_adler32; /*if 1, continue and don't give an error message if the Adler32 checksum is corrupted*/
     unsigned ignore_nlen; /*ignore complement of len checksum in uncompressed blocks*/
@@ -553,6 +680,9 @@ void lodepng_decompress_settings_init(LodePNGDecompressSettings* settings);
 
 LV_ATTRIBUTE_EXTERN_DATA extern const LodePNGDecompressSettings lodepng_default_decompress_settings;
 void lodepng_decompress_settings_init(LodePNGDecompressSettings * settings);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /*LODEPNG_COMPILE_DECODER*/
 
@@ -562,6 +692,7 @@ Settings for zlib compression. Tweaking these settings tweaks the balance
 between speed and compression ratio.
 */
 typedef struct LodePNGCompressSettings LodePNGCompressSettings;
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 struct LodePNGCompressSettings /*deflate = compress*/ {
   /*LZ77 related settings*/
@@ -589,6 +720,8 @@ struct LodePNGCompressSettings /*deflate = compress*/ {
 extern const LodePNGCompressSettings lodepng_default_compress_settings;
 void lodepng_compress_settings_init(LodePNGCompressSettings* settings);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 struct LodePNGCompressSettings { /*deflate = compress*/
     /*LZ77 related settings*/
     unsigned btype; /*the block type for LZ (0, 1, 2 or 3, see zlib standard). Should be 2 for proper compression.*/
@@ -614,6 +747,9 @@ struct LodePNGCompressSettings { /*deflate = compress*/
 
 LV_ATTRIBUTE_EXTERN_DATA extern const LodePNGCompressSettings lodepng_default_compress_settings;
 void lodepng_compress_settings_init(LodePNGCompressSettings * settings);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /*LODEPNG_COMPILE_ENCODER*/
 
@@ -624,6 +760,7 @@ bits to RGBA colors. This information is the same as used in the PNG file
 format, and is used both for PNG and raw image data in LodePNG.
 */
 typedef struct LodePNGColorMode {
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
   /*header (IHDR)*/
   LodePNGColorType colortype; /*color type, see PNG standard or documentation further in this header file*/
@@ -692,6 +829,8 @@ unsigned lodepng_is_palette_type(const LodePNGColorMode* info);
 Loops through the palette to check this.*/
 unsigned lodepng_has_palette_alpha(const LodePNGColorMode* info);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
     /*header (IHDR)*/
     LodePNGColorType colortype; /*color type, see PNG standard or documentation further in this header file*/
     unsigned bitdepth;  /*bits per sample, see PNG standard or documentation further in this header file*/
@@ -760,6 +899,9 @@ unsigned lodepng_is_palette_type(const LodePNGColorMode * info);
 /*only returns true if there is a palette and there is a value in the palette with alpha < 255.
 Loops through the palette to check this.*/
 unsigned lodepng_has_palette_alpha(const LodePNGColorMode * info);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 /*
 Check if the given color info indicates the possibility of having non-opaque pixels in the PNG image.
@@ -769,9 +911,15 @@ In detail, it returns true only if it's a color type with alpha, or has a palett
 or if "key_defined" is true.
 */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_can_have_alpha(const LodePNGColorMode* info);
 /*Returns the byte size of a raw image buffer with given width, height and color mode*/
 size_t lodepng_get_raw_size(unsigned w, unsigned h, const LodePNGColorMode* color);
+=======
+unsigned lodepng_can_have_alpha(const LodePNGColorMode * info);
+/*Returns the byte size of a raw image buffer with given width, height and color mode*/
+size_t lodepng_get_raw_size(unsigned w, unsigned h, const LodePNGColorMode * color);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
 unsigned lodepng_can_have_alpha(const LodePNGColorMode * info);
 /*Returns the byte size of a raw image buffer with given width, height and color mode*/
@@ -782,6 +930,7 @@ size_t lodepng_get_raw_size(unsigned w, unsigned h, const LodePNGColorMode * col
 /*The information of a Time chunk in PNG.*/
 typedef struct LodePNGTime {
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
   unsigned year;    /*2 bytes used (0-65535)*/
   unsigned month;   /*1-12*/
   unsigned day;     /*1-31*/
@@ -789,18 +938,24 @@ typedef struct LodePNGTime {
   unsigned minute;  /*0-59*/
   unsigned second;  /*0-60 (to allow for leap seconds)*/
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
     unsigned year;    /*2 bytes used (0-65535)*/
     unsigned month;   /*1-12*/
     unsigned day;     /*1-31*/
     unsigned hour;    /*0-23*/
     unsigned minute;  /*0-59*/
     unsigned second;  /*0-60 (to allow for leap seconds)*/
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 } LodePNGTime;
 #endif /*LODEPNG_COMPILE_ANCILLARY_CHUNKS*/
 
 /*Information about the PNG image, except pixels, width and height.*/
 typedef struct LodePNGInfo {
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
   /*header (IHDR), palette (PLTE) and transparency (tRNS) chunks*/
   unsigned compression_method;/*compression method of the original file. Always 0.*/
@@ -972,6 +1127,8 @@ typedef struct LodePNGInfo {
   unsigned char* unknown_chunks_data[3];
   size_t unknown_chunks_size[3]; /*size in bytes of the unknown chunks, given for protection*/
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
     /*header (IHDR), palette (PLTE) and transparency (tRNS) chunks*/
     unsigned compression_method;/*compression method of the original file. Always 0.*/
     unsigned filter_method;     /*filter method of the original file*/
@@ -1182,11 +1339,15 @@ typedef struct LodePNGInfo {
     */
     unsigned char * unknown_chunks_data[3];
     size_t unknown_chunks_size[3]; /*size in bytes of the unknown chunks, given for protection*/
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /*LODEPNG_COMPILE_ANCILLARY_CHUNKS*/
 } LodePNGInfo;
 
 /*init, cleanup and copy functions to use with this struct*/
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 void lodepng_info_init(LodePNGInfo* info);
 void lodepng_info_cleanup(LodePNGInfo* info);
@@ -1205,6 +1366,8 @@ void lodepng_clear_itext(LodePNGInfo* info); /*use this to clear the itexts agai
 unsigned lodepng_set_icc(LodePNGInfo* info, const char* name, const unsigned char* profile, unsigned profile_size);
 void lodepng_clear_icc(LodePNGInfo* info); /*use this to clear the texts again after you filled them in*/
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 void lodepng_info_init(LodePNGInfo * info);
 void lodepng_info_cleanup(LodePNGInfo * info);
 /*return value is error code (0 means no error)*/
@@ -1221,6 +1384,9 @@ void lodepng_clear_itext(LodePNGInfo * info); /*use this to clear the itexts aga
 /*replaces if exists*/
 unsigned lodepng_set_icc(LodePNGInfo * info, const char * name, const unsigned char * profile, unsigned profile_size);
 void lodepng_clear_icc(LodePNGInfo * info); /*use this to clear the texts again after you filled them in*/
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /*LODEPNG_COMPILE_ANCILLARY_CHUNKS*/
 
@@ -1236,8 +1402,13 @@ For 16-bit per channel colors, uses big endian format like PNG does.
 Return value is LodePNG error code
 */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_convert(unsigned char* out, const unsigned char* in,
                          const LodePNGColorMode* mode_out, const LodePNGColorMode* mode_in,
+=======
+unsigned lodepng_convert(unsigned char * out, const unsigned char * in,
+                         const LodePNGColorMode * mode_out, const LodePNGColorMode * mode_in,
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
 unsigned lodepng_convert(unsigned char * out, const unsigned char * in,
                          const LodePNGColorMode * mode_out, const LodePNGColorMode * mode_in,
@@ -1250,6 +1421,7 @@ Settings for the decoder. This contains settings for the PNG and the Zlib
 decoder, but not the Info settings from the Info structs.
 */
 typedef struct LodePNGDecoderSettings {
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
   LodePNGDecompressSettings zlibsettings; /*in here is the setting to ignore Adler32 checksums*/
 
@@ -1284,6 +1456,8 @@ typedef struct LodePNGDecoderSettings {
 
 void lodepng_decoder_settings_init(LodePNGDecoderSettings* settings);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
     LodePNGDecompressSettings zlibsettings; /*in here is the setting to ignore Adler32 checksums*/
 
     /* Check LodePNGDecompressSettings for more ignorable errors such as ignore_adler32 */
@@ -1316,12 +1490,16 @@ void lodepng_decoder_settings_init(LodePNGDecoderSettings* settings);
 } LodePNGDecoderSettings;
 
 void lodepng_decoder_settings_init(LodePNGDecoderSettings * settings);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /*LODEPNG_COMPILE_DECODER*/
 
 #ifdef LODEPNG_COMPILE_ENCODER
 /*automatically use color type with less bits per pixel if losslessly possible. Default: AUTO*/
 typedef enum LodePNGFilterStrategy {
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
   /*every filter at zero*/
   LFS_ZERO = 0,
@@ -1343,6 +1521,8 @@ typedef enum LodePNGFilterStrategy {
   /*use predefined_filters buffer: you specify the filter type for each scanline*/
   LFS_PREDEFINED
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
     /*every filter at zero*/
     LFS_ZERO = 0,
     /*every filter at 1, 2, 3 or 4 (paeth), unlike LFS_ZERO not a good choice, but for testing*/
@@ -1362,6 +1542,9 @@ typedef enum LodePNGFilterStrategy {
     LFS_BRUTE_FORCE,
     /*use predefined_filters buffer: you specify the filter type for each scanline*/
     LFS_PREDEFINED
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 } LodePNGFilterStrategy;
 
@@ -1369,6 +1552,7 @@ typedef enum LodePNGFilterStrategy {
 which helps decide which color model to use for encoding.
 Used internally by default if "auto_convert" is enabled. Public because it's useful for custom algorithms.*/
 typedef struct LodePNGColorStats {
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
   unsigned colored; /*not grayscale*/
   unsigned key; /*image is not opaque and color key is possible instead of full alpha*/
@@ -1427,6 +1611,8 @@ typedef struct LodePNGEncoderSettings {
 
 void lodepng_encoder_settings_init(LodePNGEncoderSettings* settings);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
     unsigned colored; /*not grayscale*/
     unsigned key; /*image is not opaque and color key is possible instead of full alpha*/
     unsigned short key_r; /*key values, always as 16-bit, in 8-bit case the byte is duplicated, e.g. 65535 means 255*/
@@ -1488,6 +1674,9 @@ typedef struct LodePNGEncoderSettings {
 } LodePNGEncoderSettings;
 
 void lodepng_encoder_settings_init(LodePNGEncoderSettings * settings);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /*LODEPNG_COMPILE_ENCODER*/
 
@@ -1496,6 +1685,7 @@ void lodepng_encoder_settings_init(LodePNGEncoderSettings * settings);
 /*The settings, state and information for extended encoding and decoding.*/
 typedef struct LodePNGState {
 #ifdef LODEPNG_COMPILE_DECODER
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
   LodePNGDecoderSettings decoder; /*the decoding settings*/
 #endif /*LODEPNG_COMPILE_DECODER*/
@@ -1512,6 +1702,8 @@ void lodepng_state_init(LodePNGState* state);
 void lodepng_state_cleanup(LodePNGState* state);
 void lodepng_state_copy(LodePNGState* dest, const LodePNGState* source);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
     LodePNGDecoderSettings decoder; /*the decoding settings*/
 #endif /*LODEPNG_COMPILE_DECODER*/
 #ifdef LODEPNG_COMPILE_ENCODER
@@ -1526,6 +1718,9 @@ void lodepng_state_copy(LodePNGState* dest, const LodePNGState* source);
 void lodepng_state_init(LodePNGState * state);
 void lodepng_state_cleanup(LodePNGState * state);
 void lodepng_state_copy(LodePNGState * dest, const LodePNGState * source);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /* defined(LODEPNG_COMPILE_DECODER) || defined(LODEPNG_COMPILE_ENCODER) */
 
@@ -1535,9 +1730,15 @@ Same as lodepng_decode_memory, but uses a LodePNGState to allow custom settings 
 getting much more information about the PNG image and color mode.
 */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_decode(unsigned char** out, unsigned* w, unsigned* h,
                         LodePNGState* state,
                         const unsigned char* in, size_t insize);
+=======
+unsigned lodepng_decode(unsigned char ** out, unsigned * w, unsigned * h,
+                        LodePNGState * state,
+                        const unsigned char * in, size_t insize);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
 unsigned lodepng_decode(unsigned char ** out, unsigned * w, unsigned * h,
                         LodePNGState * state,
@@ -1550,6 +1751,7 @@ that is in the IHDR chunk of the PNG, such as width, height and color type. The
 information is placed in the info_png field of the LodePNGState.
 */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_inspect(unsigned* w, unsigned* h,
                          LodePNGState* state,
                          const unsigned char* in, size_t insize);
@@ -1559,6 +1761,8 @@ unsigned lodepng_inspect(unsigned* w, unsigned* h,
 Reads one metadata chunk (other than IHDR) of the PNG file and outputs what it
 read in the state. Returns error code on failure.
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_inspect(unsigned * w, unsigned * h,
                          LodePNGState * state,
                          const unsigned char * in, size_t insize);
@@ -1567,6 +1771,9 @@ unsigned lodepng_inspect(unsigned * w, unsigned * h,
 /*
 Reads one metadata chunk (other than IHDR, which is handled by lodepng_inspect)
 of the PNG file and outputs what it read in the state. Returns error code on failure.
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 Use lodepng_inspect first with a new state, then e.g. lodepng_chunk_find_const
 to find the desired chunk type, and if non null use lodepng_inspect_chunk (with
@@ -1578,6 +1785,7 @@ lodepng_inspect first since format of most other chunks depends on IHDR, and if
 there is a PLTE chunk, that one must be inspected before tRNS or bKGD.
 */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_inspect_chunk(LodePNGState* state, size_t pos,
                                const unsigned char* in, size_t insize);
 
@@ -1587,6 +1795,8 @@ unsigned lodepng_encode(unsigned char** out, size_t* outsize,
                         const unsigned char* image, unsigned w, unsigned h,
                         LodePNGState* state);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_inspect_chunk(LodePNGState * state, size_t pos,
                                const unsigned char * in, size_t insize);
 
@@ -1595,6 +1805,9 @@ unsigned lodepng_inspect_chunk(LodePNGState * state, size_t pos,
 unsigned lodepng_encode(unsigned char ** out, size_t * outsize,
                         const unsigned char * image, unsigned w, unsigned h,
                         LodePNGState * state);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /*LODEPNG_COMPILE_ENCODER*/
 
@@ -1628,6 +1841,7 @@ There must be at least 4 bytes to read from. If the result value is too large,
 it may be corrupt data.
 */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_chunk_length(const unsigned char* chunk);
 
 /*puts the 4-byte type in null terminated string*/
@@ -1655,6 +1869,8 @@ unsigned lodepng_chunk_check_crc(const unsigned char* chunk);
 /*generates the correct CRC from the data and puts it in the last 4 bytes of the chunk*/
 void lodepng_chunk_generate_crc(unsigned char* chunk);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_chunk_length(const unsigned char * chunk);
 
 /*puts the 4-byte type in null terminated string*/
@@ -1681,6 +1897,9 @@ unsigned lodepng_chunk_check_crc(const unsigned char * chunk);
 
 /*generates the correct CRC from the data and puts it in the last 4 bytes of the chunk*/
 void lodepng_chunk_generate_crc(unsigned char * chunk);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 
 /*
@@ -1695,6 +1914,7 @@ Start this process at the 8th byte of the PNG file.
 In a non-corrupt PNG file, the last chunk should have name "IEND".
 */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned char* lodepng_chunk_next(unsigned char* chunk, unsigned char* end);
 const unsigned char* lodepng_chunk_next_const(const unsigned char* chunk, const unsigned char* end);
 
@@ -1702,6 +1922,8 @@ const unsigned char* lodepng_chunk_next_const(const unsigned char* chunk, const 
 unsigned char* lodepng_chunk_find(unsigned char* chunk, unsigned char* end, const char type[5]);
 const unsigned char* lodepng_chunk_find_const(const unsigned char* chunk, const unsigned char* end, const char type[5]);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned char * lodepng_chunk_next(unsigned char * chunk, unsigned char * end);
 const unsigned char * lodepng_chunk_next_const(const unsigned char * chunk, const unsigned char * end);
 
@@ -1709,6 +1931,9 @@ const unsigned char * lodepng_chunk_next_const(const unsigned char * chunk, cons
 unsigned char * lodepng_chunk_find(unsigned char * chunk, unsigned char * end, const char type[5]);
 const unsigned char * lodepng_chunk_find_const(const unsigned char * chunk, const unsigned char * end,
                                                const char type[5]);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 
 /*
@@ -1717,7 +1942,11 @@ The out variable and outsize are updated to reflect the new reallocated buffer.
 Returns error code (0 if it went ok)
 */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_chunk_append(unsigned char** out, size_t* outsize, const unsigned char* chunk);
+=======
+unsigned lodepng_chunk_append(unsigned char ** out, size_t * outsize, const unsigned char * chunk);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
 unsigned lodepng_chunk_append(unsigned char ** out, size_t * outsize, const unsigned char * chunk);
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
@@ -1729,6 +1958,7 @@ The out variable and outsize are updated to reflect the new reallocated buffer.
 Returne error code (0 if it went ok)
 */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_chunk_create(unsigned char** out, size_t* outsize, unsigned length,
                               const char* type, const unsigned char* data);
 
@@ -1736,12 +1966,17 @@ unsigned lodepng_chunk_create(unsigned char** out, size_t* outsize, unsigned len
 /*Calculate CRC32 of buffer*/
 unsigned lodepng_crc32(const unsigned char* buf, size_t len);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_chunk_create(unsigned char ** out, size_t * outsize, size_t length,
                               const char * type, const unsigned char * data);
 
 
 /*Calculate CRC32 of buffer*/
 unsigned lodepng_crc32(const unsigned char * buf, size_t len);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /*LODEPNG_COMPILE_PNG*/
 
@@ -1756,9 +1991,15 @@ part of zlib that is required for PNG, it does not support dictionaries.
 #ifdef LODEPNG_COMPILE_DECODER
 /*Inflate a buffer. Inflate is the decompression step of deflate. Out buffer must be freed after use.*/
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_inflate(unsigned char** out, size_t* outsize,
                          const unsigned char* in, size_t insize,
                          const LodePNGDecompressSettings* settings);
+=======
+unsigned lodepng_inflate(unsigned char ** out, size_t * outsize,
+                         const unsigned char * in, size_t insize,
+                         const LodePNGDecompressSettings * settings);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
 unsigned lodepng_inflate(unsigned char ** out, size_t * outsize,
                          const unsigned char * in, size_t insize,
@@ -1772,9 +2013,15 @@ Either, *out must be NULL and *outsize must be 0, or, *out must be a valid
 buffer and *outsize its size in bytes. out must be freed by user after usage.
 */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_zlib_decompress(unsigned char** out, size_t* outsize,
                                  const unsigned char* in, size_t insize,
                                  const LodePNGDecompressSettings* settings);
+=======
+unsigned lodepng_zlib_decompress(unsigned char ** out, size_t * outsize,
+                                 const unsigned char * in, size_t insize,
+                                 const LodePNGDecompressSettings * settings);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
 unsigned lodepng_zlib_decompress(unsigned char ** out, size_t * outsize,
                                  const unsigned char * in, size_t insize,
@@ -1791,9 +2038,15 @@ Either, *out must be NULL and *outsize must be 0, or, *out must be a valid
 buffer and *outsize its size in bytes. out must be freed by user after usage.
 */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_zlib_compress(unsigned char** out, size_t* outsize,
                                const unsigned char* in, size_t insize,
                                const LodePNGCompressSettings* settings);
+=======
+unsigned lodepng_zlib_compress(unsigned char ** out, size_t * outsize,
+                               const unsigned char * in, size_t insize,
+                               const LodePNGCompressSettings * settings);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
 unsigned lodepng_zlib_compress(unsigned char ** out, size_t * outsize,
                                const unsigned char * in, size_t insize,
@@ -1805,6 +2058,7 @@ Find length-limited Huffman code for given frequencies. This function is in the
 public interface only for tests, it's used internally by lodepng_deflate.
 */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_huffman_code_lengths(unsigned* lengths, const unsigned* frequencies,
                                       size_t numcodes, unsigned maxbitlen);
 
@@ -1813,6 +2067,8 @@ unsigned lodepng_deflate(unsigned char** out, size_t* outsize,
                          const unsigned char* in, size_t insize,
                          const LodePNGCompressSettings* settings);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned lodepng_huffman_code_lengths(unsigned * lengths, const unsigned * frequencies,
                                       size_t numcodes, unsigned maxbitlen);
 
@@ -1820,12 +2076,16 @@ unsigned lodepng_huffman_code_lengths(unsigned * lengths, const unsigned * frequ
 unsigned lodepng_deflate(unsigned char ** out, size_t * outsize,
                          const unsigned char * in, size_t insize,
                          const LodePNGCompressSettings * settings);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 
 #endif /*LODEPNG_COMPILE_ENCODER*/
 #endif /*LODEPNG_COMPILE_ZLIB*/
 
 #ifdef LODEPNG_COMPILE_DISK
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 /*
 Load a file from disk into buffer. The function allocates the out buffer, and
@@ -1847,6 +2107,8 @@ return value: error code (0 means ok)
 */
 unsigned lodepng_save_file(const unsigned char* buffer, size_t buffersize, const char* filename);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
     /*
     Load a file from disk into buffer. The function allocates the out buffer, and
     after usage you should free it.
@@ -1872,11 +2134,15 @@ unsigned lodepng_save_file(const unsigned char* buffer, size_t buffersize, const
     to handle such files and encode in-memory
     */
     unsigned lodepng_save_file(const unsigned char * buffer, size_t buffersize, const char * filename);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /*LODEPNG_COMPILE_DISK*/
 
 #ifdef LODEPNG_COMPILE_CPP
 /* The LodePNG C++ wrapper uses std::vectors instead of manually allocated memory buffers. */
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 namespace lodepng {
 #ifdef LODEPNG_COMPILE_PNG
@@ -1887,6 +2153,8 @@ class State : public LodePNGState {
     ~State();
     State& operator=(const State& other);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 namespace lodepng
 {
 #ifdef LODEPNG_COMPILE_PNG
@@ -1897,11 +2165,15 @@ class State : public LodePNGState
         State(const State & other);
         ~State();
         State & operator=(const State & other);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 };
 
 #ifdef LODEPNG_COMPILE_DECODER
 /* Same as other lodepng::decode, but using a State for more settings and information. */
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned decode(std::vector<unsigned char>& out, unsigned& w, unsigned& h,
                 State& state,
@@ -1910,17 +2182,23 @@ unsigned decode(std::vector<unsigned char>& out, unsigned& w, unsigned& h,
                 State& state,
                 const std::vector<unsigned char>& in);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned decode(std::vector<unsigned char> & out, unsigned & w, unsigned & h,
                 State & state,
                 const unsigned char * in, size_t insize);
 unsigned decode(std::vector<unsigned char> & out, unsigned & w, unsigned & h,
                 State & state,
                 const std::vector<unsigned char> & in);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /*LODEPNG_COMPILE_DECODER*/
 
 #ifdef LODEPNG_COMPILE_ENCODER
 /* Same as other lodepng::encode, but using a State for more settings and information. */
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned encode(std::vector<unsigned char>& out,
                 const unsigned char* in, unsigned w, unsigned h,
@@ -1943,6 +2221,8 @@ without warning.
 */
 unsigned save_file(const std::vector<unsigned char>& buffer, const std::string& filename);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned encode(std::vector<unsigned char> & out,
                 const unsigned char * in, unsigned w, unsigned h,
                 State & state);
@@ -1969,6 +2249,9 @@ unsigned encode(std::vector<unsigned char> & out,
     to handle such files and encode in-memory
     */
     unsigned save_file(const std::vector<unsigned char> & buffer, const std::string & filename);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /* LODEPNG_COMPILE_DISK */
 #endif /* LODEPNG_COMPILE_PNG */
@@ -1977,6 +2260,7 @@ unsigned encode(std::vector<unsigned char> & out,
 #ifdef LODEPNG_COMPILE_DECODER
 /* Zlib-decompress an unsigned char buffer */
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned decompress(std::vector<unsigned char>& out, const unsigned char* in, size_t insize,
                     const LodePNGDecompressSettings& settings = lodepng_default_decompress_settings);
 
@@ -1984,17 +2268,23 @@ unsigned decompress(std::vector<unsigned char>& out, const unsigned char* in, si
 unsigned decompress(std::vector<unsigned char>& out, const std::vector<unsigned char>& in,
                     const LodePNGDecompressSettings& settings = lodepng_default_decompress_settings);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned decompress(std::vector<unsigned char> & out, const unsigned char * in, size_t insize,
                     const LodePNGDecompressSettings & settings = lodepng_default_decompress_settings);
 
 /* Zlib-decompress an std::vector */
 unsigned decompress(std::vector<unsigned char> & out, const std::vector<unsigned char> & in,
                     const LodePNGDecompressSettings & settings = lodepng_default_decompress_settings);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /* LODEPNG_COMPILE_DECODER */
 
 #ifdef LODEPNG_COMPILE_ENCODER
 /* Zlib-compress an unsigned char buffer */
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned compress(std::vector<unsigned char>& out, const unsigned char* in, size_t insize,
                   const LodePNGCompressSettings& settings = lodepng_default_compress_settings);
@@ -2003,12 +2293,17 @@ unsigned compress(std::vector<unsigned char>& out, const unsigned char* in, size
 unsigned compress(std::vector<unsigned char>& out, const std::vector<unsigned char>& in,
                   const LodePNGCompressSettings& settings = lodepng_default_compress_settings);
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 unsigned compress(std::vector<unsigned char> & out, const unsigned char * in, size_t insize,
                   const LodePNGCompressSettings & settings = lodepng_default_compress_settings);
 
 /* Zlib-compress an std::vector */
 unsigned compress(std::vector<unsigned char> & out, const std::vector<unsigned char> & in,
                   const LodePNGCompressSettings & settings = lodepng_default_compress_settings);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /* LODEPNG_COMPILE_ENCODER */
 #endif /* LODEPNG_COMPILE_ZLIB */
@@ -2022,7 +2317,11 @@ TODO:
 [X] converting color to 16-bit per channel types
 [X] support color profile chunk types (but never let them touch RGB values by default)
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 [ ] support all public PNG chunk types (almost done except sBIT, sPLT and hIST)
+=======
+[ ] support all public PNG chunk types (almost done except sPLT and hIST)
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
 [ ] support all public PNG chunk types (almost done except sPLT and hIST)
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
@@ -2042,13 +2341,19 @@ TODO:
 */
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /*LV_USE_PNG*/
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 #endif /*LV_USE_LODEPNG*/
 
 #ifdef __cplusplus
 } /* extern "C" */
 #endif
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 
 #endif /*LODEPNG_H inclusion guard*/
@@ -2163,6 +2468,10 @@ The following features are supported by the decoder:
     iCCP: ICC color profile
     sRGB: rendering intent
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
+    sBIT: significant bits
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
     sBIT: significant bits
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
@@ -2170,6 +2479,7 @@ The following features are supported by the decoder:
 1.2. features not supported
 ---------------------------
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 The following features are _not_ supported:
 
@@ -2180,11 +2490,16 @@ The following features are _not_ supported:
     hIST
     sPLT
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 The following features are not (yet) supported:
 
 *) some features needed to make a conformant PNG-Editor might be still missing.
 *) partial loading/stream processing. All data must be available and is processed in one call.
 *) The hIST and sPLT public chunks are not (yet) supported but treated as unknown chunks
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 
 
@@ -2690,6 +3005,12 @@ This decoder example shows the most basic usage of LodePNG. More complex
 examples can be found on the LodePNG website.
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
+NOTE: these examples do not support wide-character filenames, you can use an
+external method to handle such files and encode or decode in-memory
+
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
 NOTE: these examples do not support wide-character filenames, you can use an
 external method to handle such files and encode or decode in-memory
@@ -2793,13 +3114,19 @@ Not all changes are listed here, the commit history in github lists more:
 https://github.com/lvandeve/lodepng
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 *) 10 apr 2023: faster CRC32 implementation, but with larger lookup table.
 *) 13 jun 2022: added support for the sBIT chunk.
 *) 09 jan 2022: minor decoder speed improvements.
 *) 27 jun 2021: added warnings that file reading/writing functions don't support
    wide-character filenames (support for this is not planned, opening files is
    not the core part of PNG decoding/decoding and is platform dependent).
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+=======
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 *) 17 okt 2020: prevent decoding too large text/icc chunks by default.
 *) 06 mar 2020: simplified some of the dynamic memory allocations.
@@ -2969,7 +3296,11 @@ Account: lode dot vandevenne.
 
 
 <<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 Copyright (c) 2005-2020 Lode Vandevenne
+=======
+Copyright (c) 2005-2022 Lode Vandevenne
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
 =======
 Copyright (c) 2005-2022 Lode Vandevenne
 >>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/png/lodepng.h
