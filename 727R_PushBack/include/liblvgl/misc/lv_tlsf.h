@@ -1,5 +1,10 @@
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/misc/lv_tlsf.h
 #include "../lv_conf_internal.h"
 #if LV_MEM_CUSTOM == 0
+=======
+#include "../../lv_conf_internal.h"
+#if LV_USE_STDLIB_MALLOC == LV_STDLIB_BUILTIN
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/misc/lv_tlsf.h
 
 #ifndef LV_TLSF_H
 #define LV_TLSF_H
@@ -41,7 +46,13 @@
 ** SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/misc/lv_tlsf.h
 #include <stddef.h>
+=======
+#include "../../osal/lv_os.h"
+#include "../../misc/lv_ll.h"
+#include "../../misc/lv_types.h"
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/misc/lv_tlsf.h
 
 #if defined(__cplusplus)
 extern "C" {
@@ -92,4 +103,8 @@ int lv_tlsf_check_pool(lv_pool_t pool);
 
 #endif /*LV_TLSF_H*/
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/misc/lv_tlsf.h
 #endif /* LV_MEM_CUSTOM == 0 */
+=======
+#endif /*LV_STDLIB_BUILTIN*/
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/misc/lv_tlsf.h

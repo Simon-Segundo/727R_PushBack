@@ -1,0 +1,31 @@
+{
+  "configurations": [
+    {
+      "name": "PROS Project",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "/Users/simonsegundo/Documents/727R_PushBack_Repository/Drive_727R_PushBack/include"
+      ],
+      "defines": [
+        "_DEBUG",
+        "UNICODE",
+        "_UNICODE"
+      ],
+      "compilerPath": "/Users/simonsegundo/Library/Application Support/Code/User/globalStorage/sigbots.pros/install/pros-toolchain-macos/bin/arm-none-eabi-g++",
+      "cStandard": "gnu11",
+      "cppStandard": "gnu++20",
+      "intelliSenseMode": "gcc-arm",
+      "macFrameworkPath": [
+        "/System/Library/Frameworks"
+      ],
+      "browse": {
+        "path": [
+          "/Users/simonsegundo/Documents/727R_PushBack_Repository/Drive_727R_PushBack"
+        ],
+        "limitSymbolsToIncludedHeaders": true,
+        "databaseFilename": ""
+      }
+    }
+  ],
+  "version": 4
+}

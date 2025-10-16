@@ -23,6 +23,12 @@
 
 #pragma once
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
+=======
+#include "liblvgl/lvgl.h"
+#ifdef LV_USE_QRCODE
+
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -55,12 +61,21 @@ extern "C" {
  * The error correction level in a QR Code symbol.
  */
 enum qrcodegen_Ecc {
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 	// Must be declared in ascending order of error protection
 	// so that an internal qrcodegen function works properly
 	qrcodegen_Ecc_LOW = 0 ,  // The QR Code can tolerate about  7% erroneous codewords
 	qrcodegen_Ecc_MEDIUM  ,  // The QR Code can tolerate about 15% erroneous codewords
 	qrcodegen_Ecc_QUARTILE,  // The QR Code can tolerate about 25% erroneous codewords
 	qrcodegen_Ecc_HIGH    ,  // The QR Code can tolerate about 30% erroneous codewords
+=======
+    // Must be declared in ascending order of error protection
+    // so that an internal qrcodegen function works properly
+    qrcodegen_Ecc_LOW = 0,   // The QR Code can tolerate about  7% erroneous codewords
+    qrcodegen_Ecc_MEDIUM,    // The QR Code can tolerate about 15% erroneous codewords
+    qrcodegen_Ecc_QUARTILE,  // The QR Code can tolerate about 25% erroneous codewords
+    qrcodegen_Ecc_HIGH,      // The QR Code can tolerate about 30% erroneous codewords
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 };
 
 
@@ -68,6 +83,7 @@ enum qrcodegen_Ecc {
  * The mask pattern used in a QR Code symbol.
  */
 enum qrcodegen_Mask {
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 	// A special value to tell the QR Code encoder to
 	// automatically select an appropriate mask pattern
 	qrcodegen_Mask_AUTO = -1,
@@ -80,6 +96,20 @@ enum qrcodegen_Mask {
 	qrcodegen_Mask_5,
 	qrcodegen_Mask_6,
 	qrcodegen_Mask_7,
+=======
+    // A special value to tell the QR Code encoder to
+    // automatically select an appropriate mask pattern
+    qrcodegen_Mask_AUTO = -1,
+    // The eight actual mask patterns
+    qrcodegen_Mask_0 = 0,
+    qrcodegen_Mask_1,
+    qrcodegen_Mask_2,
+    qrcodegen_Mask_3,
+    qrcodegen_Mask_4,
+    qrcodegen_Mask_5,
+    qrcodegen_Mask_6,
+    qrcodegen_Mask_7,
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 };
 
 
@@ -87,11 +117,19 @@ enum qrcodegen_Mask {
  * Describes how a segment's data bits are interpreted.
  */
 enum qrcodegen_Mode {
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 	qrcodegen_Mode_NUMERIC      = 0x1,
 	qrcodegen_Mode_ALPHANUMERIC = 0x2,
 	qrcodegen_Mode_BYTE         = 0x4,
 	qrcodegen_Mode_KANJI        = 0x8,
 	qrcodegen_Mode_ECI          = 0x7,
+=======
+    qrcodegen_Mode_NUMERIC      = 0x1,
+    qrcodegen_Mode_ALPHANUMERIC = 0x2,
+    qrcodegen_Mode_BYTE         = 0x4,
+    qrcodegen_Mode_KANJI        = 0x8,
+    qrcodegen_Mode_ECI          = 0x7,
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 };
 
 
@@ -107,6 +145,7 @@ enum qrcodegen_Mode {
  * the largest QR Code (version 40) has 31329 modules.
  */
 struct qrcodegen_Segment {
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 	// The mode indicator of this segment.
 	enum qrcodegen_Mode mode;
 	
@@ -123,6 +162,24 @@ struct qrcodegen_Segment {
 	// 0 <= bitLength <= 32767, and bitLength <= (capacity of data array) * 8.
 	// The character count (numChars) must agree with the mode and the bit buffer length.
 	int bitLength;
+=======
+    // The mode indicator of this segment.
+    enum qrcodegen_Mode mode;
+
+    // The length of this segment's unencoded data. Measured in characters for
+    // numeric/alphanumeric/kanji mode, bytes for byte mode, and 0 for ECI mode.
+    // Always zero or positive. Not the same as the data's bit length.
+    int numChars;
+
+    // The data bits of this segment, packed in bitwise big endian.
+    // Can be null if the bit length is zero.
+    uint8_t * data;
+
+    // The number of valid data bits used in the buffer. Requires
+    // 0 <= bitLength <= 32767, and bitLength <= (capacity of data array) * 8.
+    // The character count (numChars) must agree with the mode and the bit buffer length.
+    int bitLength;
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 };
 
 
@@ -166,8 +223,13 @@ struct qrcodegen_Segment {
  * - Please consult the QR Code specification for information on
  *   data capacities per version, ECC level, and text encoding mode.
  */
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 bool qrcodegen_encodeText(const char *text, uint8_t tempBuffer[], uint8_t qrcode[],
 	enum qrcodegen_Ecc ecl, int minVersion, int maxVersion, enum qrcodegen_Mask mask, bool boostEcl);
+=======
+bool qrcodegen_encodeText(const char * text, uint8_t tempBuffer[], uint8_t qrcode[],
+                          enum qrcodegen_Ecc ecl, int minVersion, int maxVersion, enum qrcodegen_Mask mask, bool boostEcl);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 
 
 /*
@@ -189,7 +251,11 @@ bool qrcodegen_encodeText(const char *text, uint8_t tempBuffer[], uint8_t qrcode
  *   data capacities per version, ECC level, and text encoding mode.
  */
 bool qrcodegen_encodeBinary(uint8_t dataAndTemp[], size_t dataLen, uint8_t qrcode[],
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 	enum qrcodegen_Ecc ecl, int minVersion, int maxVersion, enum qrcodegen_Mask mask, bool boostEcl);
+=======
+                            enum qrcodegen_Ecc ecl, int minVersion, int maxVersion, enum qrcodegen_Mask mask, bool boostEcl);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 
 
 /*---- Functions (low level) to generate QR Codes ----*/
@@ -207,7 +273,11 @@ bool qrcodegen_encodeBinary(uint8_t dataAndTemp[], size_t dataLen, uint8_t qrcod
  * But the qrcode array must not overlap tempBuffer or any segment's data buffer.
  */
 bool qrcodegen_encodeSegments(const struct qrcodegen_Segment segs[], size_t len,
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 	enum qrcodegen_Ecc ecl, uint8_t tempBuffer[], uint8_t qrcode[]);
+=======
+                              enum qrcodegen_Ecc ecl, uint8_t tempBuffer[], uint8_t qrcode[]);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 
 
 /*
@@ -226,7 +296,11 @@ bool qrcodegen_encodeSegments(const struct qrcodegen_Segment segs[], size_t len,
  * But the qrcode array must not overlap tempBuffer or any segment's data buffer.
  */
 bool qrcodegen_encodeSegmentsAdvanced(const struct qrcodegen_Segment segs[], size_t len, enum qrcodegen_Ecc ecl,
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 	int minVersion, int maxVersion, int mask, bool boostEcl, uint8_t tempBuffer[], uint8_t qrcode[]);
+=======
+                                      int minVersion, int maxVersion, int mask, bool boostEcl, uint8_t tempBuffer[], uint8_t qrcode[]);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 
 
 /*
@@ -234,14 +308,22 @@ bool qrcodegen_encodeSegmentsAdvanced(const struct qrcodegen_Segment segs[], siz
  * A string is encodable iff each character is in the following set: 0 to 9, A to Z
  * (uppercase only), space, dollar, percent, asterisk, plus, hyphen, period, slash, colon.
  */
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 bool qrcodegen_isAlphanumeric(const char *text);
+=======
+bool qrcodegen_isAlphanumeric(const char * text);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 
 
 /*
  * Tests whether the given string can be encoded as a segment in numeric mode.
  * A string is encodable iff each character is in the range 0 to 9.
  */
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 bool qrcodegen_isNumeric(const char *text);
+=======
+bool qrcodegen_isNumeric(const char * text);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 
 
 /*
@@ -269,7 +351,11 @@ struct qrcodegen_Segment qrcodegen_makeBytes(const uint8_t data[], size_t len, u
 /*
  * Returns a segment representing the given string of decimal digits encoded in numeric mode.
  */
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 struct qrcodegen_Segment qrcodegen_makeNumeric(const char *digits, uint8_t buf[]);
+=======
+struct qrcodegen_Segment qrcodegen_makeNumeric(const char * digits, uint8_t buf[]);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 
 
 /*
@@ -277,7 +363,11 @@ struct qrcodegen_Segment qrcodegen_makeNumeric(const char *digits, uint8_t buf[]
  * The characters allowed are: 0 to 9, A to Z (uppercase only), space,
  * dollar, percent, asterisk, plus, hyphen, period, slash, colon.
  */
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 struct qrcodegen_Segment qrcodegen_makeAlphanumeric(const char *text, uint8_t buf[]);
+=======
+struct qrcodegen_Segment qrcodegen_makeAlphanumeric(const char * text, uint8_t buf[]);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
 
 
 /*
@@ -317,3 +407,8 @@ int qrcodegen_getMinFitVersion(enum qrcodegen_Ecc ecl, size_t dataLen);
 #ifdef __cplusplus
 }
 #endif
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h
+=======
+
+#endif
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/qrcode/qrcodegen.h

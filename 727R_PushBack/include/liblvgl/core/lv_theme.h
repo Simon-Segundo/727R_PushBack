@@ -13,7 +13,11 @@ extern "C" {
 /*********************
  *    INCLUDES
  *********************/
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/core/lv_theme.h
 #include "liblvgl/core/lv_obj.h"
+=======
+#include "../core/lv_obj.h"
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/core/lv_theme.h
 
 /*********************
  *    DEFINES
@@ -23,6 +27,7 @@ extern "C" {
  *    TYPEDEFS
  **********************/
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/core/lv_theme.h
 struct _lv_theme_t;
 struct _lv_disp_t;
 
@@ -40,6 +45,9 @@ typedef struct _lv_theme_t {
     const lv_font_t * font_large;
     uint32_t flags;                 /*Any custom flag used by the theme*/
 } lv_theme_t;
+=======
+typedef void (*lv_theme_apply_cb_t)(lv_theme_t *, lv_obj_t *);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/core/lv_theme.h
 
 /**********************
  *  GLOBAL PROTOTYPES
@@ -113,6 +121,13 @@ lv_color_t lv_theme_get_color_secondary(lv_obj_t * obj);
  *    MACROS
  **********************/
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/core/lv_theme.h
+=======
+#include "default/lv_theme_default.h"
+#include "mono/lv_theme_mono.h"
+#include "simple/lv_theme_simple.h"
+
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/core/lv_theme.h
 #ifdef __cplusplus
 } /*extern "C"*/
 #endif

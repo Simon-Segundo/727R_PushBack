@@ -13,7 +13,11 @@ extern "C" {
 /*********************
  *      INCLUDES
  *********************/
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
 #include "liblvgl/lvgl.h"
+=======
+#include "../../lv_conf_internal.h"
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
 
 #if LV_USE_SPINNER
 
@@ -29,13 +33,34 @@ extern "C" {
 /**********************
  *      TYPEDEFS
  **********************/
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
 extern const lv_obj_class_t lv_spinner_class;
+=======
+LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_spinner_class;
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
 
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
 lv_obj_t * lv_spinner_create(lv_obj_t * parent, uint32_t time, uint32_t arc_length);
+=======
+/**
+ * Create a spinner widget
+ * @param parent    pointer to an object, it will be the parent of the new spinner.
+ * @return          the created spinner
+ */
+lv_obj_t * lv_spinner_create(lv_obj_t * parent);
+
+/**
+ * Set the animation time and arc length of the spinner
+ * @param obj       pointer to a spinner
+ * @param t         the animation time in milliseconds
+ * @param angle     the angle of the arc in degrees
+ */
+void lv_spinner_set_anim_params(lv_obj_t * obj, uint32_t t, uint32_t angle);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/spinner/lv_spinner.h
 
 /**********************
  *      MACROS

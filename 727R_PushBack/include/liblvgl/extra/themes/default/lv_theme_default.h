@@ -13,7 +13,11 @@ extern "C" {
 /*********************
  *      INCLUDES
  *********************/
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/themes/default/lv_theme_default.h
 #include "liblvgl/core/lv_obj.h"
+=======
+#include "../lv_theme.h"
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/themes/default/lv_theme_default.h
 
 #if LV_USE_THEME_DEFAULT
 
@@ -31,12 +35,23 @@ extern "C" {
 
 /**
  * Initialize the theme
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/themes/default/lv_theme_default.h
  * @param color_primary the primary color of the theme
  * @param color_secondary the secondary color for the theme
  * @param font pointer to a font to use.
  * @return a pointer to reference this theme later
  */
 lv_theme_t * lv_theme_default_init(lv_disp_t * disp, lv_color_t color_primary, lv_color_t color_secondary, bool dark,
+=======
+ * @param disp pointer to display
+ * @param color_primary the primary color of the theme
+ * @param color_secondary the secondary color for the theme
+ * @param dark
+ * @param font pointer to a font to use.
+ * @return a pointer to reference this theme later
+ */
+lv_theme_t * lv_theme_default_init(lv_display_t * disp, lv_color_t color_primary, lv_color_t color_secondary, bool dark,
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/themes/default/lv_theme_default.h
                                    const lv_font_t * font);
 
 /**
@@ -51,6 +66,14 @@ lv_theme_t * lv_theme_default_get(void);
  */
 bool lv_theme_default_is_inited(void);
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/themes/default/lv_theme_default.h
+=======
+/**
+ * Deinitialize the default theme
+ */
+void lv_theme_default_deinit(void);
+
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/themes/default/lv_theme_default.h
 /**********************
  *      MACROS
  **********************/

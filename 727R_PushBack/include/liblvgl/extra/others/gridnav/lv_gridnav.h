@@ -1,4 +1,5 @@
 /**
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/gridnav/lv_gridnav.h
  * @file lv_templ.c
  *
  */
@@ -39,12 +40,19 @@ typedef int _keep_pedantic_happy;
  *   STATIC FUNCTIONS
  **********************/
 /**
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/gridnav/lv_gridnav.h
  * @file lv_gridnav.h
  *
  */
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/gridnav/lv_gridnav.h
 #ifndef LV_GRIDFOCUS_H
 #define LV_GRIDFOCUS_H
+=======
+#ifndef LV_GRIDNAV_H
+#define LV_GRIDNAV_H
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/gridnav/lv_gridnav.h
 
 #ifdef __cplusplus
 extern "C" {
@@ -53,7 +61,11 @@ extern "C" {
 /*********************
  *      INCLUDES
  *********************/
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/gridnav/lv_gridnav.h
 #include "liblvgl/core/lv_obj.h"
+=======
+#include "../../core/lv_obj.h"
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/gridnav/lv_gridnav.h
 
 #if LV_USE_GRIDNAV
 
@@ -80,6 +92,21 @@ typedef enum {
      * If there is no more room for scrolling the next/previous object will be focused normally */
     LV_GRIDNAV_CTRL_SCROLL_FIRST = 0x2,
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/gridnav/lv_gridnav.h
+=======
+    /**
+     * Only use left/right keys for grid navigation. Up/down key events will be sent to the
+     * focused object.
+    */
+    LV_GRIDNAV_CTRL_HORIZONTAL_MOVE_ONLY = 0x4,
+
+    /**
+     * Only use up/down keys for grid navigation. Left/right key events will be sent to the
+     * focused object.
+    */
+    LV_GRIDNAV_CTRL_VERTICAL_MOVE_ONLY = 0x8
+
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/gridnav/lv_gridnav.h
 } lv_gridnav_ctrl_t;
 
 /**********************
@@ -120,4 +147,8 @@ void lv_gridnav_set_focused(lv_obj_t * cont, lv_obj_t * to_focus, lv_anim_enable
 } /*extern "C"*/
 #endif
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/others/gridnav/lv_gridnav.h
 #endif /*LV_GRIDFOCUS_H*/
+=======
+#endif /* LV_GRIDNAV_H */
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/others/gridnav/lv_gridnav.h

@@ -13,7 +13,11 @@ extern "C" {
 /*********************
  *      INCLUDES
  *********************/
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/bmp/lv_bmp.h
 #include "liblvgl/lv_conf_internal.h"
+=======
+#include "../../lv_conf_internal.h"
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/bmp/lv_bmp.h
 #if LV_USE_BMP
 
 /*********************
@@ -28,6 +32,10 @@ extern "C" {
  * GLOBAL PROTOTYPES
  **********************/
 void lv_bmp_init(void);
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/bmp/lv_bmp.h
+=======
+void lv_bmp_deinit(void);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/bmp/lv_bmp.h
 
 /**********************
  *      MACROS

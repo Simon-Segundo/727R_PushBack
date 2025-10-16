@@ -1,10 +1,19 @@
 /**
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/gif/lv_gif.h
  * @file lv_gif.h
  *
  */
 
 #ifndef LV_GIF_H
 #define LV_GIF_H
+=======
+ * @file lv_gif_private.h
+ *
+ */
+
+#ifndef LV_GIF_PRIVATE_H
+#define LV_GIF_PRIVATE_H
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/gif/lv_gif.h
 
 #ifdef __cplusplus
 extern "C" {
@@ -14,10 +23,17 @@ extern "C" {
  *      INCLUDES
  *********************/
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/gif/lv_gif.h
 #include "liblvgl/lvgl.h"
 #if LV_USE_GIF
 
 #include "gifdec.h"
+=======
+#include "../../widgets/image/lv_image_private.h"
+#include "lv_gif.h"
+
+#if LV_USE_GIF
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/gif/lv_gif.h
 
 /*********************
  *      DEFINES
@@ -27,6 +43,7 @@ extern "C" {
  *      TYPEDEFS
  **********************/
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/gif/lv_gif.h
 typedef struct {
     lv_img_t img;
     gd_GIF * gif;
@@ -36,19 +53,37 @@ typedef struct {
 } lv_gif_t;
 
 extern const lv_obj_class_t lv_gif_class;
+=======
+/**********************
+ *      TYPEDEFS
+ **********************/
+
+struct _lv_gif_t {
+    lv_image_t img;
+    gd_GIF * gif;
+    lv_timer_t * timer;
+    lv_image_dsc_t imgdsc;
+    uint32_t last_call;
+};
+
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/gif/lv_gif.h
 
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/gif/lv_gif.h
 lv_obj_t * lv_gif_create(lv_obj_t * parent);
 void lv_gif_set_src(lv_obj_t * obj, const void * src);
 void lv_gif_restart(lv_obj_t * gif);
 
+=======
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/gif/lv_gif.h
 /**********************
  *      MACROS
  **********************/
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/gif/lv_gif.h
 #endif /*LV_USE_GIF*/
 
 #ifdef __cplusplus
@@ -56,3 +91,12 @@ void lv_gif_restart(lv_obj_t * gif);
 #endif
 
 #endif /*LV_GIF_H*/
+=======
+#endif /* LV_USE_GIF */
+
+#ifdef __cplusplus
+} /*extern "C"*/
+#endif
+
+#endif /*LV_GIF_PRIVATE_H*/
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/gif/lv_gif.h

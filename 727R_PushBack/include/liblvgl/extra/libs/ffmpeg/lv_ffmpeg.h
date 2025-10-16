@@ -12,8 +12,14 @@ extern "C" {
 /*********************
  *      INCLUDES
  *********************/
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/ffmpeg/lv_ffmpeg.h
 #include "liblvgl/lvgl.h"
 #if LV_USE_FFMPEG != 0
+=======
+#include "../../lv_conf_internal.h"
+#if LV_USE_FFMPEG != 0
+#include "../../misc/lv_types.h"
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/ffmpeg/lv_ffmpeg.h
 
 /*********************
  *      DEFINES
@@ -24,6 +30,7 @@ extern "C" {
  **********************/
 struct ffmpeg_context_s;
 
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/ffmpeg/lv_ffmpeg.h
 extern const lv_obj_class_t lv_ffmpeg_player_class;
 
 typedef struct {
@@ -33,13 +40,20 @@ typedef struct {
     bool auto_restart;
     struct ffmpeg_context_s * ffmpeg_ctx;
 } lv_ffmpeg_player_t;
+=======
+LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_ffmpeg_player_class;
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/ffmpeg/lv_ffmpeg.h
 
 typedef enum {
     LV_FFMPEG_PLAYER_CMD_START,
     LV_FFMPEG_PLAYER_CMD_STOP,
     LV_FFMPEG_PLAYER_CMD_PAUSE,
     LV_FFMPEG_PLAYER_CMD_RESUME,
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/ffmpeg/lv_ffmpeg.h
     _LV_FFMPEG_PLAYER_CMD_LAST
+=======
+    LV_FFMPEG_PLAYER_CMD_LAST
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/ffmpeg/lv_ffmpeg.h
 } lv_ffmpeg_player_cmd_t;
 
 /**********************
@@ -69,9 +83,15 @@ lv_obj_t * lv_ffmpeg_player_create(lv_obj_t * parent);
  * Set the path of the file to be played
  * @param obj pointer to a ffmpeg_player object
  * @param path video file path
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/libs/ffmpeg/lv_ffmpeg.h
  * @return LV_RES_OK: no error; LV_RES_INV: can't get the info.
  */
 lv_res_t lv_ffmpeg_player_set_src(lv_obj_t * obj, const char * path);
+=======
+ * @return LV_RESULT_OK: no error; LV_RESULT_INVALID: can't get the info.
+ */
+lv_result_t lv_ffmpeg_player_set_src(lv_obj_t * obj, const char * path);
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/libs/ffmpeg/lv_ffmpeg.h
 
 /**
  * Set command control video player

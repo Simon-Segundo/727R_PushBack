@@ -13,8 +13,13 @@ extern "C" {
 /*********************
  *      INCLUDES
  *********************/
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_arrow.h
 #include "liblvgl/core/lv_obj.h"
 #if LV_USE_CALENDAR_HEADER_ARROW
+=======
+#include "../../core/lv_obj.h"
+#if LV_USE_CALENDAR && LV_USE_CALENDAR_HEADER_ARROW
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_arrow.h
 
 /*********************
  *      DEFINES
@@ -23,7 +28,11 @@ extern "C" {
 /**********************
  *      TYPEDEFS
  **********************/
+<<<<<<< Updated upstream:727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_arrow.h
 extern const lv_obj_class_t lv_calendar_header_arrow_class;
+=======
+LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_calendar_header_arrow_class;
+>>>>>>> Stashed changes:Drive_727R_PushBack/include/liblvgl/extra/widgets/calendar/lv_calendar_header_arrow.h
 
 /**********************
  * GLOBAL PROTOTYPES
