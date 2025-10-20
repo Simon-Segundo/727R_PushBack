@@ -61,10 +61,15 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-void autonomous(void);
 void initialize(void);
+void intaking(void);
+void unstoring(void);
+void opposingStorage(void);
+void matchLoading(void);
+void midScoring(void);
 void disabled(void);
 void competition_initialize(void);
+void autonomous(void);
 void opcontrol(void);
 #ifdef __cplusplus
 }

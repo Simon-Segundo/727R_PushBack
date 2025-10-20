@@ -1,17 +1,23 @@
-#include "main.h"
+#include "main.h" // IWYU pragma: keep
+#include "autons.hpp" // IWYU pragma: keep
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "lemlib/chassis/trackingWheel.hpp"
+<<<<<<< Updated upstream
 #include "liblvgl/widgets/lv_label.h" // IWYU pragma: keep
 #include "pros/abstract_motor.hpp"
+=======
+#include "liblvgl/lv_api_map.h" // IWYU pragma: keep
+#include "pros/abstract_motor.hpp" // IWYU pragma: keep
+>>>>>>> Stashed changes
 #include "pros/adi.h" // IWYU pragma: keep
-#include "pros/adi.hpp"
+#include "pros/adi.hpp" // IWYU pragma: keep
 #include "pros/colors.hpp" // IWYU pragma: keep
 #include "pros/device.hpp" // IWYU pragma: keep
-#include "pros/misc.h"
-#include "pros/misc.hpp"
-#include "pros/motors.h"
+#include "pros/misc.h" // IWYU pragma: keep
+#include "pros/misc.hpp" // IWYU pragma: keep
+#include "pros/motors.h" // IWYU pragma: keep
 #include "pros/optical.h" // IWYU pragma: keep
-#include "pros/optical.hpp" // IWYU pragma: keep
+#include "pros/optical.hpp" // IWYU pragma keep
 #include <thread> // IWYU pragma: keep
 
 pros::Controller Controller(pros::E_CONTROLLER_MASTER);
@@ -141,7 +147,7 @@ void intaking() {
 	if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 		intake.move(127);
 	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-		intake.move(-127);
+		intake.move(-63);
     } else {
 		intake.brake();
 	}
@@ -180,6 +186,7 @@ void opposingStorage() {
     }
 }
 
+<<<<<<< Updated upstream
 // Actuates the middle piston to block the intake at the middle to redirect the blocks into the middle tube
 void midScoring() {
     if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == false)) {
@@ -191,6 +198,45 @@ void midScoring() {
         pros::delay(500);
         middleScore = false;
     }
+=======
+    // Sorts the blocks into the storage system and up and over the robot
+	while(oppStore == true) {
+        // Blue Team Color Sorting
+	    // if(((colorSensor.get_hue() >= 60) && (colorSensor.get_hue() <= 75)) && (colorSensor.get_proximity() >= 100)) {
+	    // 	store.move(127);
+		// 	pros::delay(100);
+	    // } else if(((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 57)) && (colorSensor.get_proximity() >= 100)) {
+	    //     store.move(-127);
+		// 	pros::delay(500);
+	    // } else {
+	    //     store.brake();
+        //     break;
+	    // }
+
+        // Red Team Color Sorting
+        if(((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 57)) && (colorSensor.get_proximity() >= 80)) {
+	    	store.move(127);
+			pros::delay(125);
+	    } else if(((colorSensor.get_hue() >= 60) && (colorSensor.get_hue() <= 75)) && (colorSensor.get_proximity() >= 80)) {
+	        store.move(-127);
+			pros::delay(500);
+	    } else {
+	        store.brake();
+            break;
+	    }
+	}
+
+    // Shoots both color of block out the front of the robot
+    while(oppStore == false) {
+	    if((((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 57)) || ((colorSensor.get_hue() >= 60) && (colorSensor.get_hue() <= 75))) && (colorSensor.get_proximity() >= 100)) {
+	        store.move(-127);
+			pros::delay(250);
+	    } else {
+	        store.brake();
+            break;
+	    }
+	}
+>>>>>>> Stashed changes
 }
 
 // Actuates the bottom piston to drop a bar that gives us access to the blocks inside of the match loading tubes
@@ -236,7 +282,17 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
+    // Calls different autonomous functions
+    // fullLeftAuto();
+    // halfLeftAuto();
+    // moveFwdAuto();
+    // fullRightAuto();
+    // halfRightAuto();
 
+    // Used for tuning the PID and Vertical Tracking Wheel
+    chassis.setPose(0, 0, 0);
+    chassis.moveToPoint(12, 0, 1000);
+    // chassis.turnToHeading(90, 1000);
 }
 
 /**
