@@ -2,13 +2,10 @@
 #include "autons.hpp" // IWYU pragma: keep
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "lemlib/chassis/trackingWheel.hpp"
-<<<<<<< Updated upstream
 #include "liblvgl/widgets/lv_label.h" // IWYU pragma: keep
 #include "pros/abstract_motor.hpp"
-=======
 #include "liblvgl/lv_api_map.h" // IWYU pragma: keep
 #include "pros/abstract_motor.hpp" // IWYU pragma: keep
->>>>>>> Stashed changes
 #include "pros/adi.h" // IWYU pragma: keep
 #include "pros/adi.hpp" // IWYU pragma: keep
 #include "pros/colors.hpp" // IWYU pragma: keep
@@ -118,30 +115,6 @@ void initialize() {
     colorSensor.set_integration_time(10);
 }
 
-// Senses the color of the blocks entering the intake and if a block of the opposing color tries to enter the storage, the runs a motor to put the opposing colored block into a separate storage area
-void colorSensing() {
-// Red Team
-    // if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 53) && (colorSensor.get_proximity() >= 50)) {
-    //     store.move(127);
-    //     pros::delay(100);
-    // } else if ((colorSensor.get_hue() >= 57) && (colorSensor.get_hue() <= 75) && (colorSensor.get_proximity() >= 50)) {
-    //     store.move(-127);
-    //     pros::delay(100);
-    // } else {
-    //     store.brake();
-    // }
-// Blue Team
-    if ((colorSensor.get_hue() >= 60) && (colorSensor.get_hue() <= 75) && (colorSensor.get_proximity() >= 50)) {
-        store.move(127);
-        pros::delay(100);
-    } else if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 53) && (colorSensor.get_proximity() >= 50)) {
-        store.move(-127);
-        pros::delay(100);
-    } else {
-        store.brake();
-    }
-}
-
 // Intakes and outtakes the blocks
 void intaking() {
 	if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
@@ -184,21 +157,7 @@ void opposingStorage() {
         colorSensing(); // Calls the colorSensing function
         oppStore = false;
     }
-}
 
-<<<<<<< Updated upstream
-// Actuates the middle piston to block the intake at the middle to redirect the blocks into the middle tube
-void midScoring() {
-    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == false)) {
-        midScore.set_value(false);
-        pros::delay(500);
-        middleScore = true;
-    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == true)) {
-        midScore.set_value(true);
-        pros::delay(500);
-        middleScore = false;
-    }
-=======
     // Sorts the blocks into the storage system and up and over the robot
 	while(oppStore == true) {
         // Blue Team Color Sorting
@@ -236,7 +195,19 @@ void midScoring() {
             break;
 	    }
 	}
->>>>>>> Stashed changes
+}
+
+// Actuates the middle piston to block the intake at the middle to redirect the blocks into the middle tube
+void midScoring() {
+    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == false)) {
+        midScore.set_value(false);
+        pros::delay(500);
+        middleScore = true;
+    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == true)) {
+        midScore.set_value(true);
+        pros::delay(500);
+        middleScore = false;
+    }
 }
 
 // Actuates the bottom piston to drop a bar that gives us access to the blocks inside of the match loading tubes
@@ -313,44 +284,7 @@ void opcontrol() {
     pros::Task sortingTask ([&] () {
         while(true) {
             lv_task_handler();
-            if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) && (oppStore == false)) {
-                storage.set_value(false);
-                pros::delay(500);
-                // Shoots any color of block out the front of the robot for high goal scoring
-                if (((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 53)) || ((colorSensor.get_hue() >= 57) && (colorSensor.get_hue() <= 75)) && (colorSensor.get_proximity() >= 50)) {
-                    store.move(-127);
-                    pros::delay(100);
-                } else {
-                    store.brake();
-                }
-                oppStore = true;
-            } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) && (oppStore == true)) {
-                storage.set_value(true);
-                pros::delay(500);
-                // Red Team
-                    // if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 53) && (colorSensor.get_proximity() >= 50)) {
-                    //     store.move(127);
-                    //     pros::delay(100);
-                    // } else if ((colorSensor.get_hue() >= 57) && (colorSensor.get_hue() <= 75) && (colorSensor.get_proximity() >= 50)) {
-                    //     store.move(-127);
-                    //     pros::delay(100);
-                    // } else {
-                    //     store.brake();
-                    // }
-                // Blue Team
-                    if ((colorSensor.get_hue() >= 60) && (colorSensor.get_hue() <= 75) && (colorSensor.get_proximity() >= 50)) {
-                        store.move(127);
-                        pros::delay(100);
-                    } else if ((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 53) && (colorSensor.get_proximity() >= 50)) {
-                        store.move(-127);
-                        pros::delay(100);
-                    } else {
-                        store.brake();
-                    }
-                oppStore = false;
-            }
-            pros::delay(10);
-        }
+            opposingStorage(); // Calls the opposingStorage function
     });
     pros::Task midScoreTask ([&] () {
         while(true) {
