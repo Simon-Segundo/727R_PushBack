@@ -1,11 +1,20 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
+#include "lemlib/chassis/chassis.hpp"
 #include "lemlib/chassis/trackingWheel.hpp"
+<<<<<<< Updated upstream
 #include "liblvgl/lv_api_map.h"
 #include "liblvgl/widgets/lv_label.h" // IWYU pragma: keep
 #include "pros/abstract_motor.hpp"
 #include "pros/adi.h" // IWYU pragma: keep
 #include "pros/adi.hpp"
+=======
+#include "liblvgl/llemu.hpp"
+#include "pros/abstract_motor.hpp"
+#include "pros/adi.h" // IWYU pragma: keep
+#include "pros/adi.hpp"
+#include "pros/apix.h" // IWYU pragma: keep
+>>>>>>> Stashed changes
 #include "pros/colors.hpp" // IWYU pragma: keep
 #include "pros/device.hpp" // IWYU pragma: keep
 #include "pros/misc.h"
@@ -13,6 +22,11 @@
 #include "pros/motors.h"
 #include "pros/optical.h" // IWYU pragma: keep
 #include "pros/optical.hpp" // IWYU pragma: keep
+<<<<<<< Updated upstream
+=======
+#include <algorithm>
+#include <cmath>
+>>>>>>> Stashed changes
 #include <thread> // IWYU pragma: keep
 
 pros::Controller Controller(pros::E_CONTROLLER_MASTER);
@@ -31,7 +45,7 @@ lemlib::Drivetrain drivetrain(&left_mg, // left motor group
                               &right_mg, // right motor group
                               12.75, // 12.75 inch track width
                               lemlib::Omniwheel::NEW_325, // using new 3.25" omnis
-                              360, // drivetrain rpm is 360
+                              800, // drivetrain rpm is the gear ratio multiplied by the rpm of the driving motor
                               2 // horizontal drift is 2 (for now)
 );
 
@@ -48,7 +62,7 @@ pros::Optical colorSensor (3);
 lemlib::TrackingWheel vertical_tracker(&vertical_sensor, lemlib::Omniwheel::NEW_2, 0);
 
 // Combines all sensors into one item
-lemlib::OdomSensors sensors(&vertical_tracker, // vertical tracking wheel 1, set to null
+lemlib::OdomSensors sensors(&vertical_tracker, // vertical tracking wheel 1
                             nullptr, // vertical tracking wheel 2, set to nullptr as we are using IMEs
                             nullptr, // horizontal tracking wheel 1
                             nullptr, // horizontal tracking wheel 2, set to nullptr as we don't have a second one
@@ -56,27 +70,27 @@ lemlib::OdomSensors sensors(&vertical_tracker, // vertical tracking wheel 1, set
 );
 
 // Lateral PID controller
-lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
+lemlib::ControllerSettings lateral_controller(7, // proportional gain (kP)
                                               0, // integral gain (kI)
-                                              3, // derivative gain (kD)
-                                              3, // anti windup
-                                              1, // small error range, in inches
-                                              100, // small error range timeout, in milliseconds
-                                              3, // large error range, in inches
-                                              500, // large error range timeout, in milliseconds
-                                              10 // maximum acceleration (slew)
+                                              3.5, // derivative gain (kD)
+                                              0, // anti windup
+                                              0, // small error range, in inches
+                                              0, // small error range timeout, in milliseconds
+                                              0, // large error range, in inches
+                                              0, // large error range timeout, in milliseconds
+                                              0 // maximum acceleration (slew)
 );
 
 // Angular PID controller
-lemlib::ControllerSettings angular_controller(2, // proportional gain (kP)
+lemlib::ControllerSettings angular_controller(1.8, // proportional gain (kP)
                                               0, // integral gain (kI)
-                                              10, // derivative gain (kD)
-                                              3, // anti windup
-                                              1, // small error range, in degrees
-                                              100, // small error range timeout, in milliseconds
-                                              3, // large error range, in degrees
-                                              500, // large error range timeout, in milliseconds
-                                              10 // maximum acceleration (slew)
+                                              11.7, // derivative gain (kD)
+                                              0, // anti windup
+                                              0, // small error range, in degrees
+                                              0, // small error range timeout, in milliseconds
+                                              0, // large error range, in degrees
+                                              0, // large error range timeout, in milliseconds
+                                              0 // maximum acceleration (slew)
 );
 
 // Creates the chassis
@@ -98,6 +112,14 @@ bool matchLoadDown = false;
 // Used to disable the color sensor while trying to score in the top or middle goals
 bool scoring = false;
 
+// Left off right switch
+// Used to toggle between sorting red out vs blue out
+// Blue is false, Red is true
+bool sortColorToggle = true;
+
+// Used to toggle the color sensor on and off
+bool sortToggle = true;
+
 /**
  * Runs initialization code. This occurs as soon as the program is started.
  *
@@ -105,6 +127,7 @@ bool scoring = false;
  * to keep execution time for this mode under a few seconds.
  */
 
+<<<<<<< Updated upstream
 void initialize() {
 	pros::lcd::initialize();
     // Sets the brightness of the color sensor's lights (This affects color detection)
@@ -119,9 +142,46 @@ void intaking() {
 		intake.move(127);
 	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
 		intake.move(-127);
+=======
+class slew {
+public:
+
+    slew(int accelRate = 8, int decelRate = 8)
+        : accelRate(std::abs(accelRate)), decelRate(std::abs(decelRate)), output(0) {}
+
+    int update(int target) {
+        target = std::clamp(target, -127, 127);
+        int delta = target - output;
+
+        if (delta > 0) {
+            output += std::min(delta, accelRate);
+        } else if (delta < 0) {
+            output += std::max(delta, -decelRate);
+        }
+        return output;
+    }
+
+    void reset(int value = 0) {
+        output = std::clamp(value, -127, 127);
+    }
+
+private:
+    int accelRate;
+    int decelRate;
+    int output;
+};
+
+
+// Intakes and outtakes the blocks
+void intaking() {
+    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+        intake.move(127);
+    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+        intake.move(-127);
+>>>>>>> Stashed changes
     } else {
-		intake.brake();
-	}
+        intake.brake();
+    }
 }
 
 // Takes blocks out of storage when holding R1 and holds the position of the rubber band roller when not holding it so extra blocks wont come out of storage
@@ -137,6 +197,7 @@ void unstoring() {
 }
 
 // Actuates the piston at the top of the robot to allow for storage of the opposite color of block
+<<<<<<< Updated upstream
 void opposingStorage() {
     // Toggles the top piston on and off and changes boolean values to help with the color sort modes
     if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) && (oppStore == false)) {
@@ -147,8 +208,54 @@ void opposingStorage() {
     	storage.set_value(false);
         oppStore = false;
     	pros::delay(250);
+=======
+void colorSorting() {
+    // Sorts the blocks into the storage system and up and over the robot
+    // sortColorToggle STARTS ON FALSE *******************************************
+    if ((oppStore == true) && (sortToggle == true)) {
+        if (sortColorToggle == false) {
+            // Store Blue Blocks
+            if(((colorSensor.get_hue() >= 65) && (colorSensor.get_hue() <= 359)) && (colorSensor.get_proximity() >= 50)) {
+            store.move(127);
+            pros::delay(100);
+            } else if(((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 57)) && (colorSensor.get_proximity() >= 50)) {
+                store.move(-127);
+            pros::delay(750);
+            } else {
+                store.brake();
+            }
+        } else if (sortColorToggle == true) {
+            // Store Red Blocks
+            if(((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 57)) && (colorSensor.get_proximity() >= 50)) {
+                store.move(127);
+                pros::delay(100);
+            } else if(((colorSensor.get_hue() >= 65) && (colorSensor.get_hue() <= 359)) && (colorSensor.get_proximity() >= 50)) {
+                store.move(-127);
+                pros::delay(750);
+            } else {
+                store.brake();
+            }
+        }
+    } else if (oppStore == false && (sortToggle == true)) {
+        // Shoots both color of block out the front of the robot
+        if((((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 57)) || ((colorSensor.get_hue() >= 65) && (colorSensor.get_hue() <= 359))) && (colorSensor.get_proximity() >= 50)) {
+            store.move(-127);
+            pros::delay(250);
+        } else {
+            store.brake();
+        }
+    } else if (sortToggle == false) {
+        // Store Both Colors of Blocks
+        if((((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 57)) || ((colorSensor.get_hue() >= 65) && (colorSensor.get_hue() <= 359))) && (colorSensor.get_proximity() >= 50)) {
+            store.move(127);
+            pros::delay(100);
+        } else {
+            store.brake();
+        }
+>>>>>>> Stashed changes
     }
 
+<<<<<<< Updated upstream
     // Sorts the blocks into the storage system and up and over the robot
 	while(oppStore == true) {
         // Blue Team Color Sorting
@@ -188,6 +295,8 @@ void opposingStorage() {
 	}
 }
 
+=======
+>>>>>>> Stashed changes
 // Actuates the bottom piston to drop a bar that gives us access to the blocks inside of the match loading tubes
 void matchLoading() {
     if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) && (matchLoadDown == false)) {
@@ -202,6 +311,7 @@ void matchLoading() {
         matchLoadDown = false;
         oppStore = false;
         pros::delay(250);
+<<<<<<< Updated upstream
     }
 }
 
@@ -217,7 +327,94 @@ void midScoring() {
         midScore.set_value(true);
         middleScore = false;
         pros::delay(250);
+=======
+>>>>>>> Stashed changes
     }
+}
+
+
+
+// Actuates the middle piston to block the intake at the middle to redirect the blocks into the middle tube
+void midScoring() {
+    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == false)) {
+        midScore.set_value(true);
+        middleScore = true;
+        pros::delay(250);
+    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == true)) {
+        midScore.set_value(false);
+        middleScore = false;
+        pros::delay(250);
+    }
+}
+
+void initialize() {
+    pros::lcd::initialize();
+    chassis.calibrate();
+	chassis.setPose(0, 0, 0);
+    // Sets the speed at which the color sensor scans the color
+    colorSensor.set_integration_time(1);
+	
+	// Tasks for drivercontrol and autonomous periods
+	pros::Task ([&]{
+		while (true) {
+			// Defines the color sensor values and prints the values on the screen
+            // Sets the brightness of the color sensor's lights (This affects color detection)
+            colorSensor.set_led_pwm(100);
+			pros::c::optical_rgb_s_t rgb = colorSensor.get_rgb();
+			double hue = colorSensor.get_hue();
+			double brightness = colorSensor.get_brightness();
+			double proximity = colorSensor.get_proximity();
+			pros::lcd::print(1, "RGB: %f, %f, %f", rgb.red, rgb.green, rgb.blue);
+			pros::lcd::print(2, "Hue: %f", hue);
+			pros::lcd::print(3, "Brightness: %f", brightness);
+			pros::lcd::print(4, "Proximity: %f", proximity);
+			pros::lcd::print(5, "X-Value: %f", chassis.getPose().x);
+			pros::lcd::print(6, "Y-Value: %f", chassis.getPose().y);
+			pros::lcd::print(7, "Theta: %f", chassis.getPose().theta);
+			pros::Task::delay(10);
+		}
+	});
+    pros::Task ([&] {
+        while (true) {
+            // Toggles the top piston on and off and changes boolean values to help with the color sort modes
+            if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) && (oppStore == false)) {
+                storage.set_value(true);
+                oppStore = true;
+            } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) && (oppStore == true)) {
+                storage.set_value(false);
+                oppStore = false;
+            }
+            pros::Task::delay(200);
+        }
+    });
+    pros::Task ([&] {
+        while (true) {
+            // Toggles the color of the color sorting
+            if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) && (sortColorToggle == false)) {
+                sortColorToggle = !sortColorToggle;
+            } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) && (sortColorToggle == true)) {
+                sortColorToggle = !sortColorToggle;
+            }
+            pros::Task::delay(200);
+        }
+    });
+    pros::Task ([&] {
+        while (true) {
+            // Toggles the color sensing on and off
+            if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) && (sortToggle == true)) {
+                sortToggle = false;
+            } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) && (sortToggle == false)) {
+                sortToggle = true;
+            }
+            pros::Task::delay(200);
+        }
+    });
+    pros::Task ([&] {
+        while (true) {
+            colorSorting();
+            pros::Task::delay(10);
+        }
+    });
 }
 
 /**
@@ -249,8 +446,54 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
+ 
 void autonomous() {
+<<<<<<< Updated upstream
 
+=======
+    // Match Auto Half Left
+    storage.set_value(true);
+    oppStore = true;
+    intake.move(127);
+    // Transfer
+    chassis.moveToPoint(0, 16, 250);
+    // Set of 3 Blocks
+    chassis.moveToPoint(-12, 53, 1500);
+    // Transfer
+    chassis.moveToPoint(-8, 37.5, 750, {.forwards = false});
+    unstore.move(-127);
+    pros::delay(500);
+    unstore.brake();
+    // Middle Stake
+    // chassis.moveToPoint(0, 48, 1000, {.maxSpeed = 80});
+    // midScore.set_value(true);
+    // unstore.move(127);
+    // pros::delay(2000);
+    // midScore.set_value(false);
+    // unstore.brake();
+    // Transfer
+    chassis.turnToHeading(-135, 500);
+    chassis.moveToPoint(-29, 20, 1250, {.maxSpeed = 80});
+    chassis.turnToHeading(180, 250);
+    // Match Load
+    matchLoad.set_value(true);
+    chassis.moveToPoint(-34.5, -5, 1000, {.maxSpeed = 50});
+    pros::delay(2500);
+    matchLoad.set_value(false);
+    // Transfer
+    chassis.moveToPoint(-32, 15, 1000, {.forwards = false});
+    chassis.turnToHeading(-20, 1250, {.maxSpeed = 80});
+    // High Goal
+    chassis.moveToPoint(-34, 34, 5000, {}, true);
+    pros::delay(500);
+    unstore.move(127);
+    storage.set_value(false);
+    oppStore = false;
+
+    // Skills Auto
+    // chassis.moveToPoint(0, -25, 1000, {.forwards = false});
+    // chassis.moveToPoint(0, 0, 5000, {.minSpeed = 127});
+>>>>>>> Stashed changes
 }
 
 /**
@@ -267,6 +510,7 @@ void autonomous() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
+<<<<<<< Updated upstream
     // Tasks for drivercontrol
     pros::Task ([&] () {
         while(true) {
@@ -301,11 +545,34 @@ void opcontrol() {
         pros::lcd::print(1, "Hue: %f", hue);
         pros::lcd::print(2, "Brightness: %f", brightness);
         pros::lcd::print(3, "Proximity: %f", proximity);
+=======
+    // Defines the slew speed for throttle
+    slew throttleSlew(8, 8);
+>>>>>>> Stashed changes
 
-		// Arcade control scheme
-		int dir = Controller.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
-		int turn = Controller.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
-		chassis.arcade(dir, turn);
+    // Tasks for drivercontrol
+    pros::Task ([&] () {
+        while(true) {
+            midScoring(); // Calls the midScoring function
+            pros::Task::delay(10);
+        }
+    });
+    pros::Task ([&] () {
+        while(true) {
+            matchLoading(); // Calls the matchLoading function
+            pros::Task::delay(10);
+        }
+    });
+
+    while (true) {
+        // Arcade control scheme
+        int dir = Controller.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
+        int turn = Controller.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
+
+        // Adds slew to the inputted controller values
+        int throttleOut = throttleSlew.update(dir);
+
+        chassis.arcade(throttleOut, turn);
 
         // Curvature Drive control scheme
         // chassis.curvature(dir, turn);            // Similar to arcade but turns better
@@ -315,6 +582,6 @@ void opcontrol() {
         unstoring();     // Calls the unstoring function
 
         // How long it takes for each update of inputs
-		pros::delay(20);
-	}
+        pros::delay(20);
+    }
 }
