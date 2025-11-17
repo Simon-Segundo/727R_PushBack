@@ -2,19 +2,12 @@
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "lemlib/chassis/chassis.hpp"
 #include "lemlib/chassis/trackingWheel.hpp"
-<<<<<<< Updated upstream
-#include "liblvgl/lv_api_map.h"
 #include "liblvgl/widgets/lv_label.h" // IWYU pragma: keep
 #include "pros/abstract_motor.hpp"
 #include "pros/adi.h" // IWYU pragma: keep
 #include "pros/adi.hpp"
-=======
 #include "liblvgl/llemu.hpp"
-#include "pros/abstract_motor.hpp"
-#include "pros/adi.h" // IWYU pragma: keep
-#include "pros/adi.hpp"
 #include "pros/apix.h" // IWYU pragma: keep
->>>>>>> Stashed changes
 #include "pros/colors.hpp" // IWYU pragma: keep
 #include "pros/device.hpp" // IWYU pragma: keep
 #include "pros/misc.h"
@@ -22,11 +15,8 @@
 #include "pros/motors.h"
 #include "pros/optical.h" // IWYU pragma: keep
 #include "pros/optical.hpp" // IWYU pragma: keep
-<<<<<<< Updated upstream
-=======
 #include <algorithm>
 #include <cmath>
->>>>>>> Stashed changes
 #include <thread> // IWYU pragma: keep
 
 pros::Controller Controller(pros::E_CONTROLLER_MASTER);
@@ -100,49 +90,6 @@ lemlib::Chassis chassis(drivetrain, // Drivetrain Settings
                         sensors // Odometry Sensors
 );
 
-// Used to toggle the top piston to allow for shooting blocks into the top storage
-bool oppStore = false;
-
-// Used to toggle the top piston to allow for scoring blocks in the middle goal
-bool middleScore = false;
-
-// Used to toggle the top piston to access the blocks at the bottom of the match loading tubes
-bool matchLoadDown = false;
-
-// Used to disable the color sensor while trying to score in the top or middle goals
-bool scoring = false;
-
-// Left off right switch
-// Used to toggle between sorting red out vs blue out
-// Blue is false, Red is true
-bool sortColorToggle = true;
-
-// Used to toggle the color sensor on and off
-bool sortToggle = true;
-
-/**
- * Runs initialization code. This occurs as soon as the program is started.
- *
- * All other competition modes are blocked by initialize; it is recommended
- * to keep execution time for this mode under a few seconds.
- */
-
-<<<<<<< Updated upstream
-void initialize() {
-	pros::lcd::initialize();
-    // Sets the brightness of the color sensor's lights (This affects color detection)
-	colorSensor.set_led_pwm(100);
-    // Sets the speed at which the color sensor scans the color
-    colorSensor.set_integration_time(3);
-}
-
-// Intakes and outtakes the blocks
-void intaking() {
-	if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-		intake.move(127);
-	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-		intake.move(-127);
-=======
 class slew {
 public:
 
@@ -171,16 +118,39 @@ private:
     int output;
 };
 
+// Used to toggle the top piston to allow for shooting blocks into the top storage
+bool oppStore = false;
+
+// Used to toggle the top piston to allow for scoring blocks in the middle goal
+bool middleScore = false;
+
+// Used to toggle the top piston to access the blocks at the bottom of the match loading tubes
+bool matchLoadDown = false;
+
+// Used to disable the color sensor while trying to score in the top or middle goals
+bool scoring = false;
+
+// Left off right switch
+// Used to toggle between sorting red out vs blue out
+// Blue is false, Red is true
+bool sortColorToggle = true;
+
+// Used to toggle the color sensor on and off
+bool sortToggle = true;
+
+/**
+ * Runs initialization code. This occurs as soon as the program is started.
+ *
+ * All other competition modes are blocked by initialize; it is recommended
+ * to keep execution time for this mode under a few seconds.
+ */
 
 // Intakes and outtakes the blocks
 void intaking() {
-    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-        intake.move(127);
-    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-        intake.move(-127);
->>>>>>> Stashed changes
-    } else {
-        intake.brake();
+	if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+		intake.move(127);
+	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+		intake.move(-127);
     }
 }
 
@@ -197,7 +167,6 @@ void unstoring() {
 }
 
 // Actuates the piston at the top of the robot to allow for storage of the opposite color of block
-<<<<<<< Updated upstream
 void opposingStorage() {
     // Toggles the top piston on and off and changes boolean values to help with the color sort modes
     if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) && (oppStore == false)) {
@@ -208,10 +177,11 @@ void opposingStorage() {
     	storage.set_value(false);
         oppStore = false;
     	pros::delay(250);
-=======
+    }
+}
+
 void colorSorting() {
     // Sorts the blocks into the storage system and up and over the robot
-    // sortColorToggle STARTS ON FALSE *******************************************
     if ((oppStore == true) && (sortToggle == true)) {
         if (sortColorToggle == false) {
             // Store Blue Blocks
@@ -252,51 +222,9 @@ void colorSorting() {
         } else {
             store.brake();
         }
->>>>>>> Stashed changes
     }
-
-<<<<<<< Updated upstream
-    // Sorts the blocks into the storage system and up and over the robot
-	while(oppStore == true) {
-        // Blue Team Color Sorting
-	    // if(((colorSensor.get_hue() >= 60) && (colorSensor.get_hue() <= 75)) && (colorSensor.get_proximity() >= 100)) {
-	    // 	store.move(127);
-		// 	pros::delay(100);
-	    // } else if(((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 53)) && (colorSensor.get_proximity() >= 100)) {
-	    //     store.move(-127);
-		// 	pros::delay(500);
-	    // } else {
-	    //     store.brake();
-        //     break;
-	    // }
-
-        // Red Team Color Sorting
-        if(((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 53)) && (colorSensor.get_proximity() >= 100)) {
-	    	store.move(127);
-			pros::delay(100);
-	    } else if(((colorSensor.get_hue() >= 60) && (colorSensor.get_hue() <= 75)) && (colorSensor.get_proximity() >= 100)) {
-	        store.move(-127);
-			pros::delay(500);
-	    } else {
-	        store.brake();
-            break;
-	    }
-	}
-
-    // Shoots both color of block out the front of the robot
-    while(oppStore == false) {
-	    if((((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 53)) || ((colorSensor.get_hue() >= 60) && (colorSensor.get_hue() <= 75))) && (colorSensor.get_proximity() >= 100)) {
-	        store.move(-127);
-			pros::delay(250);
-	    } else {
-	        store.brake();
-            break;
-	    }
-	}
 }
 
-=======
->>>>>>> Stashed changes
 // Actuates the bottom piston to drop a bar that gives us access to the blocks inside of the match loading tubes
 void matchLoading() {
     if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) && (matchLoadDown == false)) {
@@ -311,11 +239,8 @@ void matchLoading() {
         matchLoadDown = false;
         oppStore = false;
         pros::delay(250);
-<<<<<<< Updated upstream
     }
 }
-
-
 
 // Actuates the middle piston to block the intake at the middle to redirect the blocks into the middle tube
 void midScoring() {
@@ -325,23 +250,6 @@ void midScoring() {
 		pros::delay(250);
     } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == true)) {
         midScore.set_value(true);
-        middleScore = false;
-        pros::delay(250);
-=======
->>>>>>> Stashed changes
-    }
-}
-
-
-
-// Actuates the middle piston to block the intake at the middle to redirect the blocks into the middle tube
-void midScoring() {
-    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == false)) {
-        midScore.set_value(true);
-        middleScore = true;
-        pros::delay(250);
-    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == true)) {
-        midScore.set_value(false);
         middleScore = false;
         pros::delay(250);
     }
@@ -448,9 +356,6 @@ void competition_initialize() {}
  */
  
 void autonomous() {
-<<<<<<< Updated upstream
-
-=======
     // Match Auto Half Left
     storage.set_value(true);
     oppStore = true;
@@ -493,7 +398,6 @@ void autonomous() {
     // Skills Auto
     // chassis.moveToPoint(0, -25, 1000, {.forwards = false});
     // chassis.moveToPoint(0, 0, 5000, {.minSpeed = 127});
->>>>>>> Stashed changes
 }
 
 /**
@@ -510,18 +414,18 @@ void autonomous() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-<<<<<<< Updated upstream
+    // Defines the slew speed for throttle
+    slew throttleSlew(8, 8);
+
     // Tasks for drivercontrol
     pros::Task ([&] () {
         while(true) {
-            lv_task_handler();
             midScoring(); // Calls the midScoring function
             pros::delay(10);
         }
     });
     pros::Task ([&] () {
         while(true) {
-            lv_task_handler();
             matchLoading(); // Calls the matchLoading function
             pros::delay(10);
         }
@@ -529,38 +433,8 @@ void opcontrol() {
     // This task is the issue
     pros::Task ([&] () {
         while(true) {
-            lv_task_handler();
-            opposingStorage(); // Calls the opposingStorage function
+            colorSorting(); // Calls the colorSorting function
             pros::delay(10);
-        }
-    });
-        
-	while (true) {
-        // Defines the color sensor values and prints the values on the screen
-        pros::c::optical_rgb_s_t rgb = colorSensor.get_rgb();
-        double hue = colorSensor.get_hue();
-        double brightness = colorSensor.get_brightness();
-        double proximity = colorSensor.get_proximity();
-        pros::lcd::print(0, "RGB: %f, %f, %f", rgb.red, rgb.green, rgb.blue);
-        pros::lcd::print(1, "Hue: %f", hue);
-        pros::lcd::print(2, "Brightness: %f", brightness);
-        pros::lcd::print(3, "Proximity: %f", proximity);
-=======
-    // Defines the slew speed for throttle
-    slew throttleSlew(8, 8);
->>>>>>> Stashed changes
-
-    // Tasks for drivercontrol
-    pros::Task ([&] () {
-        while(true) {
-            midScoring(); // Calls the midScoring function
-            pros::Task::delay(10);
-        }
-    });
-    pros::Task ([&] () {
-        while(true) {
-            matchLoading(); // Calls the matchLoading function
-            pros::Task::delay(10);
         }
     });
 
