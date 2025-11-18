@@ -1,94 +1,5 @@
 #include "main.h"
-#include "lemlib/api.hpp" // IWYU pragma: keep
-#include "lemlib/chassis/chassis.hpp"
-#include "lemlib/chassis/trackingWheel.hpp"
-#include "liblvgl/widgets/lv_label.h" // IWYU pragma: keep
-#include "pros/abstract_motor.hpp"
-#include "pros/adi.h" // IWYU pragma: keep
-#include "pros/adi.hpp"
-#include "liblvgl/llemu.hpp"
-#include "pros/apix.h" // IWYU pragma: keep
-#include "pros/colors.hpp" // IWYU pragma: keep
-#include "pros/device.hpp" // IWYU pragma: keep
-#include "pros/misc.h"
-#include "pros/misc.hpp"
-#include "pros/motors.h"
-#include "pros/optical.h" // IWYU pragma: keep
-#include "pros/optical.hpp" // IWYU pragma: keep
-#include <algorithm>
-#include <cmath>
-#include <thread> // IWYU pragma: keep
-
-pros::Controller Controller(pros::E_CONTROLLER_MASTER);
-
-pros::MotorGroup left_mg({-11, -12, -13}, pros::MotorGearset::blue);    // Creates a motor group with reversed ports 11 12 & 13
-pros::MotorGroup right_mg({20, 19, 18}, pros::MotorGearset::blue);  // Creates a motor group with forwards port 18 19 & 20
-pros::Motor intake(-2, pros::MotorGearset::blue);
-pros::Motor unstore(-9);
-pros::Motor store(10);
-pros::adi::DigitalOut matchLoad('C');
-pros::adi::DigitalOut midScore('B');
-pros::adi::DigitalOut storage('A');
-
-// Drivetrain settings
-lemlib::Drivetrain drivetrain(&left_mg, // left motor group
-                              &right_mg, // right motor group
-                              12.75, // 12.75 inch track width
-                              lemlib::Omniwheel::NEW_325, // using new 3.25" omnis
-                              800, // drivetrain rpm is the gear ratio multiplied by the rpm of the driving motor
-                              2 // horizontal drift is 2 (for now)
-);
-
-// Creates an imu on port 21
-pros::Imu imu(21);
-
-// Creates a V5 vertical rotation sensor on port 9
-pros::Rotation vertical_sensor(17);
-
-// Creates a V5 optical sensor on port 11
-pros::Optical colorSensor (3);
-
-// Vertical Tracking Wheel
-lemlib::TrackingWheel vertical_tracker(&vertical_sensor, lemlib::Omniwheel::NEW_2, 0);
-
-// Combines all sensors into one item
-lemlib::OdomSensors sensors(&vertical_tracker, // vertical tracking wheel 1
-                            nullptr, // vertical tracking wheel 2, set to nullptr as we are using IMEs
-                            nullptr, // horizontal tracking wheel 1
-                            nullptr, // horizontal tracking wheel 2, set to nullptr as we don't have a second one
-                            &imu // inertial sensor
-);
-
-// Lateral PID controller
-lemlib::ControllerSettings lateral_controller(7, // proportional gain (kP)
-                                              0, // integral gain (kI)
-                                              3.5, // derivative gain (kD)
-                                              0, // anti windup
-                                              0, // small error range, in inches
-                                              0, // small error range timeout, in milliseconds
-                                              0, // large error range, in inches
-                                              0, // large error range timeout, in milliseconds
-                                              0 // maximum acceleration (slew)
-);
-
-// Angular PID controller
-lemlib::ControllerSettings angular_controller(1.8, // proportional gain (kP)
-                                              0, // integral gain (kI)
-                                              11.7, // derivative gain (kD)
-                                              0, // anti windup
-                                              0, // small error range, in degrees
-                                              0, // small error range timeout, in milliseconds
-                                              0, // large error range, in degrees
-                                              0, // large error range timeout, in milliseconds
-                                              0 // maximum acceleration (slew)
-);
-
-// Creates the chassis
-lemlib::Chassis chassis(drivetrain, // Drivetrain Settings
-                        lateral_controller, // Lateral PID Settings
-                        angular_controller, // Angular PID Settings
-                        sensors // Odometry Sensors
-);
+#include "autons.h" // IWYU pragma: keep
 
 class slew {
 public:
@@ -118,26 +29,6 @@ private:
     int output;
 };
 
-// Used to toggle the top piston to allow for shooting blocks into the top storage
-bool oppStore = false;
-
-// Used to toggle the top piston to allow for scoring blocks in the middle goal
-bool middleScore = false;
-
-// Used to toggle the top piston to access the blocks at the bottom of the match loading tubes
-bool matchLoadDown = false;
-
-// Used to disable the color sensor while trying to score in the top or middle goals
-bool scoring = false;
-
-// Left off right switch
-// Used to toggle between sorting red out vs blue out
-// Blue is false, Red is true
-bool sortColorToggle = true;
-
-// Used to toggle the color sensor on and off
-bool sortToggle = true;
-
 /**
  * Runs initialization code. This occurs as soon as the program is started.
  *
@@ -151,6 +42,8 @@ void intaking() {
 		intake.move(127);
 	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
 		intake.move(-127);
+    } else {
+        intake.brake();
     }
 }
 
@@ -356,48 +249,10 @@ void competition_initialize() {}
  */
  
 void autonomous() {
-    // Match Auto Half Left
-    storage.set_value(true);
-    oppStore = true;
-    intake.move(127);
-    // Transfer
-    chassis.moveToPoint(0, 16, 250);
-    // Set of 3 Blocks
-    chassis.moveToPoint(-12, 53, 1500);
-    // Transfer
-    chassis.moveToPoint(-8, 37.5, 750, {.forwards = false});
-    unstore.move(-127);
-    pros::delay(500);
-    unstore.brake();
-    // Middle Stake
-    // chassis.moveToPoint(0, 48, 1000, {.maxSpeed = 80});
-    // midScore.set_value(true);
-    // unstore.move(127);
-    // pros::delay(2000);
-    // midScore.set_value(false);
-    // unstore.brake();
-    // Transfer
-    chassis.turnToHeading(-135, 500);
-    chassis.moveToPoint(-29, 20, 1250, {.maxSpeed = 80});
-    chassis.turnToHeading(180, 250);
-    // Match Load
-    matchLoad.set_value(true);
-    chassis.moveToPoint(-34.5, -5, 1000, {.maxSpeed = 50});
-    pros::delay(2500);
-    matchLoad.set_value(false);
-    // Transfer
-    chassis.moveToPoint(-32, 15, 1000, {.forwards = false});
-    chassis.turnToHeading(-20, 1250, {.maxSpeed = 80});
-    // High Goal
-    chassis.moveToPoint(-34, 34, 5000, {}, true);
-    pros::delay(500);
-    unstore.move(127);
-    storage.set_value(false);
-    oppStore = false;
-
-    // Skills Auto
-    // chassis.moveToPoint(0, -25, 1000, {.forwards = false});
-    // chassis.moveToPoint(0, 0, 5000, {.minSpeed = 127});
+    // matchAutoLeft();
+    // matchAutoRight();
+    // winPointAuto();
+    skillsAuto();
 }
 
 /**
@@ -427,13 +282,6 @@ void opcontrol() {
     pros::Task ([&] () {
         while(true) {
             matchLoading(); // Calls the matchLoading function
-            pros::delay(10);
-        }
-    });
-    // This task is the issue
-    pros::Task ([&] () {
-        while(true) {
-            colorSorting(); // Calls the colorSorting function
             pros::delay(10);
         }
     });
