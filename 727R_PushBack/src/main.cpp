@@ -1,33 +1,7 @@
-#include "main.h"
-#include "autons.h" // IWYU pragma: keep
-
-class slew {
-public:
-
-    slew(int accelRate = 8, int decelRate = 8)
-        : accelRate(std::abs(accelRate)), decelRate(std::abs(decelRate)), output(0) {}
-
-    int update(int target) {
-        target = std::clamp(target, -127, 127);
-        int delta = target - output;
-
-        if (delta > 0) {
-            output += std::min(delta, accelRate);
-        } else if (delta < 0) {
-            output += std::max(delta, -decelRate);
-        }
-        return output;
-    }
-
-    void reset(int value = 0) {
-        output = std::clamp(value, -127, 127);
-    }
-
-private:
-    int accelRate;
-    int decelRate;
-    int output;
-};
+#include "autons.h"
+#include "liblvgl/lv_api_map.h"
+#include "pros/abstract_motor.hpp"
+#include "pros/misc.h"
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -41,80 +15,9 @@ void intaking() {
 	if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 		intake.move(127);
 	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-		intake.move(-127);
+		intake.move(-100);
     } else {
         intake.brake();
-    }
-}
-
-// Takes blocks out of storage when holding R1 and holds the position of the rubber band roller when not holding it so extra blocks wont come out of storage
-void unstoring() {
-    unstore.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-        unstore.move(127);
-    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-        unstore.move(-127);
-    } else {
-        unstore.brake();
-    }
-}
-
-// Actuates the piston at the top of the robot to allow for storage of the opposite color of block
-void opposingStorage() {
-    // Toggles the top piston on and off and changes boolean values to help with the color sort modes
-    if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) && (oppStore == false)) {
-    	storage.set_value(true);
-        oppStore = true;
-    	pros::delay(250);
-    } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) && (oppStore == true)) {
-    	storage.set_value(false);
-        oppStore = false;
-    	pros::delay(250);
-    }
-}
-
-void colorSorting() {
-    // Sorts the blocks into the storage system and up and over the robot
-    if ((oppStore == true) && (sortToggle == true)) {
-        if (sortColorToggle == false) {
-            // Store Blue Blocks
-            if(((colorSensor.get_hue() >= 65) && (colorSensor.get_hue() <= 359)) && (colorSensor.get_proximity() >= 50)) {
-            store.move(127);
-            pros::delay(100);
-            } else if(((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 57)) && (colorSensor.get_proximity() >= 50)) {
-                store.move(-127);
-            pros::delay(750);
-            } else {
-                store.brake();
-            }
-        } else if (sortColorToggle == true) {
-            // Store Red Blocks
-            if(((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 57)) && (colorSensor.get_proximity() >= 50)) {
-                store.move(127);
-                pros::delay(100);
-            } else if(((colorSensor.get_hue() >= 65) && (colorSensor.get_hue() <= 359)) && (colorSensor.get_proximity() >= 50)) {
-                store.move(-127);
-                pros::delay(750);
-            } else {
-                store.brake();
-            }
-        }
-    } else if (oppStore == false && (sortToggle == true)) {
-        // Shoots both color of block out the front of the robot
-        if((((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 57)) || ((colorSensor.get_hue() >= 65) && (colorSensor.get_hue() <= 359))) && (colorSensor.get_proximity() >= 50)) {
-            store.move(-127);
-            pros::delay(250);
-        } else {
-            store.brake();
-        }
-    } else if (sortToggle == false) {
-        // Store Both Colors of Blocks
-        if((((colorSensor.get_hue() >= 0) && (colorSensor.get_hue() <= 57)) || ((colorSensor.get_hue() >= 65) && (colorSensor.get_hue() <= 359))) && (colorSensor.get_proximity() >= 50)) {
-            store.move(127);
-            pros::delay(100);
-        } else {
-            store.brake();
-        }
     }
 }
 
@@ -122,100 +25,88 @@ void colorSorting() {
 void matchLoading() {
     if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) && (matchLoadDown == false)) {
         matchLoad.set_value(true);
-        storage.set_value(true);
         matchLoadDown = true;
-        oppStore = true;
         pros::delay(250);
     } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) && (matchLoadDown == true)) {
         matchLoad.set_value(false);
-        storage.set_value(false);
         matchLoadDown = false;
-        oppStore = false;
         pros::delay(250);
     }
 }
 
 // Actuates the middle piston to block the intake at the middle to redirect the blocks into the middle tube
-void midScoring() {
-    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == false)) {
-        midScore.set_value(false);
-        middleScore = true;
+void upDown() {
+    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (up == false)) {
+        highMid.set_value(true);
+        up = true;
 		pros::delay(250);
-    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (middleScore == true)) {
-        midScore.set_value(true);
-        middleScore = false;
+    } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (up == true)) {
+        highMid.set_value(false);
+        up = false;
         pros::delay(250);
     }
 }
 
+// Actuates a piston to both push out the wing from the bot and pull it back into the bot for descore and blocking
+void wingPos() {
+    if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) && (wingUp == false)) {
+        wing.set_value(true);
+        wingUp = true;
+        pros::delay(250);
+    } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) && (wingUp == true)) {
+        wing.set_value(false);
+        wingUp = false;
+        pros::delay(250);
+    }
+}
+
+// Activates the hood piston to open and close it
+void hoodMech() {
+    if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) && (hoodOpen == false)) {
+        hood.set_value(false);
+        hoodOpen = true;
+        pros::delay(250);
+    } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) && (hoodOpen == true)) {
+        hood.set_value(true);
+        hoodOpen = false;
+        pros::delay(250);
+    }
+}
+
+// Swings the lever mechanism to score blocks in the middle and high goals
+void leverSwing() {
+    if (up == false) {
+        lever.move_velocity(downSpeed);
+    } else if (up == true) {
+// *************** Change when in skills/match ***********************
+        lever.move_velocity(upSpeed);
+    }
+    while (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+        pros::delay(10);
+    }
+    lever.move_velocity(backSpeed);
+    pros::delay(500);
+    lever.brake();
+}
+
 void initialize() {
+    lever.set_brake_mode(pros::MotorBrake::brake);
     pros::lcd::initialize();
     chassis.calibrate();
-	chassis.setPose(0, 0, 0);
-    // Sets the speed at which the color sensor scans the color
-    colorSensor.set_integration_time(1);
+    lever.move(-127);
+    pros::delay(100);
+    lever.brake();
 	
 	// Tasks for drivercontrol and autonomous periods
 	pros::Task ([&]{
 		while (true) {
-			// Defines the color sensor values and prints the values on the screen
-            // Sets the brightness of the color sensor's lights (This affects color detection)
-            colorSensor.set_led_pwm(100);
-			pros::c::optical_rgb_s_t rgb = colorSensor.get_rgb();
-			double hue = colorSensor.get_hue();
-			double brightness = colorSensor.get_brightness();
-			double proximity = colorSensor.get_proximity();
-			pros::lcd::print(1, "RGB: %f, %f, %f", rgb.red, rgb.green, rgb.blue);
-			pros::lcd::print(2, "Hue: %f", hue);
-			pros::lcd::print(3, "Brightness: %f", brightness);
-			pros::lcd::print(4, "Proximity: %f", proximity);
-			pros::lcd::print(5, "X-Value: %f", chassis.getPose().x);
-			pros::lcd::print(6, "Y-Value: %f", chassis.getPose().y);
-			pros::lcd::print(7, "Theta: %f", chassis.getPose().theta);
+            lv_task_handler();
+			pros::lcd::print(1, "X-Value: %f", chassis.getPose().x);
+			pros::lcd::print(2, "Y-Value: %f", chassis.getPose().y);
+			pros::lcd::print(3, "Theta: %f", chassis.getPose().theta);
 			pros::Task::delay(10);
 		}
 	});
-    pros::Task ([&] {
-        while (true) {
-            // Toggles the top piston on and off and changes boolean values to help with the color sort modes
-            if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) && (oppStore == false)) {
-                storage.set_value(true);
-                oppStore = true;
-            } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) && (oppStore == true)) {
-                storage.set_value(false);
-                oppStore = false;
-            }
-            pros::Task::delay(200);
-        }
-    });
-    pros::Task ([&] {
-        while (true) {
-            // Toggles the color of the color sorting
-            if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) && (sortColorToggle == false)) {
-                sortColorToggle = !sortColorToggle;
-            } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) && (sortColorToggle == true)) {
-                sortColorToggle = !sortColorToggle;
-            }
-            pros::Task::delay(200);
-        }
-    });
-    pros::Task ([&] {
-        while (true) {
-            // Toggles the color sensing on and off
-            if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) && (sortToggle == true)) {
-                sortToggle = false;
-            } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) && (sortToggle == false)) {
-                sortToggle = true;
-            }
-            pros::Task::delay(200);
-        }
-    });
-    pros::Task ([&] {
-        while (true) {
-            colorSorting();
-            pros::Task::delay(10);
-        }
-    });
 }
 
 /**
@@ -253,6 +144,7 @@ void autonomous() {
     // matchAutoRight();
     // winPointAuto();
     skillsAuto();
+    // tuningAuto();
 }
 
 /**
@@ -270,18 +162,43 @@ void autonomous() {
  */
 void opcontrol() {
     // Defines the slew speed for throttle
-    slew throttleSlew(8, 8);
+    slew throttleSlew(10, 10);
 
     // Tasks for drivercontrol
     pros::Task ([&] () {
         while(true) {
-            midScoring(); // Calls the midScoring function
+            lv_task_handler();
+            matchLoading(); // Calls the matchLoading function
             pros::delay(10);
         }
     });
     pros::Task ([&] () {
         while(true) {
-            matchLoading(); // Calls the matchLoading function
+            lv_task_handler();
+            upDown();       // Calls the upDown function
+            pros::delay(10);
+        }
+    });
+    pros::Task ([&] () {
+        while(true) {
+            lv_task_handler();
+            wingPos(); // Calls the wingPos function
+            pros::delay(10);
+        }
+    });
+    pros::Task ([&] () {
+        while(true) {
+            lv_task_handler();
+            if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+                leverSwing(); // Calls the leverSwing function
+            }
+            pros::delay(10);
+        }
+    });
+    pros::Task ([&] () {
+        while (true) {
+            lv_task_handler();
+            hoodMech(); // Calls the hoodMech function
             pros::delay(10);
         }
     });
@@ -294,6 +211,7 @@ void opcontrol() {
         // Adds slew to the inputted controller values
         int throttleOut = throttleSlew.update(dir);
 
+        // Arcade Drive control scheme
         chassis.arcade(throttleOut, turn);
 
         // Curvature Drive control scheme
@@ -301,7 +219,6 @@ void opcontrol() {
 
         // Calling functions
         intaking();     // Calls the intaking function
-        unstoring();     // Calls the unstoring function
 
         // How long it takes for each update of inputs
         pros::delay(20);

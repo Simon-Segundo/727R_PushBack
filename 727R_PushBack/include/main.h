@@ -61,6 +61,12 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+void intaking(void);
+void matchLoading(void);
+void upDown(void);
+void wingPos(void);
+void hoodMech(void);
+void leverSwing(void);
 void autonomous(void);
 void initialize(void);
 void disabled(void);

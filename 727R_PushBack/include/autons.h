@@ -3,7 +3,14 @@
 
 #pragma once
 
-void matchAutoLeft (void);
-void matchAutoRight (void);
-void winPointAuto (void);
-void skillsAuto (void);
+void autoMatchLoad(void);
+void autoUpDown(void);
+void autoWingPos(void);
+void autoHoodMech(void);
+void autoLeverSwing(void);
+
+void matchAutoLeft(void);
+void matchAutoRight(void);
+void winPointAuto(void);
+void skillsAuto(void);
+void tuningAuto(void);

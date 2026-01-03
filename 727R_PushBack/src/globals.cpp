@@ -1,33 +1,31 @@
 #include "globals.hpp"
+#include "pros/abstract_motor.hpp"
 
 pros::Controller Controller(pros::E_CONTROLLER_MASTER);
 
-pros::MotorGroup left_mg({-11, -12, -13}, pros::MotorGearset::blue);    // Creates a motor group with reversed ports 11 12 & 13
-pros::MotorGroup right_mg({20, 19, 18}, pros::MotorGearset::blue);  // Creates a motor group with forwards port 18 19 & 20
-pros::Motor intake(-2, pros::MotorGearset::blue);
-pros::Motor unstore(-9);
-pros::Motor store(10);
-pros::adi::DigitalOut matchLoad('C');
-pros::adi::DigitalOut midScore('B');
-pros::adi::DigitalOut storage('A');
+pros::MotorGroup left_mg({-1, -2, -3}, pros::MotorGearset::blue);    // Creates a motor group with reversed ports 11 12 & 13
+pros::MotorGroup right_mg({10, 9, 8}, pros::MotorGearset::blue);  // Creates a motor group with forwards port 18 19 & 20
+pros::Motor intake(-6, pros::MotorGearset::blue);
+pros::Motor lever(-20, pros::MotorGearset::red);
+pros::adi::DigitalOut matchLoad('A');
+pros::adi::DigitalOut highMid('B');
+pros::adi::DigitalOut hood('C');
+pros::adi::DigitalOut wing('D');
 
 // Drivetrain settings
 lemlib::Drivetrain drivetrain(&left_mg, // left motor group
                               &right_mg, // right motor group
-                              12.75, // 12.75 inch track width
+                              11.75, // 12.75 inch track width
                               lemlib::Omniwheel::NEW_325, // using new 3.25" omnis
                               800, // drivetrain rpm is the gear ratio multiplied by the rpm of the driving motor
                               2 // horizontal drift is 2 (for now)
 );
 
-// Creates an imu on port 21
-pros::Imu imu(21);
+// Creates an imu on port 19
+pros::Imu imu(19);
 
-// Creates a V5 vertical rotation sensor on port 9
-pros::Rotation vertical_sensor(17);
-
-// Creates a V5 optical sensor on port 11
-pros::Optical colorSensor (3);
+// Creates a V5 vertical rotation sensor on port 17
+pros::Rotation vertical_sensor(-17);
 
 // Vertical Tracking Wheel
 lemlib::TrackingWheel vertical_tracker(&vertical_sensor, lemlib::Omniwheel::NEW_2, 0);
@@ -41,9 +39,9 @@ lemlib::OdomSensors sensors(&vertical_tracker, // vertical tracking wheel 1
 );
 
 // Lateral PID controller
-lemlib::ControllerSettings lateral_controller(7, // proportional gain (kP)
+lemlib::ControllerSettings lateral_controller(5, // proportional gain (kP)
                                               0, // integral gain (kI)
-                                              3.5, // derivative gain (kD)
+                                              0, // derivative gain (kD)
                                               0, // anti windup
                                               0, // small error range, in inches
                                               0, // small error range timeout, in milliseconds
@@ -71,22 +69,56 @@ lemlib::Chassis chassis(drivetrain, // Drivetrain Settings
                         sensors // Odometry Sensors
 );
 
-// Used to toggle the top piston to allow for shooting blocks into the top storage
-bool oppStore = false;
-
-// Used to toggle the top piston to allow for scoring blocks in the middle goal
-bool middleScore = false;
-
 // Used to toggle the top piston to access the blocks at the bottom of the match loading tubes
 bool matchLoadDown = false;
 
-// Used to disable the color sensor while trying to score in the top or middle goals
-bool scoring = false;
+// Used to toggle match load in the autonomous period
+bool autoLoad = false;
 
-// Left off right switch
-// Used to toggle between sorting red out vs blue out
-// Blue is false, Red is true
-bool sortColorToggle = true;
+// Used to toggle the pistons to push the tube upwards to score in high goal
+bool up = false;
 
-// Used to toggle the color sensor on and off
-bool sortToggle = true;
+// Used to toggle tube up and down in the autonomous period
+bool autoTube = false;
+
+// Used to toggle the wing up and down
+bool wingUp = false;
+
+// Used to toggle the wing in the autonomous period
+bool autoWing = false;
+
+// Used to toggle the hood
+bool hoodOpen = false;
+
+// Used to toggle the hood in the autonomous period
+bool autoHood = false;
+
+// Used to swing the lever in the autonomous period
+int autoLever = 2;
+
+// Used to set the speed of the lever when the tube is down
+float downSpeed = 17.5;
+
+// Used to set the speed of the lever when the tube is up
+int upSpeed = 75;
+
+// Used to set the speed of the lever when the tube is up in skills
+int skillsUpSpeed = 25;
+
+// Used to set the speed of the lever when returning to the origin
+int backSpeed = -100;
+
+slew::slew(int accel, int decel)
+    : accelRate(std::abs(accel)), decelRate(std::abs(accel)), output(0) {}
+
+int slew::update(int target) {
+    target = std::clamp(target, -127, 127);
+    int delta = target - output;
+    
+    if (delta > 0) {
+        output += std::min(delta, accelRate);
+    } else if (delta < 0) {
+        output += std::max(delta, -decelRate);
+    }
+    return output;
+}
