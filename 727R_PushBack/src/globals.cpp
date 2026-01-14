@@ -108,6 +108,9 @@ int skillsUpSpeed = 25;
 // Used to set the speed of the lever when returning to the origin
 int backSpeed = -100;
 
+// Used for resetting the robot position using distance sensors
+double robotPosition;
+
 slew::slew(int accel, int decel)
     : accelRate(std::abs(accel)), decelRate(std::abs(accel)), output(0) {}
 

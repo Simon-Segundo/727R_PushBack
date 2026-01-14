@@ -1,5 +1,5 @@
 #include "autons.h"
-#include "globals.hpp"
+#include "distanceReset.hpp" // IWYU pragma: keep
 #include "lemlib/chassis/chassis.hpp"
 
 // Actuates a piston to drop a bar that gives us access to the blocks inside of the match loading tubes
@@ -80,7 +80,7 @@ void matchAutoLeft () {
     matchLoad.set_value(false);
     chassis.turnToHeading(-135, 675);
     // Middle Goal
-    chassis.moveToPoint(3.5, 50.6, 1000, {.forwards = false}, false);
+    chassis.moveToPoint(3.4, 50.4, 1000, {.forwards = false}, false);
     hood.set_value(true);
     lever.move_velocity(downSpeed);
     pros::delay(2000);
@@ -90,12 +90,13 @@ void matchAutoLeft () {
     intake.brake();
     // Transfer
     chassis.moveToPoint(-34, 16, 1500);
+    pros::delay(250); // ADDED THIS DELAY TO FIX GRABBING BLOCK FROM MID ***************
     hood.set_value(false);
     chassis.turnToHeading(180, 500);
     // Match Load
     matchLoad.set_value(true);
     intake.move(127);
-    chassis.moveToPoint(-34, 0, 1250);
+    chassis.moveToPoint(-34, 0, 1000); // MADE THIS SHORTER *************************
     // High Goal
     highMid.set_value(true);
     up = true;
@@ -111,36 +112,38 @@ void matchAutoLeft () {
 
 void matchAutoRight () {
 	chassis.setPose(0, 0, 0);
+    highMid.set_value(true);
+    up = true;
     // Transfer
     chassis.moveToPoint(0, 30, 750);
     chassis.turnToHeading(45, 250);
-    chassis.moveToPoint(8, 42, 500);
     intake.move(127);
+    chassis.moveToPoint(8, 42, 500, {}, false);
+    matchLoad.set_value(true);
     chassis.turnToHeading(0, 250);
     // Set of 3 Blocks
     chassis.moveToPoint(8, 50, 1500);
     // Transfer
     chassis.moveToPoint(8, 42, 1000, {.forwards = false}, false);
+    matchLoad.set_value(false);
     intake.brake();
-    chassis.turnToHeading(-45, 675);
+    chassis.turnToHeading(-45, 750);
     // Low Goal
-    chassis.moveToPoint(-3, 51, 1500, {}, false);
+    chassis.moveToPoint(-2, 51.5, 1500, {}, false);
     intake.move(-127);
     pros::delay(2000);
     intake.brake();
     // Transfer
-    chassis.moveToPoint(30, 16, 1750, {.forwards = false});
-    chassis.turnToHeading(180, 500);
+    chassis.moveToPoint(31.5, 18.5, 1750, {.forwards = false});
+    chassis.turnToHeading(180, 750);
     // Match Load
     matchLoad.set_value(true);
     intake.move(127);
-    chassis.moveToPoint(30, 0, 1000, {}, false);
+    chassis.moveToPoint(31.5, 0, 1000, {}, false);
     // High Goal
-    highMid.set_value(true);
-    up = true;
     chassis.moveToPoint(34, 38, 1500, {.forwards = false}, false);
     hood.set_value(true);
-    lever.move_velocity(75);
+    lever.move_velocity(90);
     pros::delay(1000);
     lever.move_velocity(backSpeed);
     pros::delay(1000);
@@ -154,7 +157,7 @@ void winPointAuto () {
 
 void skillsAuto () {
 	chassis.setPose(-2.5, 8.625, 0);
-
+    wing.set_value(true);
     // First Half
     // Transfer
     highMid.set_value(true);
@@ -174,10 +177,10 @@ void skillsAuto () {
     chassis.turnToHeading(-90, 500);
     chassis.moveToPoint(95, 53, 1500, {.forwards = false});
     chassis.turnToHeading(0, 1000);
-    chassis.moveToPoint(98, 38, 1100, {.forwards = false});
+    chassis.moveToPoint(98, 40, 1100, {.forwards = false});
     chassis.turnToHeading(90, 1000);
     // Long Goal 1, 1
-    chassis.moveToPoint(80, 38, 1000, {.forwards = false}, false);
+    chassis.moveToPoint(80, 40, 1000, {.forwards = false}, false);
     chassis.setPose(0,0,0);
     intake.move(127);
     matchLoad.set_value(true);
@@ -264,20 +267,20 @@ void skillsAuto () {
     // Parking
     // Transfer
     chassis.moveToPoint(0, 10, 1000);
-    // // Park From Front
-    // chassis.moveToPoint(48, 15, 1000);
-    // chassis.turnToHeading(0, 1000);
-    // intake.move(-127);
-    // chassis.moveToPoint(48, 0, 2000, {.forwards = false});
-    // chassis.moveToPoint(48, 47, 4000);
-    // chassis.turnToHeading(-90, 1000);
+    // Park From Front
+    chassis.moveToPoint(48, 15, 1000);
+    chassis.turnToHeading(0, 1000);
+    intake.move(-127);
+    chassis.moveToPoint(48, 0, 2000, {.forwards = false});
+    chassis.moveToPoint(48, 47, 4000);
+    chassis.turnToHeading(-90, 1000);
 
     // Park From Side
-    intake.move(-127);
-    chassis.turnToHeading(90, 750);
-    chassis.moveToPoint(24, 32.5, 2000);
-    chassis.turnToHeading(90, 1000);
-    chassis.moveToPoint(50, 32.5, 15000, {.maxSpeed = 80});
+    // intake.move(-127);
+    // chassis.turnToHeading(90, 750);
+    // chassis.moveToPoint(24, 32.5, 2000);
+    // chassis.turnToHeading(90, 1000);
+    // chassis.moveToPoint(50, 32.5, 15000, {.maxSpeed = 80});
 }
 
 void tuningAuto () {

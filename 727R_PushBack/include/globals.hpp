@@ -56,6 +56,7 @@ extern float downSpeed;
 extern int upSpeed;
 extern int skillsUpSpeed;
 extern int backSpeed;
+extern double robotPosition;
 
 #ifndef SLEW
 #define SLEW

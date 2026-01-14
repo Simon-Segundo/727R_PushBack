@@ -79,7 +79,7 @@ void leverSwing() {
         lever.move_velocity(downSpeed);
     } else if (up == true) {
 // *************** Change when in skills/match ***********************
-        lever.move_velocity(upSpeed);
+        lever.move_velocity(100);
     }
     while (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
         pros::delay(10);
@@ -141,9 +141,9 @@ void competition_initialize() {}
  
 void autonomous() {
     // matchAutoLeft();
-    // matchAutoRight();
+    matchAutoRight();
     // winPointAuto();
-    skillsAuto();
+    // skillsAuto();
     // tuningAuto();
 }
 
