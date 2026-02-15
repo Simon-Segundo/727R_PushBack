@@ -1,4 +1,5 @@
 #include "globals.hpp"
+#include "lemlib/chassis/chassis.hpp"
 #include "pros/abstract_motor.hpp"
 
 pros::Controller Controller(pros::E_CONTROLLER_MASTER);
@@ -26,6 +27,18 @@ pros::Imu imu(19);
 
 // Creates a V5 vertical rotation sensor on port 17
 pros::Rotation vertical_sensor(-17);
+
+// Creates a V5 distance sensor on port 7
+pros::Distance frontDistance (7);
+
+// Creates a V5 distance sensor on port 17
+pros::Distance rearDistance (16);
+
+// Creates a V5 distance sensor on port 4
+pros::Distance leftDistance (4);
+
+// Creates a V5 distance sensor on port 5
+pros::Distance rightDistance (5);
 
 // Vertical Tracking Wheel
 lemlib::TrackingWheel vertical_tracker(&vertical_sensor, lemlib::Omniwheel::NEW_2, 0);
@@ -62,11 +75,25 @@ lemlib::ControllerSettings angular_controller(1.8, // proportional gain (kP)
                                               0 // maximum acceleration (slew)
 );
 
+// input curve for throttle input during driver control
+lemlib::ExpoDriveCurve throttleCurve(3, // joystick deadband out of 127
+                                     10, // minimum output where drivetrain will move out of 127
+                                     1.019 // expo curve gain
+);
+
+// input curve for steer input during driver control
+lemlib::ExpoDriveCurve turnCurve(3, // joystick deadband out of 127
+                                  10, // minimum output where drivetrain will move out of 127
+                                  1.019 // expo curve gain
+);
+
 // Creates the chassis
 lemlib::Chassis chassis(drivetrain, // Drivetrain Settings
                         lateral_controller, // Lateral PID Settings
                         angular_controller, // Angular PID Settings
-                        sensors // Odometry Sensors
+                        sensors, // Odometry Sensors
+                        &throttleCurve, // Slews movement and makes smaller movements more accurate
+                        &turnCurve // Slews movement and makes smaller turns more accurate
 );
 
 // Used to toggle the top piston to access the blocks at the bottom of the match loading tubes
@@ -97,13 +124,13 @@ bool autoHood = false;
 int autoLever = 2;
 
 // Used to set the speed of the lever when the tube is down
-float downSpeed = 17.5;
+float downSpeed = 15;
 
 // Used to set the speed of the lever when the tube is up
 int upSpeed = 75;
 
 // Used to set the speed of the lever when the tube is up in skills
-int skillsUpSpeed = 25;
+int skillsUpSpeed = 30;
 
 // Used to set the speed of the lever when returning to the origin
 int backSpeed = -100;

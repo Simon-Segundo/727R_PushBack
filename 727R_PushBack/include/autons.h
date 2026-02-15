@@ -1,5 +1,6 @@
 #include "main.h"  // IWYU pragma: keep
 #include "globals.hpp" // IWYU pragma: keep
+#include "distanceReset.hpp" // IWYU pragma: keep
 
 #pragma once
 
@@ -12,5 +13,6 @@ void autoLeverSwing(void);
 void matchAutoLeft(void);
 void matchAutoRight(void);
 void winPointAuto(void);
-void skillsAuto(void);
+void skillsAuto74(void);
+void skillsAuto79(void);
 void tuningAuto(void);

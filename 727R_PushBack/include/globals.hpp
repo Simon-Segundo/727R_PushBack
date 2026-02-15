@@ -1,3 +1,4 @@
+#include "pros/distance.hpp"
 #include "pros/motors.hpp" // IWYU pragma: keep
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "lemlib/chassis/chassis.hpp" // IWYU pragma: keep
@@ -36,10 +37,17 @@ extern pros::adi::DigitalOut wing;
 extern pros::Imu imu;
 extern pros::Rotation vertical_sensor;
 extern lemlib::TrackingWheel vertical_tracker;
+extern pros::Distance frontDistance;
+extern pros::Distance rearDistance;
+extern pros::Distance leftDistance;
+extern pros::Distance rightDistance;
 extern lemlib::OdomSensors sensors;
 
 extern lemlib::ControllerSettings lateral_controller;
 extern lemlib::ControllerSettings angular_controller;
+
+extern lemlib::ExpoDriveCurve throttleCurve;
+extern lemlib::ExpoDriveCurve turnCurve;
 
 extern lemlib::Chassis chassis;
 

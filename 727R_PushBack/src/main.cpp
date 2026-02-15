@@ -13,9 +13,9 @@
 // Intakes and outtakes the blocks
 void intaking() {
 	if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-		intake.move(127);
+		intake.move_velocity(600);
 	} else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-		intake.move(-100);
+		intake.move_velocity(-450);
     } else {
         intake.brake();
     }
@@ -38,22 +38,28 @@ void matchLoading() {
 void upDown() {
     if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (up == false)) {
         highMid.set_value(true);
+        wing.set_value(true);
+        hood.set_value(false);
         up = true;
+        wingUp = true;
+        hoodOpen = false;
 		pros::delay(250);
     } else if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && (up == true)) {
         highMid.set_value(false);
+        wing.set_value(false);
         up = false;
+        wingUp = false;
         pros::delay(250);
     }
 }
 
 // Actuates a piston to both push out the wing from the bot and pull it back into the bot for descore and blocking
 void wingPos() {
-    if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) && (wingUp == false)) {
+    if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) && (wingUp == false)) {
         wing.set_value(true);
         wingUp = true;
         pros::delay(250);
-    } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) && (wingUp == true)) {
+    } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) && (wingUp == true)) {
         wing.set_value(false);
         wingUp = false;
         pros::delay(250);
@@ -62,11 +68,11 @@ void wingPos() {
 
 // Activates the hood piston to open and close it
 void hoodMech() {
-    if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) && (hoodOpen == false)) {
+    if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) && (hoodOpen == false)) {
         hood.set_value(false);
         hoodOpen = true;
         pros::delay(250);
-    } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) && (hoodOpen == true)) {
+    } else if ((Controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) && (hoodOpen == true)) {
         hood.set_value(true);
         hoodOpen = false;
         pros::delay(250);
@@ -76,17 +82,25 @@ void hoodMech() {
 // Swings the lever mechanism to score blocks in the middle and high goals
 void leverSwing() {
     if (up == false) {
-        lever.move_velocity(downSpeed);
+        lever.move_velocity(75);
     } else if (up == true) {
 // *************** Change when in skills/match ***********************
         lever.move_velocity(100);
+        hood.set_value(true);
     }
     while (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
         pros::delay(10);
     }
+    if (up == false) {
     lever.move_velocity(backSpeed);
-    pros::delay(500);
+    pros::delay(750);
     lever.brake();
+    } else if (up == true) {
+    lever.move_velocity(backSpeed);
+    pros::delay(750);
+    hood.set_value(false);
+    lever.brake();
+    }
 }
 
 void initialize() {
@@ -141,9 +155,10 @@ void competition_initialize() {}
  
 void autonomous() {
     // matchAutoLeft();
-    matchAutoRight();
+    // matchAutoRight();
     // winPointAuto();
-    // skillsAuto();
+    skillsAuto74();
+    // skillsAuto79();
     // tuningAuto();
 }
 

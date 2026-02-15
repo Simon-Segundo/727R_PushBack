@@ -1,17 +1,17 @@
 #include "distanceReset.hpp"
-#include "globals.hpp"
 #include "pros/error.h"
 #include <iostream>
+#include <cmath>
 #include <vector>
 
 // Conversion factor from millimeters to inches, as the dist ance sensor reads in MM
 constexpr double MM_TO_INCH = 1.0 / 25.4;
 
 // Sensor port definitions (again, adjust these)
-#define FRONT_SENSOR_PORT 8
-#define BACK_SENSOR_PORT 12
-#define LEFT_SENSOR_PORT 7
-#define RIGHT_SENSOR_PORT 13
+#define FRONT_SENSOR_PORT 7
+#define BACK_SENSOR_PORT 16
+#define LEFT_SENSOR_PORT 4
+#define RIGHT_SENSOR_PORT 5
 
 double getAveragedSensorReading(pros::Distance& sensor) {
 // Averages the first 10 sensor readings
@@ -86,6 +86,20 @@ std::cout << "[resetRobotPos] Invalid wallAxisDirection." "\n";
 return;
 }
 
+// double trueVal = 0.0;
+// double rad = fabs(chassis.getPose().theta) * M_PI / 180;
+
+// if ((axis == "x") && (fabs(chassis.getPose().theta) != 90) || (fabs(chassis.getPose().theta) != 270)) {
+//     trueVal = distance_in * cos(rad);
+// } else if ((axis == "x") && (fabs(chassis.getPose().theta) == 90) || (fabs(chassis.getPose().theta) == 270)) {
+//     trueVal = distance_in;
+// } else if ((axis == "y") && (fabs(chassis.getPose().theta) != 0) || (fabs(chassis.getPose().theta) != 180)) {
+//     trueVal = distance_in * sin(rad);
+// } else if ((axis == "y") && (fabs(chassis.getPose().theta) == 0) || (fabs(chassis.getPose().theta) == 180)) {
+//     trueVal = distance_in;
+// }
+
+
 // Determine the sensor offset based on the sensor used
 if (sensor.get_port() == FRONT_SENSOR_PORT) {
 sensorOffset = FRONT_SENSOR_OFFSET;
@@ -103,17 +117,13 @@ return;
 std::cout << "[resetRobotPos] Wall position: " << wallPosition
 << ", Sensor offset: " << sensorOffset << ", Axis: " << axis << "\n";
 
+// CHANGED distance_in TO TRUE VAL **************************
 // For positive walls (wallPosition > 0), we need to subtract distances
 if (wallPosition > 0) {
     robotPosition = wallPosition - distance_in - sensorOffset;
-}else if(wallPosition < 0){
+} else if (wallPosition < 0){
     // For negative walls (wallPosition < 0), we need to add distances which are positive
     robotPosition = wallPosition + distance_in + sensorOffset;
-}
-
-// For positive walls (wallPosition > 0), we need to subtract distances
-if (wallPosition > 0) {
-robotPosition = wallPosition - distance_in - sensorOffset;
 }
 
 std::cout << "[resetRobotPos] Calculated robot position along " << axis << ": " << robotPosition << "\n";
