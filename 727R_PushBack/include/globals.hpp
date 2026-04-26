@@ -50,6 +50,7 @@ extern lemlib::ExpoDriveCurve throttleCurve;
 extern lemlib::ExpoDriveCurve turnCurve;
 
 extern lemlib::Chassis chassis;
+extern lemlib::Chassis skillsChassis;
 
 extern bool matchLoadDown;
 extern bool autoLoad;
@@ -62,7 +63,8 @@ extern bool autoHood;
 extern int autoLever;
 extern float downSpeed;
 extern int upSpeed;
-extern int skillsUpSpeed;
+extern int matchUpSpeed;
+extern double skillsUpSpeed;
 extern int backSpeed;
 extern double robotPosition;
 

@@ -87,13 +87,13 @@ lemlib::ExpoDriveCurve turnCurve(3, // joystick deadband out of 127
                                   1.019 // expo curve gain
 );
 
-// Creates the chassis
+// Creates the chassis for matches
 lemlib::Chassis chassis(drivetrain, // Drivetrain Settings
                         lateral_controller, // Lateral PID Settings
                         angular_controller, // Angular PID Settings
                         sensors, // Odometry Sensors
-                        &throttleCurve, // Slews movement and makes smaller movements more accurate
-                        &turnCurve // Slews movement and makes smaller turns more accurate
+                        &throttleCurve,
+                        &turnCurve
 );
 
 // Used to toggle the top piston to access the blocks at the bottom of the match loading tubes
@@ -129,8 +129,11 @@ float downSpeed = 15;
 // Used to set the speed of the lever when the tube is up
 int upSpeed = 75;
 
+// Used to set the speed of the lever when the tube is up in match
+int matchUpSpeed = 100;
+
 // Used to set the speed of the lever when the tube is up in skills
-int skillsUpSpeed = 30;
+double skillsUpSpeed = 27.5;
 
 // Used to set the speed of the lever when returning to the origin
 int backSpeed = -100;

@@ -1,4 +1,5 @@
 #include "autons.h"
+#include "globals.hpp"
 #include "liblvgl/lv_api_map.h"
 #include "pros/abstract_motor.hpp"
 #include "pros/misc.h"
@@ -82,10 +83,10 @@ void hoodMech() {
 // Swings the lever mechanism to score blocks in the middle and high goals
 void leverSwing() {
     if (up == false) {
-        lever.move_velocity(75);
+        lever.move_velocity(downSpeed);
     } else if (up == true) {
 // *************** Change when in skills/match ***********************
-        lever.move_velocity(100);
+        lever.move_velocity(matchUpSpeed);
         hood.set_value(true);
     }
     while (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
@@ -154,10 +155,14 @@ void competition_initialize() {}
  */
  
 void autonomous() {
+	// pros::lcd::print(4, "Left Auto");
     // matchAutoLeft();
-    // matchAutoRight();
+	pros::lcd::print(4, "Right Auto");
+    matchAutoRight();
+	// pros::lcd::print(4, "AWP Auto");
     // winPointAuto();
-    skillsAuto74();
+	// pros::lcd::print(4, "Skills Auto");
+    // skillsAuto74();
     // skillsAuto79();
     // tuningAuto();
 }

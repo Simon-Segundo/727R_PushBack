@@ -76,40 +76,43 @@ void autoLeverSwing() {
 // lever when tube is up requires 1s
 
 void matchAutoLeft () {
-    chassis.setPose(0, 0, 90);
-    resetRobotPos(rearDistance, WallAxis::NEG_X);
-    resetRobotPos(leftDistance, WallAxis::POS_Y);
-    highMid.set_value(true);
-
-    // 3 Blocks
-    intake.move(127);
-    chassis.turnToPoint(-24, 24, 1000, {.minSpeed = 50});
-    chassis.moveToPoint(-24, 10, 1000, {}, false);
+    chassis.setPose(0, 0, 0);
+    chassis.moveToPoint(0, 30, 750);
+    chassis.turnToHeading(-45, 250);
+    chassis.moveToPoint(-8, 42, 500, {}, false);
     matchLoad.set_value(true);
+    intake.move(127);
+    chassis.turnToHeading(0, 250);
+    // Set of 3 Blocks
+    chassis.moveToPoint(-8, 48, 1500);
+    // Transfer
+    chassis.moveToPoint(-8, 40, 1000, {.forwards = false}, false);
+    matchLoad.set_value(false);
+    chassis.turnToHeading(-135, 675);
     // Middle Goal
-    chassis.moveToPoint(-24, 24, 1000, {.forwards = false});
-    chassis.turnToPoint(-12, 12, 1000, {.forwards = false});
-    chassis.moveToPoint(-12, 12, 1000, {.forwards = false});
+    chassis.moveToPoint(3.5, 50.75, 1000, {.forwards = false}, false);
     hood.set_value(true);
     lever.move_velocity(downSpeed);
-    pros::delay(1500);
+    pros::delay(2000);
     lever.move_velocity(backSpeed);
     pros::delay(1000);
     lever.brake();
     intake.brake();
-	// Match Load
-    chassis.moveToPoint(-48, 47.75, 1000);
-    chassis.turnToPoint(-48, 70, 750, {}, false);
-    resetRobotPos(frontDistance, WallAxis::POS_Y);
-    resetRobotPos(leftDistance, WallAxis::NEG_X);
-    chassis.turnToPoint(-63,47.75, 1250);
+    // Transfer
+    chassis.moveToPoint(-34, 16, 1500);
+    hood.set_value(false);
+    chassis.turnToHeading(180, 500);
+    // Match Load
+    matchLoad.set_value(true);
     intake.move(127);
-    chassis.moveToPoint(-63,47.75,2250, {.minSpeed = 30});
-    // Long Goal
-    chassis.moveToPoint(-30, 48, 1750, {.forwards = false}, false);
+    chassis.moveToPoint(-34, 0, 1000);
+    // High Goal
+    highMid.set_value(true);
+    up = true;
+    chassis.moveToPoint(-34, 38, 1500, {.forwards = false}, false);
     hood.set_value(true);
-    lever.move_velocity(upSpeed);
-    pros::delay(1300);
+    lever.move_velocity(matchUpSpeed);
+    pros::delay(1000);
     lever.move_velocity(backSpeed);
     pros::delay(1000);
     lever.brake();
@@ -117,41 +120,41 @@ void matchAutoLeft () {
 }
 
 void matchAutoRight () {
-    chassis.setPose(0, 0, -90);
-    resetRobotPos(rearDistance, WallAxis::NEG_X);
-    resetRobotPos(rightDistance, WallAxis::NEG_Y);
-    highMid.set_value(true);
-    wing.set_value(true);
-
-    // 3 Blocks
+	chassis.setPose(0, 0, 0);
+    // Transfer
+    chassis.moveToPoint(0, 30, 750);
+    chassis.turnToHeading(45, 250);
+    chassis.moveToPoint(8, 42, 500);
     intake.move(127);
-    chassis.turnToPoint(-24, -24, 1000, {.minSpeed = 50});
-    chassis.moveToPoint(-24, -10, 1250);
+    chassis.turnToHeading(0, 250);
+    // Set of 3 Blocks
+    chassis.moveToPoint(8, 50, 1500);
+    pros::delay(750);
     matchLoad.set_value(true);
+    // Transfer
+    chassis.moveToPoint(8, 42, 1000, {.forwards = false}, false);
+    matchLoad.set_value(false);
+    intake.brake();
+    chassis.turnToHeading(-45, 675);
     // Low Goal
-    chassis.moveToPoint(-24, -24, 1000, {.forwards = false});
-    chassis.turnToPoint(-12, -12, 1000, {.forwards = false}, false);
-    matchLoad.set_value(false);
-    chassis.moveToPoint(-12, -12, 1000, {.forwards = false}, false);
-    pros::delay(100);
-    matchLoad.set_value(true);
-    intake.move_velocity(-175);
-    pros::delay(1000);
-    matchLoad.set_value(false);
-	// Match Load
-    chassis.moveToPoint(-48, -47.75, 750);
-    chassis.turnToPoint(-48, -70, 750, {}, false);
-    resetRobotPos(frontDistance, WallAxis::NEG_Y);
-    resetRobotPos(rightDistance, WallAxis::NEG_X);
-    chassis.turnToPoint(-63, -47.75, 1250);
+    chassis.moveToPoint(-3, 51, 1500, {}, false);
+    intake.move(-127);
+    pros::delay(2000);
+    intake.brake();
+    // Transfer
+    chassis.moveToPoint(28, 16, 1750, {.forwards = false});
+    chassis.turnToHeading(180, 500);
+    // Match Load
     matchLoad.set_value(true);
     intake.move(127);
-    chassis.moveToPoint(-63, -47.75,2250, {.minSpeed = 30});
-    // Long Goal
-    chassis.moveToPoint(-30, -48, 1750, {.forwards = false}, false);
+    chassis.moveToPoint(28, 0, 750, {}, false);
+    // High Goal
+    highMid.set_value(true);
+    up = true;
+    chassis.moveToPoint(30, 38, 1500, {.forwards = false}, false);
     hood.set_value(true);
-    lever.move_velocity(upSpeed);
-    pros::delay(1300);
+    lever.move_velocity(75);
+    pros::delay(1000);
     lever.move_velocity(backSpeed);
     pros::delay(1000);
     lever.brake();
@@ -164,12 +167,16 @@ void winPointAuto () {
     resetRobotPos(leftDistance, WallAxis::NEG_X);
     highMid.set_value(true);
 
-    // Left Match Loader
-    chassis.moveToPoint(-51, 48, 1250);
-    chassis.turnToPoint(-60,48, 750);
+	// Match Load
+    chassis.moveToPoint(-48, 24, 1000);
+    chassis.turnToPoint(-48, 47.75, 750);
+    chassis.moveToPoint(-48, 47.75, 1000, {}, false);
+    resetRobotPos(frontDistance, WallAxis::POS_Y);
+    resetRobotPos(leftDistance, WallAxis::NEG_X);
+    chassis.turnToPoint(-63,47.75, 1250);
     matchLoad.set_value(true);
     intake.move(127);
-    chassis.moveToPoint(-60,48,1000, {.minSpeed = 30});
+    chassis.moveToPoint(-63,47.75,1250, {.minSpeed = 30});
     // Left Long Goal
     chassis.moveToPoint(-30, 48, 1000, {.forwards = false}, false);
     hood.set_value(true);
@@ -192,10 +199,29 @@ void winPointAuto () {
     matchLoad.set_value(false);
     intake.brake();
     chassis.moveToPoint(-12, -12, 1000, {}, false);
+    matchLoad.set_value(true);
     intake.move_velocity(-500);
     pros::delay(1000);
     intake.brake();
-
+    matchLoad.set_value(false);
+	// Right Match Loader
+    chassis.moveToPoint(-48, -47.75, 750);
+    chassis.turnToPoint(-48, -70, 750, {}, false);
+    resetRobotPos(frontDistance, WallAxis::NEG_Y);
+    resetRobotPos(rightDistance, WallAxis::NEG_X);
+    chassis.turnToPoint(-63, -47.75, 1250);
+    matchLoad.set_value(true);
+    intake.move(127);
+    chassis.moveToPoint(-63, -47.75,1250, {.minSpeed = 30});
+    // Right Long Goal
+    chassis.moveToPoint(-30, -48, 1750, {.forwards = false}, false);
+    hood.set_value(true);
+    lever.move_velocity(upSpeed);
+    pros::delay(1300);
+    lever.move_velocity(backSpeed);
+    pros::delay(1000);
+    lever.brake();
+    intake.brake();
 }
 
 void skillsAuto74 () {
@@ -208,7 +234,7 @@ void skillsAuto74 () {
     // pros::delay(500);
     // resetRobotPos(frontDistance, WallAxis::NEG_Y);
 
-    // Front Clear
+    // // Front Clear
     // chassis.setPose(0, 0, -90);
 	// resetRobotPos(frontDistance, WallAxis::NEG_X);
     // wing.set_value(true);
@@ -242,10 +268,11 @@ void skillsAuto74 () {
     chassis.moveToPoint(-48, 47.75, 1000, {}, false);
     resetRobotPos(frontDistance, WallAxis::POS_Y);
     resetRobotPos(leftDistance, WallAxis::NEG_X);
-    chassis.turnToPoint(-63,47.75, 1250);
+    chassis.turnToPoint(-63,47.5, 1250);
     matchLoad.set_value(true);
     intake.move(127);
-    chassis.moveToPoint(-63,47.75,2250, {.minSpeed = 30});
+    chassis.moveToPoint(-63,47.25,3000, {.minSpeed = 30}, false);
+    pros::delay(10);
     // Long Goal 1, 1
     chassis.moveToPoint(-48, 48, 1750, {.forwards = false}, false);
     intake.brake();
@@ -280,7 +307,7 @@ void skillsAuto74 () {
     intake.brake();
     // Match Load 2
     intake.move(127);
-    chassis.moveToPoint(63.4, 47.75, 2500, {.maxSpeed = 100});
+    chassis.moveToPoint(65.25, 47.5, 2750, {.maxSpeed = 80});
     pros::delay(700);
     hood.set_value(false);
     // Long Goal 1, 2
@@ -307,7 +334,7 @@ void skillsAuto74 () {
     matchLoad.set_value(true);
     intake.brake();
     intake.move(127);
-    chassis.moveToPoint(63,-47,2500, {.maxSpeed = 110});
+    chassis.moveToPoint(63,-47,2750, {.maxSpeed = 70});
     // Long Goal 2, 1
     chassis.moveToPoint(48, -48, 1250, {.forwards = false}, false);
     intake.brake();
@@ -342,11 +369,11 @@ void skillsAuto74 () {
     intake.brake();
     // Match Load 4
     intake.move(127);
-    chassis.moveToPoint(-64, -47.75, 2400, {.maxSpeed = 100});
+    chassis.moveToPoint(-65, -47.5, 2750, {.maxSpeed = 75});
     pros::delay(100);
     hood.set_value(false);
     // Long Goal 2, 2
-    chassis.moveToPoint(-30, -48, 2250, {.forwards = false}, false);
+    chassis.moveToPoint(-30, -48, 2250, {.forwards = false, .maxSpeed = 110}, false);
     hood.set_value(true);
     lever.move_velocity(skillsUpSpeed);
     pros::delay(1300);
@@ -373,7 +400,7 @@ void skillsAuto74 () {
             resetRobotPos(leftDistance, WallAxis::NEG_X);
         }
     });
-    intake.move(127);
+    intake.move(-127);
 }
 
 void skillsAuto79 () {
